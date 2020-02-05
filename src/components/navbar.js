@@ -11,6 +11,7 @@ class Navbar extends Component {
 			<div id="navbar">
 				<div id="logoContainer">
 					<img id="logo" alt="Explorify" src={logo} />
+					<div id="logoName">Explorify</div>
 				</div>
 				<ul>
 				  <li>
