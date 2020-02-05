@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./assets/css/app.css"
 
 //components
-// import Header from "./components/header";
-// import Footer from "./components/footer";
-// import Home from "./components/pages/home";
+import Navbar from "./components/navbar";
+import Playbar from "./components/playbar";
+import Home from "./components/home";
 // import DataTypes from "./components/pages/dataTypes";
 // import ObjectOrientedProgramming from "./components/pages/oop";
 // import DataStructures from "./components/pages/dataStructures";
@@ -18,7 +18,11 @@ import "./assets/css/app.css"
 class App extends Component {
   render() {
     return(
-      <h2>hi</h2>
+		<Router>
+			<Navbar />
+			<Route exact path='/' component={Home} />
+			<Playbar />
+		</Router>
     );
   }
 }

@@ -1,0 +1,11 @@
+#home {
+	/*background: rgb(255,255,255);
+	background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(75,73,73,1) 0%, rgba(0,0,0,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);*/
+	background-color: #181818;
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -99;
+}
