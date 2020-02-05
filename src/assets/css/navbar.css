@@ -6,7 +6,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	z-index: 0;
 	-webkit-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
 	box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
@@ -55,6 +54,7 @@ li {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	transition: 0.3s;
 }
 
 li:hover {
