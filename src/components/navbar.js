@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import '../assets/css/navbar.css';
 import { IoMdHome, IoMdSearch } from "react-icons/io";
@@ -15,16 +16,22 @@ class Navbar extends Component {
 				</div>
 				<ul>
 				  <li>
-				  	<IoMdHome className="icon" />
-				  	Home
+				  	<NavLink exact className="link" activeClassName="linkActive" to="/">
+					  	<IoMdHome className="icon" />
+					  	Home
+				  	</NavLink>
 				  </li>
 				  <li>
-				  	<IoMdSearch className="icon" />
-				  	Search
+				 	<NavLink className="link" activeClassName="linkActive" to="/search">
+					  	<IoMdSearch className="icon" />
+					  	Search
+				  	</NavLink>
 				  </li>
 				  <li>
-				  	<MdQueueMusic className="icon" />
-				  	Playlists
+				  	<NavLink className="link" activeClassName="linkActive" to="/yourLibrary">
+					  	<MdQueueMusic className="icon" />
+					  	Your Library
+				  	</NavLink>
 				  </li>
 				</ul>
 			</div>

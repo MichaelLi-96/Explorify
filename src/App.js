@@ -8,12 +8,8 @@ import "./assets/css/app.css"
 import Navbar from "./components/navbar";
 import Playbar from "./components/playbar";
 import Home from "./components/home";
-// import DataTypes from "./components/pages/dataTypes";
-// import ObjectOrientedProgramming from "./components/pages/oop";
-// import DataStructures from "./components/pages/dataStructures";
-// import Algorithms from "./components/pages/algorithms";
-// import BigO from "./components/pages/bigO";
-// import Sorting from "./components/pages/sorting";
+import Search from "./components/search";
+import yourLibrary from "./components/yourLibrary";
 
 class App extends Component {
   render() {
@@ -21,6 +17,8 @@ class App extends Component {
 		<Router>
 			<Navbar />
 			<Route exact path='/' component={Home} />
+			<Route exact path='/search' component={Search} />
+			<Route exact path='/yourLibrary' component={yourLibrary} />		
 			<Playbar />
 		</Router>
     );

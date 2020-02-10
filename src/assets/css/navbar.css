@@ -42,10 +42,9 @@ ul {
   display: flex;
   flex-direction: column;
   padding: 0px;
-  color: #9B9B9B;
 }
 
-li {
+.link {
 	padding-top: 25px;
 	padding-bottom: 25px;
 	font-size: 16px;
@@ -54,13 +53,25 @@ li {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	transition: 0.3s;
+	transition: background-color 0.3s, border-width 0.3s, color 0.3s;
+	text-decoration: none;
+	color: #9B9B9B;
 }
 
-li:hover {
+.link:hover {
 	color: white;
 	border-left: solid;
 	border-width: 6px;
 	background-color: #181818;
 	border-image: linear-gradient(0deg, rgb(138,37,177), rgb(23,97,160)) 1;
+}
+
+.linkActive {
+	color: white;
+	border-left: solid;
+	border-width: 6px;
+	background-color: #181818;
+	border-image: linear-gradient(0deg, rgb(138,37,177), rgb(23,97,160)) 1;
+	pointer-events: none;
+
 }

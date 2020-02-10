@@ -23,11 +23,75 @@
 #title {
 	margin-top: 50px;
 	margin-bottom: 50px;
-	font-size: 22px;
+	font-size: 36px;
 	color: #9B9B9B;
+	letter-spacing: 2px;
 }
 
-#weeklySongsContainer {
+#subtitle {
+	width: 80%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.artistContainer {
+	margin: 25px 25px 25px 25px;
+}
+
+.artistImg {
+	width: 225px;
+	height: 225px;
+	background-color: green;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+}
+
+.artistIconContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: -225px;
+	width: 225px;
+	height: 225px;
+	border-radius: 50%;
+	transition: 0.3s;
+	background-color: transparent;
+}
+
+.artistIconContainer:hover {
+	background-color: rgb(0,0,0,0.3);
+	cursor: pointer;
+}
+
+.artistIconContainer:hover > .moreInfoIcon {
+	visibility: visible;
+  	opacity: 1;
+}
+
+.moreInfoIcon {
+	font-size: 40px;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.3s linear;
+}
+
+.artistName {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: 26px;
+	margin-top: 20px;
+}
+
+.listContainer {
 	width: auto;
 	display: flex;
 	padding-left: 200px;
@@ -35,7 +99,7 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: center;
 	margin-bottom: 50px;
 }
 
