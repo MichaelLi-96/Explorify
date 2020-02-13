@@ -3,6 +3,7 @@ import '../assets/css/playbar.css';
 import sound from "../assets/songs/Shelter.mp3";
 import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious, 
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
+import { connect } from 'react-redux';
 
 class Playbar extends Component {
 	constructor(props) {
@@ -110,6 +111,10 @@ class Playbar extends Component {
 			if(audio.ended) {
 				this.setState({ playing: false, ended: true });
 			}
+
+			if(audio.currentTime == 0) {
+				audio.play();
+			}
 		}
 		else {
 			if(audio.currentTime < audio.duration && this.state.ended) {
@@ -126,7 +131,7 @@ class Playbar extends Component {
 
   	render() {
 	    return(
-			<div id="playbar">
+			<div id="playbar" className="noselect">
 				<div id="currentSong">
 					<div id="currentSongImg">
 					</div>
@@ -140,7 +145,7 @@ class Playbar extends Component {
 					</div>
 				</div>
 				<div id="nowPlaying">
-					<audio controls src={sound} id="audio" />
+					<audio controls src={this.props.currentSong.src} id="audio" />
 					<div id="controlButtons">
 						<MdShuffle className="icons" />
 						<MdSkipPrevious className="icons" />
@@ -179,4 +184,6 @@ class Playbar extends Component {
   	}
 }
 
-export default Playbar;
+const mapStateToProps = state => ({ currentSong: state.currentSong });
+
+export default connect(mapStateToProps)(Playbar);

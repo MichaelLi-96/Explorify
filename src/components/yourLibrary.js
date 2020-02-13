@@ -6,7 +6,7 @@ import { changeSong } from '../actions';
 
 class yourLibrary extends Component {
 	playSong = () => {
-		this.props.changeSong("Shelter");
+		this.props.changeSong({ src:"https://spotify-clone.s3-us-west-1.amazonaws.com/Taylor+Swift+-+Red/taylor_swift-starlight-IroMusic-581.mp3", name: "Starlight"});
 	}
 
   	render() {
