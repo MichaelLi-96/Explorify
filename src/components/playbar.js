@@ -10,6 +10,7 @@ class Playbar extends Component {
 		this.state = {
 			playing: false,
 			muted: false,
+			volumeBarValue: 0,
 			songProgressValue: 0,
 			ended: false,
 			repeat: false
@@ -42,13 +43,17 @@ class Playbar extends Component {
 	mute = () => {
 		const audio = document.getElementById("audio");
 		audio.muted = true;
-		this.setState({ muted: true });
+		const volumeBar = document.getElementById("volumeBar");
+		this.setState({ muted: true, volumeBarValue: audio.volume * 100 });
+		volumeBar.setAttribute("value", 0);
 	}
 
 	unmute = () => {
 		const audio = document.getElementById("audio");
 		audio.muted = false;
+		const volumeBar = document.getElementById("volumeBar");
 		this.setState({ muted: false });
+		volumeBar.setAttribute("value", this.state.volumeBarValue);
 	}
 
 	repeat = () => {
@@ -113,10 +118,10 @@ class Playbar extends Component {
 			}
 		}
 
-		const volumeBar = document.getElementById("volumeBar");
-		volumeBar.setAttribute("value", audio.volume * 100);
-
-		console.log(this.state.playing);
+		if(!this.state.muted) {
+			const volumeBar = document.getElementById("volumeBar");
+			volumeBar.setAttribute("value", audio.volume * 100);
+		}
 	}
 
   	render() {
@@ -163,7 +168,7 @@ class Playbar extends Component {
 					{!this.state.muted ? (
 						<MdVolumeUp className="icons" onClick={this.mute} />
 					) : (
-						<MdVolumeOff className="icons" onClick={this.unmute} />
+						<MdVolumeOff className="selectedIcons" onClick={this.unmute} />
 					)}
 					<div className="progressBarContainer" id="volumeBarContainer">
 						<progress value="100" max="100" id="volumeBar"></progress>
