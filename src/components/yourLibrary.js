@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { MdPlayCircleOutline } from "react-icons/md";
 import '../assets/css/yourLibrary.css';
 import { connect } from 'react-redux';
-import { changeSong } from '../actions';
+import { songChange, songPress } from '../actions';
 
 class yourLibrary extends Component {
 	playSong = () => {
-		this.props.changeSong({ src:"https://spotify-clone.s3-us-west-1.amazonaws.com/Taylor+Swift+-+Red/taylor_swift-starlight-IroMusic-581.mp3", name: "Starlight"});
+		this.props.songChange({ src:"https://spotify-clone.s3-us-west-1.amazonaws.com/Taylor+Swift+-+Red/taylor_swift-starlight-IroMusic-581.mp3", name: "Starlight"});
+		this.props.songPress();
 	}
 
   	render() {
@@ -25,8 +26,11 @@ class yourLibrary extends Component {
   	}
 }
 
-const mapStateToProps = state => ({ currentSong: state.currentSong });
+const mapStateToProps = state => ({ 
+	currentSong: state.currentSong  
+});
 
 export default connect(mapStateToProps, { 
-	changeSong
+	songChange,
+	songPress
 })(yourLibrary);

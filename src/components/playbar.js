@@ -4,6 +4,7 @@ import sound from "../assets/songs/Shelter.mp3";
 import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious, 
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
+import { songChange, songPress } from '../actions';
 
 class Playbar extends Component {
 	constructor(props) {
@@ -14,28 +15,31 @@ class Playbar extends Component {
 			volumeBarValue: 0,
 			songProgressValue: 0,
 			ended: false,
-			repeat: false
+			repeat: false,
+			src: ""
 		}
 	}
 
 	playSong = () => {
 		const audio = document.getElementById("audio");
-		audio.play();
-		const songDuration = document.getElementById("songDuration");
-		const min = Math.floor(audio.duration / 60);
-		const sec = Math.floor(audio.duration % 60);
-		if(sec < 10) {
-			const time = min + ":0" + sec;
-			songDuration.innerHTML = time;
+		if(audio.currentSrc !== "") {
+			audio.play();
+			const songDuration = document.getElementById("songDuration");
+			const min = Math.floor(audio.duration / 60);
+			const sec = Math.floor(audio.duration % 60);
+			if(sec < 10) {
+				const time = min + ":0" + sec;
+				songDuration.innerHTML = time;
+			}
+			else {
+				const time = min + ":" + sec;
+				songDuration.innerHTML = time;
+			}
+			this.setState({ playing: true });
 		}
-		else {
-			const time = min + ":" + sec;
-			songDuration.innerHTML = time;
-		}
-		this.setState({ playing: true });
 	}
 
-	stopSong = () => {
+	pauseSong = () => {
 		const audio = document.getElementById("audio");
 		audio.pause();
 		this.setState({ playing: false });
@@ -43,18 +47,18 @@ class Playbar extends Component {
 
 	mute = () => {
 		const audio = document.getElementById("audio");
-		audio.muted = true;
 		const volumeBar = document.getElementById("volumeBar");
-		this.setState({ muted: true, volumeBarValue: audio.volume * 100 });
+		this.setState({ muted: true, volumeBarValue: audio.volume });
 		volumeBar.setAttribute("value", 0);
+		audio.volume = 0;
 	}
 
 	unmute = () => {
 		const audio = document.getElementById("audio");
-		audio.muted = false;
 		const volumeBar = document.getElementById("volumeBar");
 		this.setState({ muted: false });
-		volumeBar.setAttribute("value", this.state.volumeBarValue);
+		volumeBar.setAttribute("value", this.state.volumeBarValue * 100);
+		audio.volume = this.state.volumeBarValue;
 	}
 
 	repeat = () => {
@@ -73,16 +77,25 @@ class Playbar extends Component {
 		this.interval = setInterval(() => this.setState({ }), 0);
 
 		const audio = document.getElementById("audio");
+		const songProgress = document.getElementById("songProgress");
+		const volumeBar = document.getElementById("volumeBar");
 		document.getElementById("songProgressContainer").addEventListener("click", function (e) {
 			const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
-		  	audio.currentTime = currentProgress * audio.duration;
+		    if(audio.currentSrc !== "") {
+			  	audio.currentTime = currentProgress * audio.duration;
+			  	songProgress.setAttribute("value", currentProgress * 100);
+			}
 		});
 
 		document.getElementById('volumeBarContainer').addEventListener('click', function (e) {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
+		  	if(this.state.muted) {
+		  		this.setState({ muted: false });
+
+		  	}
 		});
 	}
 
@@ -111,21 +124,26 @@ class Playbar extends Component {
 			if(audio.ended) {
 				this.setState({ playing: false, ended: true });
 			}
-
-			if(audio.currentTime == 0) {
-				audio.play();
-			}
 		}
 		else {
-			if(audio.currentTime < audio.duration && this.state.ended) {
+			if((audio.currentTime < audio.duration && this.state.ended)) {
 				this.playSong();
 				this.setState({ ended: false });
 			}
 		}
 
-		if(!this.state.muted) {
+		
 			const volumeBar = document.getElementById("volumeBar");
 			volumeBar.setAttribute("value", audio.volume * 100);
+		
+
+		if(this.props.songPressed) {
+			this.setState({ src: this.props.currentSong.src });
+			audio.setAttribute("src", this.props.currentSong.src);
+			setTimeout(() => {
+			  this.playSong()
+			}, 100);
+			this.props.songPress();
 		}
 	}
 
@@ -145,14 +163,14 @@ class Playbar extends Component {
 					</div>
 				</div>
 				<div id="nowPlaying">
-					<audio controls src={this.props.currentSong.src} id="audio" />
+					<audio id="audio" />
 					<div id="controlButtons">
 						<MdShuffle className="icons" />
 						<MdSkipPrevious className="icons" />
 						{!this.state.playing ? (
 							<MdPlayCircleOutline className="icons" id="playButton" onClick={this.playSong} />
 						) : (
-							<MdPauseCircleOutline className="icons" id="playButton" onClick={this.stopSong} />
+							<MdPauseCircleOutline className="icons" id="playButton" onClick={this.pauseSong} />
 						)}
 						<MdSkipNext className="icons" />
 						{!this.state.repeat ? (
@@ -184,6 +202,12 @@ class Playbar extends Component {
   	}
 }
 
-const mapStateToProps = state => ({ currentSong: state.currentSong });
+const mapStateToProps = state => ({ 
+	currentSong: state.currentSong,
+	songPressed: state.songPressed 
+});
 
-export default connect(mapStateToProps)(Playbar);
+export default connect(mapStateToProps, { 
+	songChange,
+	songPress
+})(Playbar);

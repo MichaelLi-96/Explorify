@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import ChangeSongReducer from './changeSongReducer';
+import SongChangeReducer from './songChangeReducer';
+import SongPressReducer from './songPressReducer';
 
 export default combineReducers({
-	currentSong : ChangeSongReducer
+	currentSong : SongChangeReducer,
+	songPressed : SongPressReducer
 });
 

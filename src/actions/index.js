@@ -1,1 +1,1 @@
-export * from './changeSongAction';
+export * from './songActions';
