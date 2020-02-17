@@ -20,8 +20,15 @@
 	overflow-y: scroll;
 }
 
+#yourLibraryTitle {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 36px;
+	color: #9B9B9B;
+	letter-spacing: 2px;
+}
 
-.playlistsListContainer {
+.yourLibraryPlaylistsListContainer {
 	width: auto;
 	display: flex;
 	padding-left: 200px;
@@ -50,6 +57,7 @@
 
 .playlistImg:hover {
 	opacity: 70%;
+	cursor: pointer;
 }
 
 .playlistName {

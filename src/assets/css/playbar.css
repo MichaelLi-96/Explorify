@@ -14,7 +14,7 @@ audio {
 	display: none;
 }
 
-#currentSong {
+#playbarCurrentSong {
 	width: 400px;
 	height: 100%;
 	display: flex;
@@ -23,7 +23,7 @@ audio {
 	align-items: center;
 }
 
-#currentSongImg {
+#playbarCurrentSongImg {
 	width: 65px;
 	height: 65px;
 	margin-left: 30px;
@@ -31,24 +31,24 @@ audio {
 	background-color: white;
 }
 
-#currentSongInfo {
+#playbarCurrentSongInfo {
 	display: flex;
 	flex-direction: column;
 }
 
-#songTitle {
+#playbarSongTitle {
 	font-size: 20px;
 	font-weight: bold;
 	color: white;
 	margin-bottom: 8px;
 }
 
-#songArtist {
+#playbarSongArtist {
 	font-size: 14px;
 	color: #9B9B9B;
 }
 
-#nowPlaying {
+#playbarNowPlaying {
 	width: 900px;
 	height: 100%;
 	display: flex;
@@ -57,7 +57,7 @@ audio {
 	align-items: center;
 }
 
-#controlButtons {
+#playbarControlButtons {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -65,7 +65,7 @@ audio {
 	margin-bottom: 5px;
 }
 
-.icons{
+.playbarIcons{
 	font-size: 30px;
 	margin-left: 15px;
 	margin-right: 15px;
@@ -74,15 +74,15 @@ audio {
 	cursor: pointer;
 }
 
-#playButton {
+#playbarPlayButton {
 	font-size: 40px;
 }
 
-.icons:hover {
+.playbarIcons:hover {
 	color: white;
 }
 
-.selectedIcons {
+.playbarSelectedIcons {
 	font-size: 30px;
 	margin-left: 15px;
 	margin-right: 15px;
@@ -90,7 +90,7 @@ audio {
 	cursor: pointer;
 }
 
-.progressBarContainer {
+.playbarProgressBarContainer {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -98,31 +98,31 @@ audio {
 	height: 25px;
 }
 
-#progressBar {
+#playbarProgressBar {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 }
 
-.progressBarContainer:hover {
+.playbarProgressBarContainer:hover {
 	cursor: pointer;
 }
 
-.progressBarContainer:hover > progress::-webkit-progress-value {
+.playbarProgressBarContainer:hover > progress::-webkit-progress-value {
 	background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);
 }
 
-#songProgressContainer:hover #progressBarPositionCircle {
+#playbarSongProgressContainer:hover #playbarProgressBarPositionCircle {
 	display: block;
 }
 
-#progressBarPositionCircle {
+#playbarProgressBarPositionCircle {
 	display: none;
 	margin-left: 0px;
 }
 
-.time {
+.playbarTime {
 	font-size: 14px;
 	letter-spacing: 1px;
 	color: #9B9B9B;
@@ -133,7 +133,7 @@ audio {
 	align-items: center;
 }
 
-#songProgress {
+#playbarSongProgress {
 	width: 600px;
 	height: 4px;
 }
@@ -159,7 +159,7 @@ progress::-moz-progress-bar {
 	border-radius: 2px; 
 }
 
-#volume {
+#playbarVolume {
 	width: 400px;
 	height: 100%;
 	display: flex;
@@ -168,22 +168,22 @@ progress::-moz-progress-bar {
 	align-items: center;
 }
 
-#volumeBarContainer:hover #volumeBarPositionCircle {
+#playbarVolumeBarContainer:hover #playbarVolumeBarPositionCircle {
 	display: block;
 }
 
-#volumeBarPositionCircle {
+#playbarVolumeBarPositionCircle {
 	display: none;
 	margin-left: 0px;
 }
 
-#volumeBar {
+#playbarVolumeBar {
 	height: 4px;
 	width: 200px;
 	margin-left: 10px;
 }
 
-.circle {
+.playbarCircle {
 	position: absolute;
 	width: 14px;
 	height: 14px;

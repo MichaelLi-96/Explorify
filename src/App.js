@@ -10,13 +10,14 @@ import Playbar from "./components/playbar";
 import Home from "./components/home";
 import Search from "./components/search";
 import yourLibrary from "./components/yourLibrary";
+import playlistAlbum from "./components/playlistAlbum";
 
 class App extends Component {
   render() {
     return(
 		<Router>
 			<Navbar />
-			<Route exact path='/' component={Home} />
+			<Route exact path='/' component={playlistAlbum} />
 			<Route exact path='/search' component={Search} />
 			<Route exact path='/yourLibrary' component={yourLibrary} />		
 			<Playbar />

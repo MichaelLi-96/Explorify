@@ -5,11 +5,11 @@ import { MdPlayCircleOutline } from "react-icons/md";
 class SongPreview extends Component {
   	render() {
 	    return(
-			<div className="songContainer">
-				<div className="songImg"></div>
-				<div className="playSongIconContainer"><MdPlayCircleOutline className="playSongIcon" /></div>
-				<div className="songName">{this.props.songName}</div>
-				<div className="songArtist">{this.props.songArtist}</div>
+			<div className="songPreviewContainer">
+				<div className="songPreviewImg"></div>
+				<div className="songPreviewPlaySongIconContainer"><MdPlayCircleOutline className="songPreviewPlaySongIcon" /></div>
+				<div className="songPreviewName">{this.props.songName}</div>
+				<div className="songPreviewArtist">{this.props.songArtist}</div>
 			</div>
 	    );
   	}

@@ -7,10 +7,10 @@ class Home extends Component {
   	render() {
 	    return(
 			<div id="home">
-				<div id="title">Discover Weekly</div>
-				<div id="listsContainer"> 
-					<div id="subtitle">Popular Artists</div>
-					<div className="listContainer">
+				<div id="homeTitle">Discover Weekly</div>
+				<div id="homeListsContainer"> 
+					<div id="homeSubtitle">Popular Artists</div>
+					<div className="homeListContainer">
 						<ArtistPreview 
 							artistName="Zed" 
 						/>
@@ -30,8 +30,8 @@ class Home extends Component {
 							artistName="Zed" 
 						/>
 					</div>
-					<div id="subtitle">Featured Tracks</div>
-					<div className="listContainer">
+					<div id="homeSubtitle">Featured Tracks</div>
+					<div className="homeListContainer">
 						<SongPreview 
 							songName="Maps"
 							artistName="Maroon 5" 

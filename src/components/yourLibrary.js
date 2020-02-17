@@ -13,16 +13,16 @@ class yourLibrary extends Component {
   	render() {
 	    return(
 			<div id="yourLibrary">
-				<div id="title">Playlists</div>
-				<div className="playlistsListContainer">
+				<div id="yourLibraryTitle">Playlists</div>
+				<div className="yourLibraryPlaylistsListContainer">
 					<div className="playlistContainer">
 						<div className="playlistImg" onClick={this.playSong}></div>
 						<div className="playlistName">playlist</div>
-						<div className="tracks">100 TRACKS</div>
+						<div className="tracks">100 SONGS</div>
 					</div>
 					<PlaylistAlbumPreview
 						playlistAlbumName="name"
-						numberOfTracks="19"
+						numberOfSongs="19"
 					/>
 				</div>
 			</div>

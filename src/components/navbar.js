@@ -10,26 +10,26 @@ class Navbar extends Component {
   	render() {
 	    return(
 			<div id="navbar">
-				<div id="logoContainer">
-					<img id="logo" alt="Explorify" src={logo} />
-					<div id="logoName">Explorify</div>
+				<div id="navbarLogoContainer">
+					<img id="navbarLogo" alt="Explorify" src={logo} />
+					<div id="navbarLogoName">Explorify</div>
 				</div>
 				<ul>
 				  <li>
 				  	<NavLink exact className="link" activeClassName="linkActive" to="/">
-					  	<IoMdHome className="icon" />
+					  	<IoMdHome className="navbarIcon" />
 					  	Home
 				  	</NavLink>
 				  </li>
 				  <li>
 				 	<NavLink className="link" activeClassName="linkActive" to="/search">
-					  	<IoMdSearch className="icon" />
+					  	<IoMdSearch className="navbarIcon" />
 					  	Search
 				  	</NavLink>
 				  </li>
 				  <li>
 				  	<NavLink className="link" activeClassName="linkActive" to="/yourLibrary">
-					  	<MdQueueMusic className="icon" />
+					  	<MdQueueMusic className="navbarIcon" />
 					  	Your Library
 				  	</NavLink>
 				  </li>

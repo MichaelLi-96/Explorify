@@ -6,7 +6,7 @@ class Search extends Component {
   	render() {
 	    return(
 			<div id="search">
-				<div id="title">Find artists, albums, or playlists</div>
+				<div id="searchTitle">Find artists, albums, or playlists</div>
 				<div id="searchBarContainer">
 					<MdSearch id="searchIcon" />
 					<input type="text" placeholder="Search.." id="input" />

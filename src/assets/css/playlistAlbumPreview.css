@@ -1,8 +1,8 @@
-.playlistAlbumContainer {
+.playlistAlbumPreviewContainer {
 	margin: 25px 25px 25px 25px;
 }
 
-.playlistAlbumImg {
+.playlistAlbumPreviewImg {
 	width: 225px;
 	height: 225px;
 	background-color: red;
@@ -13,11 +13,12 @@
 	transition: 0.3s;
 }
 
-.playlistAlbumImg:hover {
+.playlistAlbumPreviewImg:hover {
 	opacity: 70%;
+	cursor: pointer;
 }
 
-.playlistAlbumName {
+.playlistAlbumPreviewName {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -27,7 +28,7 @@
 	margin-bottom: 10px;
 }
 
-.tracks {
+.playlistAlbumPreviewSongs {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

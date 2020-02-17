@@ -4,10 +4,10 @@ import '../assets/css/playlistAlbumPreview.css';
 class PlaylistAlbumPreview extends Component {
   	render() {
 	    return(
-			<div className="playlistAlbumContainer">
-				<div className="playlistAlbumImg"></div>
-				<div className="playlistAlbumName">{this.props.playlistAlbumName}</div>
-				<div className="tracks">{this.props.numberOfTracks} TRACKS</div>
+			<div className="playlistAlbumPreviewContainer">
+				<div className="playlistAlbumPreviewImg"></div>
+				<div className="playlistAlbumPreviewName">{this.props.playlistAlbumName}</div>
+				<div className="playlistAlbumPreviewSongs">{this.props.numberOfSongs} SONGS</div>
 			</div>
 	    );
   	}

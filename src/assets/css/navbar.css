@@ -11,7 +11,7 @@
 	box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
-#logoContainer {
+#navbarLogoContainer {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -21,18 +21,18 @@
 	margin-bottom: 75px;
 }
 
-#logo {
+#navbarLogo {
 	width: 70%;
 	height: auto;
 }
 
-#logoName {
+#navbarLogoName {
 	margin-top: 10px;
 	font-size: 20px;
 	font-weight: bold;
 }
 
-.icon {
+.navbarIcon {
 	font-size: 40px;
 	margin-bottom: 10px;
 }

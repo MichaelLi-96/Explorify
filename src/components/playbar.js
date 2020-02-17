@@ -21,10 +21,10 @@ class Playbar extends Component {
 	}
 
 	playSong = () => {
-		const audio = document.getElementById("audio");
+		const audio = document.getElementById("playbarAudio");
 		if(audio.currentSrc !== "") {
 			audio.play();
-			const songDuration = document.getElementById("songDuration");
+			const songDuration = document.getElementById("playbarSongDuration");
 			const min = Math.floor(audio.duration / 60);
 			const sec = Math.floor(audio.duration % 60);
 			if(sec < 10) {
@@ -40,35 +40,35 @@ class Playbar extends Component {
 	}
 
 	pauseSong = () => {
-		const audio = document.getElementById("audio");
+		const audio = document.getElementById("playbarAudio");
 		audio.pause();
 		this.setState({ playing: false });
 	}
 
 	mute = () => {
-		const audio = document.getElementById("audio");
-		const volumeBar = document.getElementById("volumeBar");
+		const audio = document.getElementById("playbarAudio");
+		const volumeBar = document.getElementById("playbarVolumeBar");
 		this.setState({ muted: true, volumeBarValue: audio.volume });
 		volumeBar.setAttribute("value", 0);
 		audio.volume = 0;
 	}
 
 	unmute = () => {
-		const audio = document.getElementById("audio");
-		const volumeBar = document.getElementById("volumeBar");
+		const audio = document.getElementById("playbarAudio");
+		const volumeBar = document.getElementById("playbarVolumeBar");
 		this.setState({ muted: false });
 		volumeBar.setAttribute("value", this.state.volumeBarValue * 100);
 		audio.volume = this.state.volumeBarValue;
 	}
 
 	repeat = () => {
-		const audio = document.getElementById("audio");
+		const audio = document.getElementById("playbarAudio");
 		audio.loop = true;
 		this.setState({ repeat: true });
 	}
 
 	unrepeat = () => {
-		const audio = document.getElementById("audio");
+		const audio = document.getElementById("playbarAudio");
 		audio.loop = false;
 		this.setState({ repeat: false });
 	}
@@ -76,10 +76,10 @@ class Playbar extends Component {
 	componentDidMount() {
 		this.interval = setInterval(() => this.setState({ }), 0);
 
-		const audio = document.getElementById("audio");
-		const songProgress = document.getElementById("songProgress");
-		const volumeBar = document.getElementById("volumeBar");
-		document.getElementById("songProgressContainer").addEventListener("click", function (e) {
+		const audio = document.getElementById("playbarAudio");
+		const songProgress = document.getElementById("playbarSongProgress");
+		const volumeBar = document.getElementById("playbarVolumeBar");
+		document.getElementById("playbarSongProgressContainer").addEventListener("click", function (e) {
 			const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		    if(audio.currentSrc !== "") {
@@ -88,7 +88,7 @@ class Playbar extends Component {
 			}
 		});
 
-		document.getElementById('volumeBarContainer').addEventListener('click', function (e) {
+		document.getElementById('playbarVolumeBarContainer').addEventListener('click', function (e) {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
@@ -100,10 +100,10 @@ class Playbar extends Component {
 	}
 
 	componentDidUpdate() {
-		const audio = document.getElementById("audio");
+		const audio = document.getElementById("playbarAudio");
 		if(this.state.playing) {
 			// Update the current time and duration of the song 
-			const currentTime = document.getElementById("currentTime");
+			const currentTime = document.getElementById("playbarCurrentTime");
 			const min = Math.floor(audio.currentTime / 60);
 			const sec = Math.floor(audio.currentTime % 60);
 			if(sec < 10) {
@@ -115,7 +115,7 @@ class Playbar extends Component {
 				currentTime.innerHTML = time;
 			}
 
-			const songProgress = document.getElementById("songProgress");
+			const songProgress = document.getElementById("playbarSongProgress");
 			songProgress.setAttribute("value", audio.currentTime * 100 / audio.duration);
 
 			if(audio.ended) {
@@ -131,15 +131,15 @@ class Playbar extends Component {
 		}
 
 		// Update the position of the progress bar circle indicator using the ratio of song completed (0.0 - 1.0) * div width
-		const progressBarPositionCircle = document.getElementById("progressBarPositionCircle");
+		const progressBarPositionCircle = document.getElementById("playbarProgressBarPositionCircle");
 		progressBarPositionCircle.style.marginLeft = (586 * (audio.currentTime / audio.duration)) + "px";
 		
 		// Update the position of the volume bar circle indicator using the volume of song (0.0 - 1.0) * div width
-		const volumeBarPositionCircle = document.getElementById("volumeBarPositionCircle");
+		const volumeBarPositionCircle = document.getElementById("playbarVolumeBarPositionCircle");
 		volumeBarPositionCircle.style.marginLeft = (200 * audio.volume) + "px";
 		
 		// Update the volume bar according to audio volume
-		const volumeBar = document.getElementById("volumeBar");
+		const volumeBar = document.getElementById("playbarVolumeBar");
 		volumeBar.setAttribute("value", audio.volume * 100);
 
 		// If muted and volume bar clicked, unmute
@@ -161,53 +161,53 @@ class Playbar extends Component {
   	render() {
 	    return(
 			<div id="playbar" className="noselect">
-				<div id="currentSong">
-					<div id="currentSongImg">
+				<div id="playbarCurrentSong">
+					<div id="playbarCurrentSongImg">
 					</div>
-					<div id="currentSongInfo">
-						<div id="songTitle">
+					<div id="playbarCurrentSongInfo">
+						<div id="playbarSongTitle">
 							Hello	
 						</div>
-						<div id="songArtist">
+						<div id="playbarSongArtist">
 							Adelle
 						</div>
 					</div>
 				</div>
-				<div id="nowPlaying">
-					<audio id="audio" />
-					<div id="controlButtons">
-						<MdShuffle className="icons" />
-						<MdSkipPrevious className="icons" />
+				<div id="playbarNowPlaying">
+					<audio id="playbarAudio" />
+					<div id="playbarControlButtons">
+						<MdShuffle className="playbarIcons" />
+						<MdSkipPrevious className="playbarIcons" />
 						{!this.state.playing ? (
-							<MdPlayCircleOutline className="icons" id="playButton" onClick={this.playSong} />
+							<MdPlayCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.playSong} />
 						) : (
-							<MdPauseCircleOutline className="icons" id="playButton" onClick={this.pauseSong} />
+							<MdPauseCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.pauseSong} />
 						)}
-						<MdSkipNext className="icons" />
+						<MdSkipNext className="playbarIcons" />
 						{!this.state.repeat ? (
-							<MdRepeat className="icons" onClick={this.repeat} />
+							<MdRepeat className="playbarIcons" onClick={this.repeat} />
 						) : (
-							<MdRepeat className="selectedIcons" onClick={this.unrepeat} />
+							<MdRepeat className="playbarSelectedIcons" onClick={this.unrepeat} />
 						)}
 					</div>
-					<div id="progressBar">
-						<div className="time" id="currentTime">0:00</div>
-						<div className="progressBarContainer" id="songProgressContainer">
-							<div id="progressBarPositionCircle" className="circle"></div>
-							<progress value="0" max="100" id="songProgress"></progress>
+					<div id="playbarProgressBar">
+						<div className="playbarTime" id="playbarCurrentTime">0:00</div>
+						<div className="playbarProgressBarContainer" id="playbarSongProgressContainer">
+							<div id="playbarProgressBarPositionCircle" className="playbarCircle"></div>
+							<progress value="0" max="100" id="playbarSongProgress"></progress>
 						</div>
-						<div className="time" id="songDuration">0:00</div>
+						<div className="playbarTime" id="playbarSongDuration">0:00</div>
 					</div>
 				</div>
-				<div id="volume">
+				<div id="playbarVolume">
 					{!this.state.muted ? (
-						<MdVolumeUp className="icons" onClick={this.mute} />
+						<MdVolumeUp className="playbarIcons" onClick={this.mute} />
 					) : (
-						<MdVolumeOff className="selectedIcons" onClick={this.unmute} />
+						<MdVolumeOff className="playbarSelectedIcons" onClick={this.unmute} />
 					)}
-					<div className="progressBarContainer" id="volumeBarContainer">
-						<div id="volumeBarPositionCircle" className="circle"></div>
-						<progress value="100" max="100" id="volumeBar"></progress>
+					<div className="playbarProgressBarContainer" id="playbarVolumeBarContainer">
+						<div id="playbarVolumeBarPositionCircle" className="playbarCircle"></div>
+						<progress value="100" max="100" id="playbarVolumeBar"></progress>
 					</div>
 				</div>
 			</div>

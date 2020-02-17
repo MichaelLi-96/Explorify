@@ -1,4 +1,4 @@
-#search {
+#playlistAlbum {
 	/*background: rgb(255,255,255);
 	background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(75,73,73,1) 0%, rgba(0,0,0,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);*/
 	background-color: #181818;
@@ -14,45 +14,35 @@
     height:         calc(100% - 100px);
 	color: white;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
 	overflow-y: scroll;
 }
 
-#searchTitle {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	font-size: 36px;
-	color: #9B9B9B;
-	letter-spacing: 2px;
-}
-
-#searchBarContainer {
-	width: 50%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-#searchIcon {
+#playlistAlbumBackButton {
 	position: absolute;
-	color: black;
-	font-size: 42px;
-	margin-left: 20px;
+	top: 0;
+	margin: 50px;
 }
 
-#input {
-	width: 100%;
-	height: 50px;
-	border-radius: 50px;
-	border: none;
-	color: black;
-	font-size: 24px;
-	padding-left: 80px;
+#playlistAlbumInfoContainer {
+	width: 40%;
+	height: 100%;
+	background-color: red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-#input:focus {
-	outline: none;
+#playlistAlbumImg {
+	width: 300px;
+	height: 300px;
+	background-color: green;
+}
+
+#playlistAlbumSongsContainer {
+	width: 60%;
+	height: 100%;
 }
