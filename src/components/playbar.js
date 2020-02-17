@@ -92,10 +92,6 @@ class Playbar extends Component {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
-		  	if(this.state.muted) {
-		  		this.setState({ muted: false });
-
-		  	}
 		});
 	}
 
@@ -106,6 +102,7 @@ class Playbar extends Component {
 	componentDidUpdate() {
 		const audio = document.getElementById("audio");
 		if(this.state.playing) {
+			// Update the current time and duration of the song 
 			const currentTime = document.getElementById("currentTime");
 			const min = Math.floor(audio.currentTime / 60);
 			const sec = Math.floor(audio.currentTime % 60);
@@ -126,17 +123,23 @@ class Playbar extends Component {
 			}
 		}
 		else {
+			// Playback on click progress bar once song has ended
 			if((audio.currentTime < audio.duration && this.state.ended)) {
 				this.playSong();
 				this.setState({ ended: false });
 			}
 		}
-
 		
-			const volumeBar = document.getElementById("volumeBar");
-			volumeBar.setAttribute("value", audio.volume * 100);
-		
+		// Update the volume bar according to audio volume
+		const volumeBar = document.getElementById("volumeBar");
+		volumeBar.setAttribute("value", audio.volume * 100);
 
+		// If muted and volume bar clicked, unmute
+		if(this.state.muted && volumeBar.getAttribute("value") > 0) {
+			this.setState({ muted: false });
+		}
+
+		// If song is clicked, play it as current song
 		if(this.props.songPressed) {
 			this.setState({ src: this.props.currentSong.src });
 			audio.setAttribute("src", this.props.currentSong.src);
