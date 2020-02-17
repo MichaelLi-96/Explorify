@@ -93,7 +93,7 @@ audio {
 .progressBarContainer {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	height: 25px;
 }
@@ -113,6 +113,15 @@ audio {
 	background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);
 }
 
+#songProgressContainer:hover #progressBarPositionCircle {
+	display: block;
+}
+
+#progressBarPositionCircle {
+	display: none;
+	margin-left: 0px;
+}
+
 .time {
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -128,6 +137,7 @@ audio {
 	width: 600px;
 	height: 4px;
 }
+
 
 progress {
 	background: #404040;
@@ -158,8 +168,25 @@ progress::-moz-progress-bar {
 	align-items: center;
 }
 
+#volumeBarContainer:hover #volumeBarPositionCircle {
+	display: block;
+}
+
+#volumeBarPositionCircle {
+	display: none;
+	margin-left: 0px;
+}
+
 #volumeBar {
 	height: 4px;
 	width: 200px;
 	margin-left: 10px;
+}
+
+.circle {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	background-color: white;
+	border-radius: 50%;
 }

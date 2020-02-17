@@ -129,6 +129,14 @@ class Playbar extends Component {
 				this.setState({ ended: false });
 			}
 		}
+
+		// Update the position of the progress bar circle indicator using the ratio of song completed (0.0 - 1.0) * div width
+		const progressBarPositionCircle = document.getElementById("progressBarPositionCircle");
+		progressBarPositionCircle.style.marginLeft = (586 * (audio.currentTime / audio.duration)) + "px";
+		
+		// Update the position of the volume bar circle indicator using the volume of song (0.0 - 1.0) * div width
+		const volumeBarPositionCircle = document.getElementById("volumeBarPositionCircle");
+		volumeBarPositionCircle.style.marginLeft = (200 * audio.volume) + "px";
 		
 		// Update the volume bar according to audio volume
 		const volumeBar = document.getElementById("volumeBar");
@@ -185,6 +193,7 @@ class Playbar extends Component {
 					<div id="progressBar">
 						<div className="time" id="currentTime">0:00</div>
 						<div className="progressBarContainer" id="songProgressContainer">
+							<div id="progressBarPositionCircle" className="circle"></div>
 							<progress value="0" max="100" id="songProgress"></progress>
 						</div>
 						<div className="time" id="songDuration">0:00</div>
@@ -197,6 +206,7 @@ class Playbar extends Component {
 						<MdVolumeOff className="selectedIcons" onClick={this.unmute} />
 					)}
 					<div className="progressBarContainer" id="volumeBarContainer">
+						<div id="volumeBarPositionCircle" className="circle"></div>
 						<progress value="100" max="100" id="volumeBar"></progress>
 					</div>
 				</div>
