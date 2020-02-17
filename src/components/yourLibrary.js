@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MdPlayCircleOutline } from "react-icons/md";
+import PlaylistAlbumPreview from "./playlistAlbumPreview";
 import '../assets/css/yourLibrary.css';
 import { connect } from 'react-redux';
 import { songChange, songPress } from '../actions';
@@ -20,6 +20,10 @@ class yourLibrary extends Component {
 						<div className="playlistName">playlist</div>
 						<div className="tracks">100 TRACKS</div>
 					</div>
+					<PlaylistAlbumPreview
+						playlistAlbumName="name"
+						numberOfTracks="19"
+					/>
 				</div>
 			</div>
 	    );

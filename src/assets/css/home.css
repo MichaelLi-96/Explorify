@@ -36,59 +36,12 @@
 	font-weight: bold;
 }
 
-.artistContainer {
-	margin: 25px 25px 25px 25px;
-}
-
-.artistImg {
-	width: 225px;
-	height: 225px;
-	background-color: green;
-	border-radius: 50%;
+#listsContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	transition: 0.3s;
-}
-
-.artistIconContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: -225px;
-	width: 225px;
-	height: 225px;
-	border-radius: 50%;
-	transition: 0.3s;
-	background-color: transparent;
-}
-
-.artistIconContainer:hover {
-	background-color: rgb(0,0,0,0.3);
-	cursor: pointer;
-}
-
-.artistIconContainer:hover > .moreInfoIcon {
-	visibility: visible;
-  	opacity: 1;
-}
-
-.moreInfoIcon {
-	font-size: 40px;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s, opacity 0.3s linear;
-}
-
-.artistName {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	font-size: 26px;
-	margin-top: 20px;
+	padding-bottom: 100px;
 }
 
 .listContainer {
@@ -101,67 +54,4 @@
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 50px;
-}
-
-.songContainer {
-	margin: 25px 25px 25px 25px;
-}
-
-.songImg {
-	width: 225px;
-	height: 225px;
-	background-color: red;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	transition: 0.3s;
-}
-
-.playSongIconContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: -225px;
-	width: 225px;
-	height: 225px;
-	transition: 0.3s;
-	background-color: transparent;
-}
-
-.playSongIconContainer:hover {
-	background-color: rgb(0,0,0,0.3);
-	cursor: pointer;
-}
-
-.playSongIconContainer:hover > .playSongIcon {
-	visibility: visible;
-  	opacity: 1;
-}
-
-.playSongIcon {
-	font-size: 100px;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s, opacity 0.3s linear;
-}
-
-.songName {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	font-size: 26px;
-	margin-top: 8px;
-	margin-bottom: 2px;
-}
-
-.songArtist {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	font-size: 18px;
-	color: #9B9B9B;
 }
