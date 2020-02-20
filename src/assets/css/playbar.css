@@ -110,7 +110,7 @@ audio {
 }
 
 .playbarProgressBarContainer:hover > progress::-webkit-progress-value {
-	background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
 }
 
 #playbarSongProgressContainer:hover #playbarProgressBarPositionCircle {

@@ -88,7 +88,7 @@ class Playbar extends Component {
 			}
 		});
 
-		document.getElementById('playbarVolumeBarContainer').addEventListener('click', function (e) {
+		document.getElementById('playbarVolumeBarContainer').addEventListener("click", function (e) {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
