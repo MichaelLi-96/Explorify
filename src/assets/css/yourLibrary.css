@@ -1,7 +1,7 @@
 #yourLibrary {
-	/*background: rgb(255,255,255);
-	background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(75,73,73,1) 0%, rgba(0,0,0,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%);*/
-	background-color: #181818;
+	background: rgb(42,42,42);
+	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
+	/*background-color: #181818;*/
 	position: fixed; 
 	top: 0; 
 	left: 0; 
@@ -17,7 +17,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 #yourLibraryTitle {
@@ -26,6 +26,7 @@
 	font-size: 36px;
 	color: #9B9B9B;
 	letter-spacing: 2px;
+	text-align: center;
 }
 
 .yourLibraryPlaylistsListContainer {

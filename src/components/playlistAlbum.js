@@ -18,7 +18,7 @@ class PlaylistAlbum extends Component {
 			}
 
 			// On hover song, change music note icon to play icon
-			songs[i].addEventListener("mouseenter", () => {
+			currentSong.addEventListener("mouseenter", () => {
 				const musicNote = currentSong.children[0].children[0];
 				const play = currentSong.children[0].children[1];
 				musicNote.style.display = "none";
@@ -26,7 +26,7 @@ class PlaylistAlbum extends Component {
 			})
 
 			// On unhover song, change play icon to music note icon
-			songs[i].addEventListener("mouseleave", () => {
+			currentSong.addEventListener("mouseleave", () => {
 				const musicNote = currentSong.children[0].children[0];
 				const play = currentSong.children[0].children[1];
 				musicNote.style.display = "block";
@@ -34,7 +34,8 @@ class PlaylistAlbum extends Component {
 			})
 
 			// On click more info icon, show more info panel
-			songs[i].addEventListener("click", () => {
+			const moreInfoIcon = currentSong.children[2].children[0];
+			moreInfoIcon.addEventListener("click", () => {
 				const moreInfoPanel = currentSong.children[2].children[1];
 				if(moreInfoPanel.style.display === "none") {
 					moreInfoPanel.style.display = "block";
@@ -45,13 +46,12 @@ class PlaylistAlbum extends Component {
 			})
 
 			// Hide more info panel when mouse leaves song div
-			songs[i].addEventListener("mouseleave", () => {
+			currentSong.addEventListener("mouseleave", () => {
 				const moreInfoPanel = currentSong.children[2].children[1];
 				moreInfoPanel.style.display = "none";
 			})
 
 		}
-		console.log(songs);
 	}
 
   	render() {

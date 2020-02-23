@@ -9,17 +9,20 @@ import Navbar from "./components/navbar";
 import Playbar from "./components/playbar";
 import Home from "./components/home";
 import Search from "./components/search";
-import yourLibrary from "./components/yourLibrary";
-import playlistAlbum from "./components/playlistAlbum";
+import YourLibrary from "./components/yourLibrary";
+import PlaylistAlbum from "./components/playlistAlbum";
+import Artist from "./components/artist";
+import AccountButton from "./components/accountButton";
 
 class App extends Component {
   render() {
     return(
 		<Router>
-			<Navbar />
-			<Route exact path='/' component={playlistAlbum} />
+			<Route exact path='/' component={Artist} />
 			<Route exact path='/search' component={Search} />
-			<Route exact path='/yourLibrary' component={yourLibrary} />		
+			<Route exact path='/yourLibrary' component={YourLibrary} />	
+			<AccountButton />
+			<Navbar />
 			<Playbar />
 		</Router>
     );
