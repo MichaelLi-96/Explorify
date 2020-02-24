@@ -9,7 +9,7 @@ import { MdQueueMusic } from "react-icons/md";
 class Navbar extends Component {
   	render() {
 	    return(
-			<div id="navbar">
+			<div id="navbar" className="noselect">
 				<div id="navbarLogoContainer">
 					<img id="navbarLogo" alt="Explorify" src={logo} />
 					<div id="navbarLogoName">Explorify</div>

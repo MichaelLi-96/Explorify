@@ -19,24 +19,6 @@
 	justify-content: flex-start;
 }
 
-#playlistAlbumBackButton {
-	position: absolute;
-	top: 0;
-	margin-top: 2%;
-	margin-left: 4%;
-	background-color: #121212;
-	padding: 10px 10px 10px 10px;
-	cursor: pointer;
-	font-size: 30px;
-	border-radius: 50px;
-	color: #9B9B9B;
-	transition: color 0.3s;
-}
-
-#playlistAlbumBackButton:hover {
-	color: white;
-}
-
 #playlistAlbumInfoContainer {
 	width: 40%;
 	height: 100%;
@@ -92,8 +74,6 @@
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
-	padding-top: 100px !important;
-	padding-bottom: 100px !important;
 }
 
 .playlistAlbumSong {

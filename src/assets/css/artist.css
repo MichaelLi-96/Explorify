@@ -14,7 +14,173 @@
     height:         calc(100% - 100px);
 	color: white;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
+	overflow-y: auto;
+}
+
+#artistImageNameContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+}
+
+#artistImage {
+	background-color: red;
+	width: 350px;
+	height: 350px;
+	border-radius: 50%;
+}
+
+#artistName {
+	font-size: 70px;
+	font-weight: 800;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+
+#artistInfoContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 100px;
+}
+
+.artistSubtitle {
+ 	width: 80%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#artistAlbumContainer {
+	width: auto;
+	display: flex;
+	padding-left: 200px;
+	padding-right: 200px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 50px;
+}
+
+#artistSongsContainer {
+	width: 80%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 25px;
+}
+
+.artistSong {
+	display: flex;
+	flex-direction: row;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	transition: 0.3s;
+}
+
+.artistSong:hover {
+	background-color: #3e3e3e;
+}
+
+.artistSong:hover .artistMusicMoreInfoIcon {
+	display: block;
+}
+
+.artistMusicNoteIconContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 5%;
+	height: 100%;
+}
+
+.artistMusicNoteIcon {
+	font-size: 25px;
+	color: #9B9B9B;
+}
+
+.artistPlayIcon {
+	font-size: 25px;
+	color: white;
+	display: none;
+	cursor: pointer
+}
+
+.artistSongInfo {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	height: 100%;
+}
+
+.artistSongName {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.artistSongPlays {
+	color: #9B9B9B;
+}
+
+.artistMusicMoreInfoIconContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 5%;
+	height: 100%;
+}
+
+.artistMusicMoreInfoIcon {
+	font-size: 30px;
+	display: none;
+	cursor: pointer;
+}
+
+.artistMoreInfoPanel {
+	position: absolute;
+	width: 250px;
+	height: auto;
+	background-color: #121212;
+	margin-left: -150px;
+	margin-top: 35px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: none;
+}
+
+.artistMoreInfoOption {
+	padding: 10px 15px 10px 15px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #9B9B9B;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.artistMoreInfoOption:hover {
+	color: white;
+	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
+}
+
+.artistMusicSongLength {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	height: 100%;
+	color: #9B9B9B;
 }

@@ -1,6 +1,6 @@
 #navbar {
 	width: 125px;
-	height:100vh;
+	height: 100vh;
 	background-color: #121212;
 	color: white;
 	display: flex;
@@ -9,6 +9,7 @@
 	-webkit-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
 	box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
+	overflow-y: hidden;
 }
 
 #navbarLogoContainer {

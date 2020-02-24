@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../assets/css/playlistAlbum.css';
+import BackButton from "./backButton";
 import { IoIosArrowBack, IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
 
 class PlaylistAlbum extends Component {
@@ -57,7 +58,7 @@ class PlaylistAlbum extends Component {
   	render() {
 	    return(
 			<div id="playlistAlbum">
-				<IoIosArrowBack id="playlistAlbumBackButton" />
+				<BackButton />
 				<div id="playlistAlbumInfoContainer">
 					<div id="playlistAlbumImg"></div>
 					<div id="playlistAlbumName">Pallete</div>

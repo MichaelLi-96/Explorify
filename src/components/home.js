@@ -34,23 +34,23 @@ class Home extends Component {
 					<div className="homeListContainer">
 						<SongPreview 
 							songName="Maps"
-							artistName="Maroon 5" 
+							songArtist="Maroon 5" 
 						/>
 						<SongPreview 
 							songName="Maps"
-							artistName="Maroon 5" 
+							songArtist="Maroon 5" 
 						/>
 						<SongPreview 
 							songName="Maps"
-							artistName="Maroon 5" 
+							songArtist="Maroon 5" 
 						/>
 						<SongPreview 
 							songName="Maps"
-							artistName="Maroon 5" 
+							songArtist="Maroon 5" 
 						/>
 						<SongPreview 
 							songName="Maps"
-							artistName="Maroon 5" 
+							songArtist="Maroon 5" 
 						/>
 					</div>
 				</div>
