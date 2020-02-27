@@ -1,0 +1,2 @@
+export const SONG_CHANGED = 'SONG_CHANGED';
+export const SONG_PRESSED = 'SONG_PRESSED';

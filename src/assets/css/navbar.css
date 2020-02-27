@@ -1,0 +1,78 @@
+#navbar {
+	width: 125px;
+	height: 100vh;
+	background-color: #121212;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	-webkit-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.75);
+	overflow-y: hidden;
+}
+
+#navbarLogoContainer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+	margin-bottom: 75px;
+}
+
+#navbarLogo {
+	width: 70%;
+	height: auto;
+}
+
+#navbarLogoName {
+	margin-top: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.navbarIcon {
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+}
+
+.link {
+	padding-top: 25px;
+	padding-bottom: 25px;
+	font-size: 16px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0.3s, border-width 0.3s, color 0.3s;
+	text-decoration: none;
+	color: #9B9B9B;
+}
+
+.link:hover {
+	color: white;
+	border-left: solid;
+	border-width: 6px;
+	background-color: #181818;
+	border-image: linear-gradient(0deg, rgb(138,37,177), rgb(23,97,160)) 1;
+}
+
+.linkActive {
+	color: white;
+	border-left: solid;
+	border-width: 6px;
+	background-color: #181818;
+	border-image: linear-gradient(0deg, rgb(138,37,177), rgb(23,97,160)) 1;
+	pointer-events: none;
+
+}
