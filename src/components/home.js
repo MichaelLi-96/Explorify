@@ -19,7 +19,6 @@ class Home extends Component {
 		axios.get('http://localhost:4000/artists/')
 	  	.then((response) => {
 	  		this.setState({ artists: response.data, loading: false });
-	  		console.log(this.state.artists);
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
@@ -28,7 +27,6 @@ class Home extends Component {
 		axios.get('http://localhost:4000/songs/')
 	  	.then((response) => {
 	  		this.setState({ songs: response.data, loading: false });
-	  		console.log(this.state.artists);
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
@@ -38,11 +36,13 @@ class Home extends Component {
 	loadArtists = () => {
 		const artists = [];
 		for(let i = 0; i < this.state.artists.length; i++) {
-			const artistName = this.state.artists[i].name;
-			const artistImageUrl = this.state.artists[i].imageUrl;
-			console.log(artistName);
+			const artist = this.state.artists[i];
+			const artistId = artist._id;
+			const artistName = artist.name;
+			const artistImageUrl = artist.imageUrl;
 			artists.push(
 				<ArtistPreview 
+					key={artistId}
 					artistName={artistName}
 					artistImageUrl={artistImageUrl}
 				/>
@@ -54,15 +54,18 @@ class Home extends Component {
 	loadTracks = () => {
 		const songs = [];
 		for(let i = 0; i < this.state.songs.length; i++) {
-			const songName = this.state.songs[i].name;
-			const songArtist = this.state.songs[i].artist;
-			const songUrl = this.state.songs[i].url;
-			const songImageUrl = this.state.songs[i].imageUrl;
-			const songLength = this.state.songs[i].length;
-			const songPlays = this.state.songs[i].plays;
+			const song = this.state.songs[i];
+			const songId = song._id;
+			const songName = song.name;
+			const songArtist = song.artist;
+			const songUrl = song.url;
+			const songImageUrl = song.imageUrl;
+			const songLength = song.length;
+			const songPlays = song.plays;
 
 			songs.push(
 				<SongPreview 
+					key={songId}
 					songName={songName}
 					songArtist={songArtist}
 					songUrl={songUrl}

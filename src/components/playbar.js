@@ -15,14 +15,13 @@ class Playbar extends Component {
 			volumeBarValue: 0,
 			songProgressValue: 0,
 			ended: false,
-			repeat: false,
-			src: ""
+			repeat: false
 		}
 	}
 
 	playSong = () => {
 		const audio = document.getElementById("playbarAudio");
-		if(audio.currentSrc !== "") {
+		if(this.props.currentSong.url !== "") {
 			audio.play();
 			const songDuration = document.getElementById("playbarSongDuration");
 			songDuration.innerHTML = this.props.currentSong.length;
@@ -140,9 +139,8 @@ class Playbar extends Component {
 
 		// If song is clicked, play it as current song
 		if(this.props.songPressed) {
-			this.setState({ src: this.props.currentSong.url });
 			audio.setAttribute("src", this.props.currentSong.url);
-			this.playSong()
+			this.playSong();
 			this.props.songPress();
 		}
 	}
