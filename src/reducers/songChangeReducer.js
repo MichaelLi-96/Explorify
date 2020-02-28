@@ -1,14 +1,25 @@
 import { SONG_CHANGED } from '../actions/types';
 
 const INITIAL_STATE = { 
-	src: '',
-	name: 'All the good girls go to hell'
+	name: '',
+	artist: '',
+	url: '',
+	imageUrl: '',
+	length: '',
+	plays: 0
 };
 
 const songChangeReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case SONG_CHANGED:
-			return { src: action.payload.src, name: action.payload.name };
+			return { 
+				name: action.payload.name, 
+				artist: action.payload.artist,
+				url: action.payload.url, 
+				imageUrl: action.payload.imageUrl, 
+				length: action.payload.length, 
+				plays: action.payload.plays 
+			};
 		default:
 			return state;
 	}

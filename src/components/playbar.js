@@ -25,16 +25,7 @@ class Playbar extends Component {
 		if(audio.currentSrc !== "") {
 			audio.play();
 			const songDuration = document.getElementById("playbarSongDuration");
-			const min = Math.floor(audio.duration / 60);
-			const sec = Math.floor(audio.duration % 60);
-			if(sec < 10) {
-				const time = min + ":0" + sec;
-				songDuration.innerHTML = time;
-			}
-			else {
-				const time = min + ":" + sec;
-				songDuration.innerHTML = time;
-			}
+			songDuration.innerHTML = this.props.currentSong.length;
 			this.setState({ playing: true });
 		}
 	}
@@ -149,11 +140,9 @@ class Playbar extends Component {
 
 		// If song is clicked, play it as current song
 		if(this.props.songPressed) {
-			this.setState({ src: this.props.currentSong.src });
-			audio.setAttribute("src", this.props.currentSong.src);
-			setTimeout(() => {
-			  this.playSong()
-			}, 100);
+			this.setState({ src: this.props.currentSong.url });
+			audio.setAttribute("src", this.props.currentSong.url);
+			this.playSong()
 			this.props.songPress();
 		}
 	}
@@ -162,14 +151,13 @@ class Playbar extends Component {
 	    return(
 			<div id="playbar" className="noselect">
 				<div id="playbarCurrentSong">
-					<div id="playbarCurrentSongImg">
-					</div>
+					<img src={this.props.currentSong.imageUrl} alt={this.props.currentSong.name} id="playbarCurrentSongImg"></img>
 					<div id="playbarCurrentSongInfo">
 						<div id="playbarSongTitle">
-							Hello	
+							{this.props.currentSong.name}
 						</div>
 						<div id="playbarSongArtist">
-							Adelle
+							{this.props.currentSong.artist}
 						</div>
 					</div>
 				</div>

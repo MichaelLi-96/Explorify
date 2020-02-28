@@ -1,11 +1,14 @@
 .artistPreviewContainer {
 	margin: 25px 25px 25px 25px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .artistPreviewImg {
 	width: 225px;
 	height: 225px;
-	background-color: green;
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
@@ -24,7 +27,7 @@
 	height: 225px;
 	border-radius: 50%;
 	transition: 0.3s;
-	background-color: transparent;
+	background-color: transparent; 
 }
 
 .artistPreviewIconContainer:hover {

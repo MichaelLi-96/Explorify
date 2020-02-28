@@ -6,7 +6,7 @@ class ArtistPreview extends Component {
   	render() {
 	    return(
 			<div className="artistPreviewContainer">
-				<div className="artistPreviewImg"></div>
+				<img src={this.props.artistImageUrl} alt={this.props.artistName} className="artistPreviewImg"></img>
 				<div className="artistPreviewIconContainer"><MdInfo className="artistPreviewMoreInfoIcon" /></div>
 				<div className="artistPreviewName">{this.props.artistName}</div>
 			</div>

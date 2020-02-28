@@ -18,9 +18,9 @@ class App extends Component {
   render() {
     return(
 		<Router>
-			<Route exact path='/' component={Artist} />
-			<Route exact path='/search' component={Home} />
-			<Route exact path='/yourLibrary' component={PlaylistAlbum} />	
+			<Route exact path='/' component={Home} />
+			<Route exact path='/search' component={Search} />
+			<Route exact path='/yourLibrary' component={YourLibrary} />	
 			<AccountButton />
 			<Navbar />
 			<Playbar />
