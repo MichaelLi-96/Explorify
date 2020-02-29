@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import '../assets/css/playlistAlbum.css';
 import BackButton from "./backButton";
-import { IoIosArrowBack, IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
+import SongRow from "./songRow";
+import { IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
 
 class PlaylistAlbum extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			playlistAlbum: this.props.location.state.playlistAlbum
+		}
+		console.log(this.state.playlistAlbum);
+	}
+
 	componentDidMount() {
-		const songs = document.getElementsByClassName("playlistAlbumSong");
+		const songs = document.getElementsByClassName("songRow");
 		for(let i = 0; i < songs.length; i++) {
 			const currentSong = songs[i];
 
@@ -55,115 +64,48 @@ class PlaylistAlbum extends Component {
 		}
 	}
 
+	loadSongs = () => {
+		const songs = [];
+		for(let i = 0; i < this.state.playlistAlbum.songs.length; i++) {
+			const song = this.state.playlistAlbum.songs[i];
+			const songId = song._id;
+			const songName = song.name;
+			const songArtist = song.artist;
+			const songUrl = song.url;
+			const songImageUrl = song.imageUrl;
+			const songLength = song.length;
+			const songPlays = song.plays;
+			songs.push(
+				<SongRow 
+					key={songId}
+					song={song}
+					songName={songName}
+					songArtist={songArtist}
+					songUrl={songUrl}
+					songImageUrl={songImageUrl}
+					songLength={songLength}
+					songPlays={songPlays}
+					showPlays={false}
+				/>
+			)
+		}
+		return songs;
+	}
+
   	render() {
 	    return(
 			<div id="playlistAlbum">
-				<BackButton />
+				<BackButton history={this.props.history} />
 				<div id="playlistAlbumInfoContainer">
-					<div id="playlistAlbumImg"></div>
-					<div id="playlistAlbumName">Pallete</div>
-					<div id="playlistAlbumArtist">IU</div>
+					<img src={this.state.playlistAlbum.imageUrl} alt={this.state.playlistAlbum.name} id="playlistAlbumImg"></img>
+					<div id="playlistAlbumName">{this.state.playlistAlbum.name}</div>
+					<div id="playlistAlbumArtist">{this.state.playlistAlbum.artist}</div>
 					<div id="playlistAlbumPlayButton">Play</div>
-					<div id="playlistAlbumYearAndSongs">2017 • 4 SONGS</div>
+					<div id="playlistAlbumYearAndSongs">{this.state.playlistAlbum.year} • {this.state.playlistAlbum.songs.length} SONGS</div>
 				</div>
 
 				<div id="playlistAlbumSongsContainer">
-					<div className="playlistAlbumSong">
-						<div className="playlistAlbumMusicNoteIconContainer">
-							<IoMdMusicalNote className="playlistAlbumMusicNoteIcon" />
-							<IoMdPlay className="playlistAlbumPlayIcon" />
-						</div>
-						<div className="playlistAlbumSongInfo">
-							<div className="playlistAlbumSongName">Through the Night</div>
-							<div className="playlistAlbumSongArtist">IU</div>
-						</div> 
-						<div className="playlistAlbumMusicMoreInfoIconContainer">
-							<IoIosMore className="playlistAlbumMusicMoreInfoIcon" />
-							<div className="playlistAlbumMoreInfoPanel">
-								<div className="playlistAlbumMoreInfoOption">Add to Playlist</div>
-								<div className="playlistAlbumMoreInfoOption">Save to your Liked Songs</div>
-							</div>
-						</div>
-						<div className="playlistAlbumMusicSongLength">4:13</div>
-					</div>
-
-					<div className="playlistAlbumSong">
-						<div className="playlistAlbumMusicNoteIconContainer">
-							<IoMdMusicalNote className="playlistAlbumMusicNoteIcon" />
-							<IoMdPlay className="playlistAlbumPlayIcon" />
-						</div>
-						<div className="playlistAlbumSongInfo">
-							<div className="playlistAlbumSongName">Through the Night</div>
-							<div className="playlistAlbumSongArtist">IU</div>
-						</div> 
-						<div className="playlistAlbumMusicMoreInfoIconContainer">
-							<IoIosMore className="playlistAlbumMusicMoreInfoIcon" />
-							<div className="playlistAlbumMoreInfoPanel">
-								<div className="playlistAlbumMoreInfoOption">Add to Playlist</div>
-								<div className="playlistAlbumMoreInfoOption">Save to your Liked Songs</div>
-							</div>
-						</div>
-						<div className="playlistAlbumMusicSongLength">4:13</div>
-					</div>
-
-					<div className="playlistAlbumSong">
-						<div className="playlistAlbumMusicNoteIconContainer">
-							<IoMdMusicalNote className="playlistAlbumMusicNoteIcon" />
-							<IoMdPlay className="playlistAlbumPlayIcon" />
-						</div>
-						<div className="playlistAlbumSongInfo">
-							<div className="playlistAlbumSongName">Through the Night</div>
-							<div className="playlistAlbumSongArtist">IU</div>
-						</div> 
-						<div className="playlistAlbumMusicMoreInfoIconContainer">
-							<IoIosMore className="playlistAlbumMusicMoreInfoIcon" />
-							<div className="playlistAlbumMoreInfoPanel">
-								<div className="playlistAlbumMoreInfoOption">Add to Playlist</div>
-								<div className="playlistAlbumMoreInfoOption">Save to your Liked Songs</div>
-							</div>
-						</div>
-						<div className="playlistAlbumMusicSongLength">4:13</div>
-					</div>
-
-					<div className="playlistAlbumSong">
-						<div className="playlistAlbumMusicNoteIconContainer">
-							<IoMdMusicalNote className="playlistAlbumMusicNoteIcon" />
-							<IoMdPlay className="playlistAlbumPlayIcon" />
-						</div>
-						<div className="playlistAlbumSongInfo">
-							<div className="playlistAlbumSongName">Through the Night</div>
-							<div className="playlistAlbumSongArtist">IU</div>
-						</div> 
-						<div className="playlistAlbumMusicMoreInfoIconContainer">
-							<IoIosMore className="playlistAlbumMusicMoreInfoIcon" />
-							<div className="playlistAlbumMoreInfoPanel">
-								<div className="playlistAlbumMoreInfoOption">Add to Playlist</div>
-								<div className="playlistAlbumMoreInfoOption">Save to your Liked Songs</div>
-							</div>
-						</div>
-						<div className="playlistAlbumMusicSongLength">4:13</div>
-					</div>
-
-
-					<div className="playlistAlbumSong">
-						<div className="playlistAlbumMusicNoteIconContainer">
-							<IoMdMusicalNote className="playlistAlbumMusicNoteIcon" />
-							<IoMdPlay className="playlistAlbumPlayIcon" />
-						</div>
-						<div className="playlistAlbumSongInfo">
-							<div className="playlistAlbumSongName">Through the Night</div>
-							<div className="playlistAlbumSongArtist">IU</div>
-						</div> 
-						<div className="playlistAlbumMusicMoreInfoIconContainer">
-							<IoIosMore className="playlistAlbumMusicMoreInfoIcon" />
-							<div className="playlistAlbumMoreInfoPanel">
-								<div className="playlistAlbumMoreInfoOption">Add to Playlist</div>
-								<div className="playlistAlbumMoreInfoOption">Save to your Liked Songs</div>
-							</div>
-						</div>
-						<div className="playlistAlbumMusicSongLength">4:13</div>
-					</div>
-					
+					{this.loadSongs()}
 				</div>
 			</div>
 	    );

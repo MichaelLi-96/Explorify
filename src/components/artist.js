@@ -14,7 +14,6 @@ class Artist extends Component {
 
 	componentDidMount() {
 		const songs = document.getElementsByClassName("songRow");
-		console.log(songs);
 		for(let i = 0; i < songs.length; i++) {
 			const currentSong = songs[i];
 			// On hover song, change music note icon to play icon
@@ -61,15 +60,17 @@ class Artist extends Component {
 			const albumId = album._id;
 			const albumName = album.name;
 			const albumImageUrl = album.imageUrl;
+			const albumArtist = album.artist;
 			const albumLength = album.songs.length;
 			albums.push(
 				<PlaylistAlbumPreview
 					key={albumId}
-					playlistAlbumImageUrl={albumImageUrl}
+					playlistAlbum={album}
 					playlistAlbumName={albumName}
+					playlistAlbumImageUrl={albumImageUrl}
+					playlistAlbumArtist={albumArtist}
 					numberOfSongs={albumLength}
 				/>
-
 			)
 		}
 		this.shuffle(albums);
@@ -103,6 +104,7 @@ class Artist extends Component {
 					songImageUrl={songImageUrl}
 					songLength={songLength}
 					songPlays={songPlays}
+					showPlays={true}
 				/>
 			)
 		}
@@ -132,7 +134,7 @@ class Artist extends Component {
   	render() {
 	    return(
 			<div id="artist">
-				<BackButton />
+				<BackButton history={this.props.history} />
 				<div id="artistImageNameContainer">
 					<img src={this.state.artist.imageUrl} alt={this.state.artist.name} id="artistImage"></img>
 					<div id="artistName">{this.state.artist.name}</div>

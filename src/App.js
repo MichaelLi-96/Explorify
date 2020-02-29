@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route  } from "react-router-dom";
 
 //css
 import "./assets/css/app.css"
@@ -22,6 +22,7 @@ class App extends Component {
 			<Route exact path='/search' component={Search} />
 			<Route exact path='/yourLibrary' component={YourLibrary} />	
 			<Route exact path='/artists/:artistname' component={Artist} />
+			<Route exact path='/albums/:artistname/:albumname' component={PlaylistAlbum} />
 			<AccountButton />
 			<Navbar />
 			<Playbar />

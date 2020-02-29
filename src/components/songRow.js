@@ -26,7 +26,11 @@ class SongRow extends Component {
 				</div>
 				<div className="songRowSongInfo">
 					<div className="songRowSongName">{this.props.songName}</div>
-					<div className="songRowSongPlays">{this.props.songPlays}</div>
+					{this.props.showPlays === true ? (
+						<div className="songRowSongPlays">{this.props.songPlays}</div>
+					) : (
+						<div className="songRowSongPlays">{this.props.songArtist}</div>
+					)}
 				</div> 
 				<div className="songRowMusicMoreInfoIconContainer">
 					<IoIosMore className="songRowMusicMoreInfoIcon" />
