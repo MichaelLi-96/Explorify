@@ -49,8 +49,8 @@
 .homeListContainer {
 	width: auto;
 	display: flex;
-	padding-left: 200px;
-	padding-right: 200px;
+	padding-left: 100px;
+	padding-right: 100px;
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;

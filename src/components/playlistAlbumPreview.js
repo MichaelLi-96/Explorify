@@ -5,7 +5,7 @@ class PlaylistAlbumPreview extends Component {
   	render() {
 	    return(
 			<div className="playlistAlbumPreviewContainer">
-				<div className="playlistAlbumPreviewImg"></div>
+				<img src={this.props.playlistAlbumImageUrl} alt={this.props.playlistAlbumName} className="playlistAlbumPreviewImg"></img>
 				<div className="playlistAlbumPreviewName">{this.props.playlistAlbumName}</div>
 				<div className="playlistAlbumPreviewSongs">{this.props.numberOfSongs} SONGS</div>
 			</div>

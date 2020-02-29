@@ -1,0 +1,104 @@
+.songRow {
+	display: flex;
+	flex-direction: row;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	transition: 0.3s;
+}
+
+.songRow:hover {
+	background-color: #3e3e3e;
+}
+
+.songRow:hover .songRowMusicMoreInfoIcon {
+	display: block;
+}
+
+.songRowMusicNoteIconContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 5%;
+	height: 100%;
+}
+
+.songRowMusicNoteIcon {
+	font-size: 25px;
+	color: #9B9B9B;
+}
+
+.songRowPlayIcon {
+	font-size: 25px;
+	color: white;
+	display: none;
+	cursor: pointer
+}
+
+.songRowSongInfo {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	height: 100%;
+}
+
+.songRowSongName {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.songRowSongPlays {
+	color: #9B9B9B;
+}
+
+.songRowMusicMoreInfoIconContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 5%;
+	height: 100%;
+}
+
+.songRowMusicMoreInfoIcon {
+	font-size: 30px;
+	display: none;
+	cursor: pointer;
+}
+
+.songRowMoreInfoPanel {
+	position: absolute;
+	width: 250px;
+	height: auto;
+	background-color: #121212;
+	margin-left: -150px;
+	margin-top: 35px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: none;
+}
+
+.songRowMoreInfoOption {
+	padding: 10px 15px 10px 15px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #9B9B9B;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.songRowMoreInfoOption:hover {
+	color: white;
+	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
+}
+
+.songRowMusicSongLength {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	height: 100%;
+	color: #9B9B9B;
+}

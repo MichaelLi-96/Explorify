@@ -21,6 +21,7 @@ class App extends Component {
 			<Route exact path='/' component={Home} />
 			<Route exact path='/search' component={Search} />
 			<Route exact path='/yourLibrary' component={YourLibrary} />	
+			<Route exact path='/artists/:artistname' component={Artist} />
 			<AccountButton />
 			<Navbar />
 			<Playbar />
