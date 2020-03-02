@@ -10,11 +10,11 @@ class PlaylistAlbum extends Component {
 		this.state = {
 			playlistAlbum: this.props.location.state.playlistAlbum
 		}
-		console.log(this.state.playlistAlbum);
 	}
 
 	componentDidMount() {
 		const songs = document.getElementsByClassName("songRow");
+		console.log(songs);
 		for(let i = 0; i < songs.length; i++) {
 			const currentSong = songs[i];
 
