@@ -11,9 +11,8 @@ class Artist extends Component {
 		this.state = {
 			artistId: this.props.location.state.artistId,
 			artist: {},
-			albumPlaylists:[],
-			songIds: [],
-			shuffledSongIds: [],
+			albumPlaylists: [],
+			songs: [],
 			loading: true,
 		}
 	}
@@ -27,50 +26,18 @@ class Artist extends Component {
 	  			axios.get(`http://localhost:4000/albumPlaylists/${this.state.artist.albumPlaylists[i]}`)
 			  	.then((response) => {
 			  		this.state.albumPlaylists.push(response.data);
-					this.state.songIds.push(...response.data.songs);
-		 			this.setState({ shuffledSongIds: this.shuffle(this.state.songIds) });
-		 			if(i === this.state.artist.albumPlaylists.length - 1) {
-						this.setState({ loading: false });
+			  		this.setState({ albumPlaylists: this.state.albumPlaylists });
 
-						const songs = document.getElementsByClassName("songRow");
-						for(let i = 0; i < songs.length; i++) {
-							const currentSong = songs[i];
-
-							// On hover song, change music note icon to play icon
-							currentSong.addEventListener("mouseenter", () => {
-								const musicNote = currentSong.children[0].children[0];
-								const play = currentSong.children[0].children[1];
-								musicNote.style.display = "none";
-								play.style.display = "block";
-							})
-
-							// On unhover song, change play icon to music note icon
-							currentSong.addEventListener("mouseleave", () => {
-								const musicNote = currentSong.children[0].children[0];
-								const play = currentSong.children[0].children[1];
-								musicNote.style.display = "block";
-								play.style.display = "none";
-							})
-
-							// On click more info icon, show more info panel
-							const moreInfoIcon = currentSong.children[2].children[0];
-							moreInfoIcon.addEventListener("click", () => {
-								const moreInfoPanel = currentSong.children[2].children[1];
-								if(moreInfoPanel.style.display === "none") {
-									moreInfoPanel.style.display = "block";
-								}
-								else {
-									moreInfoPanel.style.display = "none";
-								}
-							})
-
-							// Hide more info panel when mouse leaves song div
-							currentSong.addEventListener("mouseleave", () => {
-								const moreInfoPanel = currentSong.children[2].children[1];
-								moreInfoPanel.style.display = "none";
-							})
-						}
-		 			}
+			  		for(let j = 0; j < response.data.songs.length; j++) {
+			  			axios.get(`http://localhost:4000/songs/${response.data.songs[j]}`)
+			  			.then((response) => {
+			  				this.state.songs.push(response.data);
+			  				this.setState({ songs: this.state.songs });
+			  			})
+			  			.catch(function (error) {
+					  		console.log(error);
+					  	});
+			  		}
 				})
 			  	.catch(function (error) {
 			  		console.log(error);
@@ -82,7 +49,51 @@ class Artist extends Component {
 	  	});
 	}
 
+	componentDidUpdate() {
+		const songs = document.getElementsByClassName("songRow");
+		for(let i = 0; i < songs.length; i++) {
+			const currentSong = songs[i];
+
+			// On hover song, change music note icon to play icon
+			currentSong.addEventListener("mouseenter", () => {
+				const musicNote = currentSong.children[0].children[0];
+				const play = currentSong.children[0].children[1];
+				musicNote.style.display = "none";
+				play.style.display = "block";
+			})
+
+			// On unhover song, change play icon to music note icon
+			currentSong.addEventListener("mouseleave", () => {
+				const musicNote = currentSong.children[0].children[0];
+				const play = currentSong.children[0].children[1];
+				musicNote.style.display = "block";
+				play.style.display = "none";
+			})
+
+			// On click more info icon, show more info panel
+			const moreInfoIcon = currentSong.children[2].children[0];
+			moreInfoIcon.addEventListener("click", () => {
+				const moreInfoPanel = currentSong.children[2].children[1];
+				if(moreInfoPanel.style.display === "none") {
+					moreInfoPanel.style.display = "block";
+				}
+				else {
+					moreInfoPanel.style.display = "none";
+				}
+			})
+
+			// Hide more info panel when mouse leaves song div
+			currentSong.addEventListener("mouseleave", () => {
+				const moreInfoPanel = currentSong.children[2].children[1];
+				moreInfoPanel.style.display = "none";
+			})
+		}
+	}
+
 	loadAlbums = () => {
+		if(this.state.artist === undefined || JSON.stringify(this.state.artist) === '{}')  {
+			return;
+		}
 		const albums = [];
 		for(let i = 0; i < this.state.artist.albumPlaylists.length; i++) {
 			const albumId = this.state.artist.albumPlaylists[i];
@@ -98,9 +109,13 @@ class Artist extends Component {
 	}
 
 	loadPopularSongs = () => {
+		const sortedSongs = this.state.songs.sort((a,b) => b.plays - a.plays).slice(0, 8);
+		if(sortedSongs === undefined || sortedSongs.length < 8)  {
+			return;
+		}
 		const popularSongs = [];
-		for(let i = 0; i < 8; i++) {
-			const songId = this.state.shuffledSongIds[i];
+		for(let i = 0; i < sortedSongs.length; i++) {
+			const songId = sortedSongs[i]._id;
 			popularSongs.push(
 				<SongRow 
 					key={songId}
@@ -110,6 +125,7 @@ class Artist extends Component {
 			)
 		}
 		return popularSongs;
+		
 	}
 
 	// Shuffle an array: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -133,6 +149,11 @@ class Artist extends Component {
 	}
 
   	render() {
+		// { this.state.loading === false ? (
+		// 	this.loadPopularSongs()
+		// ) : (
+		// 	<div />
+		// )}
 	    return(
 			<div id="artist">
 				<BackButton history={this.props.history} />
@@ -143,19 +164,11 @@ class Artist extends Component {
 				<div id="artistInfoContainer">
 					<div className="artistSubtitle">Albums</div>
 					<div id="artistAlbumContainer">
-						{ this.state.loading === false ? (
-							this.loadAlbums()
-						) : (
-							<div />
-						)}
+						{ this.loadAlbums() }
 					</div>
 					<div className="artistSubtitle">Popular Songs</div>
 					<div id="artistSongsContainer">
-						{ this.state.loading === false ? (
-							this.loadPopularSongs()
-						) : (
-							<div />
-						)}
+						{ this.loadPopularSongs() }
 					</div>
 				</div>
 			</div>

@@ -53,6 +53,22 @@ class SongPreview extends Component {
 			plays: this.state.song.plays
 		});
 		this.props.songPress();
+
+		axios.put(`http://localhost:4000/songs/update/${this.state.song._id}`, {
+			name: this.state.song.name,
+			albumPlaylist: this.state.albumPlaylist._id,
+			artist: this.state.artist._id,
+			url: this.state.song.url,
+			imageUrl: this.state.song.imageUrl,
+			length: this.state.song.length,
+			plays: this.state.song.plays + 1
+		})
+	  	.then((response) => {
+	  		//console.log(response);
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+		});
 	}
 
   	render() {
