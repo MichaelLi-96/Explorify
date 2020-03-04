@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PlaylistAlbumPreview from "./playlistAlbumPreview";
+import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import '../assets/css/yourLibrary.css';
 import { connect } from 'react-redux';
 import { songChange, songPress } from '../actions';
@@ -15,15 +15,6 @@ class yourLibrary extends Component {
 			<div id="yourLibrary">
 				<div id="yourLibraryTitle">Playlists</div>
 				<div className="yourLibraryPlaylistsListContainer">
-					<div className="playlistContainer">
-						<div className="playlistImg" onClick={this.playSong}></div>
-						<div className="playlistName">playlist</div>
-						<div className="tracks">100 SONGS</div>
-					</div>
-					<PlaylistAlbumPreview
-						playlistAlbumName="name"
-						numberOfSongs="19"
-					/>
 				</div>
 			</div>
 	    );

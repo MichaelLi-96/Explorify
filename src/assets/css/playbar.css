@@ -40,12 +40,26 @@ audio {
 	font-weight: bold;
 	color: white;
 	margin-bottom: 8px;
+	text-decoration: none;
+	transition: 0.5s;
+}
+
+#playbarSongTitle:hover{
+	text-decoration: underline;
 }
 
 #playbarSongArtist {
 	font-size: 14px;
 	color: #9B9B9B;
+	text-decoration: none;
+	transition: 0.5s;
 }
+
+#playbarSongArtist:hover {
+	text-decoration: underline;
+	color: white;
+}
+
 
 #playbarNowPlaying {
 	width: 900px;

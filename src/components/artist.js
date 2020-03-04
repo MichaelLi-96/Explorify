@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/artist.css';
-import PlaylistAlbumPreview from "./playlistAlbumPreview";
+import axios from "axios";
+import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
 
@@ -8,68 +9,87 @@ class Artist extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			artist: this.props.location.state.artist
+			artistId: this.props.location.state.artistId,
+			artist: {},
+			albumPlaylists:[],
+			songIds: [],
+			shuffledSongIds: [],
+			loading: true,
 		}
 	}
 
 	componentDidMount() {
-		const songs = document.getElementsByClassName("songRow");
-		for(let i = 0; i < songs.length; i++) {
-			const currentSong = songs[i];
-			// On hover song, change music note icon to play icon
-			currentSong.addEventListener("mouseenter", () => {
-				const musicNote = currentSong.children[0].children[0];
-				const play = currentSong.children[0].children[1];
-				musicNote.style.display = "none";
-				play.style.display = "block";
-			})
+		axios.get(`http://localhost:4000/artists/${this.state.artistId}`)
+	  	.then((response) => {
+	  		this.setState({ artist: response.data });
 
-			// On unhover song, change play icon to music note icon
-			currentSong.addEventListener("mouseleave", () => {
-				const musicNote = currentSong.children[0].children[0];
-				const play = currentSong.children[0].children[1];
-				musicNote.style.display = "block";
-				play.style.display = "none";
-			})
+	  		for(let i = 0; i < this.state.artist.albumPlaylists.length; i++) {
+	  			axios.get(`http://localhost:4000/albumPlaylists/${this.state.artist.albumPlaylists[i]}`)
+			  	.then((response) => {
+			  		this.state.albumPlaylists.push(response.data);
+					this.state.songIds.push(...response.data.songs);
+		 			this.setState({ shuffledSongIds: this.shuffle(this.state.songIds) });
+		 			if(i === this.state.artist.albumPlaylists.length - 1) {
+						this.setState({ loading: false });
 
-			// On click more info icon, show more info panel
-			const moreInfoIcon = currentSong.children[2].children[0];
-			moreInfoIcon.addEventListener("click", () => {
-				const moreInfoPanel = currentSong.children[2].children[1];
-				if(moreInfoPanel.style.display === "none") {
-					moreInfoPanel.style.display = "block";
-				}
-				else {
-					moreInfoPanel.style.display = "none";
-				}
-			})
+						const songs = document.getElementsByClassName("songRow");
+						for(let i = 0; i < songs.length; i++) {
+							const currentSong = songs[i];
 
-			// Hide more info panel when mouse leaves song div
-			currentSong.addEventListener("mouseleave", () => {
-				const moreInfoPanel = currentSong.children[2].children[1];
-				moreInfoPanel.style.display = "none";
-			})
+							// On hover song, change music note icon to play icon
+							currentSong.addEventListener("mouseenter", () => {
+								const musicNote = currentSong.children[0].children[0];
+								const play = currentSong.children[0].children[1];
+								musicNote.style.display = "none";
+								play.style.display = "block";
+							})
 
-		}
+							// On unhover song, change play icon to music note icon
+							currentSong.addEventListener("mouseleave", () => {
+								const musicNote = currentSong.children[0].children[0];
+								const play = currentSong.children[0].children[1];
+								musicNote.style.display = "block";
+								play.style.display = "none";
+							})
+
+							// On click more info icon, show more info panel
+							const moreInfoIcon = currentSong.children[2].children[0];
+							moreInfoIcon.addEventListener("click", () => {
+								const moreInfoPanel = currentSong.children[2].children[1];
+								if(moreInfoPanel.style.display === "none") {
+									moreInfoPanel.style.display = "block";
+								}
+								else {
+									moreInfoPanel.style.display = "none";
+								}
+							})
+
+							// Hide more info panel when mouse leaves song div
+							currentSong.addEventListener("mouseleave", () => {
+								const moreInfoPanel = currentSong.children[2].children[1];
+								moreInfoPanel.style.display = "none";
+							})
+						}
+		 			}
+				})
+			  	.catch(function (error) {
+			  		console.log(error);
+			  	});
+	 		}
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
 	}
 
 	loadAlbums = () => {
 		const albums = [];
 		for(let i = 0; i < this.state.artist.albumPlaylists.length; i++) {
-			const album = this.state.artist.albumPlaylists[i];
-			const albumId = album._id;
-			const albumName = album.name;
-			const albumImageUrl = album.imageUrl;
-			const albumArtist = album.artist;
-			const albumLength = album.songs.length;
+			const albumId = this.state.artist.albumPlaylists[i];
 			albums.push(
-				<PlaylistAlbumPreview
+				<AlbumPlaylistPreview
 					key={albumId}
-					playlistAlbum={album}
-					playlistAlbumName={albumName}
-					playlistAlbumImageUrl={albumImageUrl}
-					playlistAlbumArtist={albumArtist}
-					numberOfSongs={albumLength}
+					albumId={albumId}
 				/>
 			)
 		}
@@ -78,32 +98,13 @@ class Artist extends Component {
 	}
 
 	loadPopularSongs = () => {
-		const songs = [];
-		for(let i = 0; i < this.state.artist.albumPlaylists.length; i++) {
-			const album = this.state.artist.albumPlaylists[i];
-			songs.push(...album.songs);
-		}
-		this.shuffle(songs);
 		const popularSongs = [];
 		for(let i = 0; i < 8; i++) {
-			const song = songs[i];
-			const songId = song._id;
-			const songName = song.name;
-			const songArtist = song.artist;
-			const songUrl = song.url;
-			const songImageUrl = song.imageUrl;
-			const songLength = song.length;
-			const songPlays = song.plays;
+			const songId = this.state.shuffledSongIds[i];
 			popularSongs.push(
 				<SongRow 
 					key={songId}
-					song={song}
-					songName={songName}
-					songArtist={songArtist}
-					songUrl={songUrl}
-					songImageUrl={songImageUrl}
-					songLength={songLength}
-					songPlays={songPlays}
+					songId={songId}
 					showPlays={true}
 				/>
 			)
@@ -142,11 +143,19 @@ class Artist extends Component {
 				<div id="artistInfoContainer">
 					<div className="artistSubtitle">Albums</div>
 					<div id="artistAlbumContainer">
-						{this.loadAlbums()}
+						{ this.state.loading === false ? (
+							this.loadAlbums()
+						) : (
+							<div />
+						)}
 					</div>
 					<div className="artistSubtitle">Popular Songs</div>
 					<div id="artistSongsContainer">
-						{this.loadPopularSongs()}
+						{ this.state.loading === false ? (
+							this.loadPopularSongs()
+						) : (
+							<div />
+						)}
 					</div>
 				</div>
 			</div>

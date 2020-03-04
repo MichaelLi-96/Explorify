@@ -48,8 +48,22 @@
 	margin-bottom: 5px;
 }
 
-.songRowSongPlays {
+.songRowDetailsContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	color: #9B9B9B;
+}
+
+.songRowDetailsLink {
+	color: #9B9B9B;
+	text-decoration: none;
+	transition: 0.5s;
+}
+
+.songRowDetailsLink:hover {
+	text-decoration: underline;
+	color: white;
 }
 
 .songRowMusicMoreInfoIconContainer {

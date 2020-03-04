@@ -1,4 +1,4 @@
-#playlistAlbum {
+#albumPlaylist {
 	background: rgb(42,42,42);
 	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
 	/*background-color: #181818;*/
@@ -19,7 +19,7 @@
 	justify-content: flex-start;
 }
 
-#playlistAlbumInfoContainer {
+#albumPlaylistInfoContainer {
 	width: 40%;
 	height: 100%;
 	display: flex;
@@ -28,25 +28,25 @@
 	align-items: center;
 }
 
-#playlistAlbumImg {
+#albumPlaylistImg {
 	width: 300px;
 	height: 300px;
 }
 
-#playlistAlbumName {
+#albumPlaylistName {
 	margin-top: 25px;
 	margin-bottom: 5px;
 	font-size: 36px;
 	font-weight: bold;
 }
 
-#playlistAlbumArtist {
+#albumPlaylistArtist {
 	color: #9B9B9B;
 	font-weight: bold;
 	font-size: 20px;
 }
 
-#playlistAlbumPlayButton {
+#albumPlaylistPlayButton {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
@@ -58,16 +58,22 @@
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 18px;
+	transition: 0.3s;
 }
 
-#playlistAlbumYearAndSongs {
+#albumPlaylistPlayButton:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
+#albumPlaylistYearAndSongs {
 	color: #9B9B9B;
 	font-size: 14px;
 	letter-spacing: 1px;
 	font-weight: bold;
 }
 
-#playlistAlbumSongsContainer {
+#albumPlaylistSongsContainer {
 	width: 60%;
 	height: 100%;
 	display: flex;

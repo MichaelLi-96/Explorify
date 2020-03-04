@@ -4,6 +4,7 @@ import sound from "../assets/songs/Shelter.mp3";
 import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious, 
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import { songChange, songPress } from '../actions';
 
 class Playbar extends Component {
@@ -151,12 +152,29 @@ class Playbar extends Component {
 				<div id="playbarCurrentSong">
 					<img src={this.props.currentSong.imageUrl} alt={this.props.currentSong.name} id="playbarCurrentSongImg"></img>
 					<div id="playbarCurrentSongInfo">
-						<div id="playbarSongTitle">
+						<Link 
+							id="playbarSongTitle"
+							to={{
+								pathname: `/albums/${this.props.currentSong.artist.name}/${this.props.currentSong.albumPlaylist.name}`,
+								state: {
+									albumPlaylistId: this.props.currentSong.albumPlaylist._id
+								}
+							}}
+						>
 							{this.props.currentSong.name}
-						</div>
-						<div id="playbarSongArtist">
-							{this.props.currentSong.artist}
-						</div>
+						</Link>
+
+						<Link 
+							id="playbarSongArtist"
+							to={{
+								pathname: `/artists/${this.props.currentSong.artist.name}`,
+								state: {
+									artistId: this.props.currentSong.artist._id
+								}
+							}}
+						>
+							{this.props.currentSong.artist.name}
+						</Link>
 					</div>
 				</div>
 				<div id="playbarNowPlaying">

@@ -1,4 +1,4 @@
-.playlistAlbumPreviewContainer {
+.albumPlaylistPreviewContainer {
 	margin: 25px 25px 25px 25px;
 	display: flex;
 	flex-direction: column;
@@ -6,10 +6,9 @@
 	align-items: center;
 }
 
-.playlistAlbumPreviewImg {
+.albumPlaylistPreviewImg {
 	width: 250px;
 	height: 250px;
-	background-color: red;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -17,12 +16,12 @@
 	transition: 0.3s;
 }
 
-.playlistAlbumPreviewImg:hover {
+.albumPlaylistPreviewImg:hover {
 	opacity: 70%;
 	cursor: pointer;
 }
 
-.playlistAlbumPreviewName {
+.albumPlaylistPreviewName {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -34,7 +33,7 @@
 	text-align: center;
 }
 
-.playlistAlbumPreviewSongs {
+.albumPlaylistPreviewSongs {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

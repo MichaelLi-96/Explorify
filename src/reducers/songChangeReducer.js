@@ -2,7 +2,8 @@ import { SONG_CHANGED } from '../actions/types';
 
 const INITIAL_STATE = { 
 	name: '',
-	artist: '',
+	albumPlaylist: {},
+	artist: {},
 	url: '',
 	imageUrl: '',
 	length: '',
@@ -14,6 +15,7 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 		case SONG_CHANGED:
 			return { 
 				name: action.payload.name, 
+				albumPlaylist: action.payload.albumPlaylist,
 				artist: action.payload.artist,
 				url: action.payload.url, 
 				imageUrl: action.payload.imageUrl, 

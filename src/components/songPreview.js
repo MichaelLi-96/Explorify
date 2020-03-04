@@ -1,18 +1,56 @@
 import React, { Component } from "react";
 import '../assets/css/songPreview.css';
 import { MdPlayCircleOutline } from "react-icons/md";
+import axios from "axios";
 import { connect } from 'react-redux';
 import { songChange, songPress } from '../actions';
 
 class SongPreview extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loading: true,
+			song: {},
+			albumPlaylist: {},
+			artist: {}
+		}
+	}
+
+	componentDidMount() {
+		axios.get(`http://localhost:4000/songs/${this.props.songId}`)
+	  	.then((response) => {
+	  		this.setState({ song: response.data, loading: false });
+
+	  		axios.get(`http://localhost:4000/albumPlaylists/${this.state.song.albumPlaylist}`)
+		  	.then((response) => {
+		  		this.setState({ albumPlaylist: response.data });
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+		  	});
+
+		  	axios.get(`http://localhost:4000/artists/${this.state.song.artist}`)
+		  	.then((response) => {
+		  		this.setState({ artist: response.data });
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+		  	});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+	}
+
 	playSong = () => {
 		this.props.songChange({ 
-			name: this.props.songName,
-			artist: this.props.songArtist,
-			url: this.props.songUrl,
-			imageUrl: this.props.songImageUrl,
-			length: this.props.songLength,
-			plays: this.props.songPlays
+			name: this.state.song.name,
+			albumPlaylist: this.state.albumPlaylist,
+			artist: this.state.artist,
+			url: this.state.song.url,
+			imageUrl: this.state.song.imageUrl,
+			length: this.state.song.length,
+			plays: this.state.song.plays
 		});
 		this.props.songPress();
 	}
@@ -20,10 +58,10 @@ class SongPreview extends Component {
   	render() {
 	    return(
 			<div className="songPreviewContainer">
-				<img src={this.props.songImageUrl} alt={this.props.songName} className="songPreviewImg"></img>
+				<img src={this.state.song.imageUrl} alt={this.state.song.name} className="songPreviewImg"></img>
 				<div className="songPreviewPlaySongIconContainer" onClick={this.playSong}><MdPlayCircleOutline className="songPreviewPlaySongIcon" /></div>
-				<div className="songPreviewName">{this.props.songName}</div>
-				<div className="songPreviewArtist">{this.props.songArtist}</div>
+				<div className="songPreviewName">{this.state.song.name}</div>
+				<div className="songPreviewArtist">{this.state.artist.name}</div>
 			</div>
 	    );
   	}

@@ -8,7 +8,6 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showArtist: false,
 			loading: true,
 			artists: [],
 			songs: []
@@ -37,15 +36,10 @@ class Home extends Component {
 		const artists = [];
 		for(let i = 0; i < this.state.artists.length; i++) {
 			const artist = this.state.artists[i];
-			const artistId = artist._id;
-			const artistName = artist.name;
-			const artistImageUrl = artist.imageUrl;
 			artists.push(
 				<ArtistPreview 
-					key={artistId}
-					artist={artist}
-					artistName={artistName}
-					artistImageUrl={artistImageUrl}
+					key={artist._id}
+					artistId={artist._id}
 				/>
 			)
 		}
@@ -56,24 +50,10 @@ class Home extends Component {
 		const songs = [];
 		for(let i = 0; i < this.state.songs.length; i++) {
 			const song = this.state.songs[i];
-			const songId = song._id;
-			const songName = song.name;
-			const songArtist = song.artist;
-			const songUrl = song.url;
-			const songImageUrl = song.imageUrl;
-			const songLength = song.length;
-			const songPlays = song.plays;
-
 			songs.push(
 				<SongPreview 
-					key={songId}
-					song={song}
-					songName={songName}
-					songArtist={songArtist}
-					songUrl={songUrl}
-					songImageUrl={songImageUrl}
-					songLength={songLength}
-					songPlays={songPlays}
+					key={song._id}
+					songId={song._id}
 				/>
 			)
 		}
