@@ -3,6 +3,7 @@ import '../assets/css/songPreview.css';
 import { MdPlayCircleOutline } from "react-icons/md";
 import axios from "axios";
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import { songChange, songPress } from '../actions';
 
 class SongPreview extends Component {
@@ -88,8 +89,29 @@ class SongPreview extends Component {
 			<div className="songPreviewContainer">
 				<img src={this.state.song.imageUrl} alt={this.state.song.name} className="songPreviewImg"></img>
 				<div className="songPreviewPlaySongIconContainer" onClick={this.playSong}><MdPlayCircleOutline className="songPreviewPlaySongIcon" /></div>
-				<div className="songPreviewName">{this.state.song.name}</div>
-				<div className="songPreviewArtist">{this.state.artist.name}</div>
+				<Link 
+					className="songPreviewName"
+					to={{
+						pathname: `/albums/${this.state.artist.name}/${this.state.albumPlaylist.name}`,
+						state: {
+							albumPlaylistId: this.state.albumPlaylist._id
+						}
+					}}
+				>
+					{this.state.song.name}
+				</Link>
+
+				<Link 
+					className="songPreviewArtist"
+					to={{
+						pathname: `/artists/${this.state.artist.name}`,
+						state: {
+							artistId: this.state.artist._id
+						}
+					}}
+				>
+					{this.state.artist.name}
+				</Link>
 			</div>
 	    );
   	}
