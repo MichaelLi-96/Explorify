@@ -35,6 +35,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
+	margin-bottom: 50px;
 }
 
 #searchIcon {
@@ -73,6 +74,7 @@
 	margin-bottom: 25px;
 	font-size: 34px;
 	font-weight: bold;
+	display: none;
 }
 
 .searchListContainer {
@@ -84,5 +86,4 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 50px;
 }

@@ -104,7 +104,6 @@ class Artist extends Component {
 				/>
 			)
 		}
-		this.shuffle(albums);
 		return albums;
 	}
 
