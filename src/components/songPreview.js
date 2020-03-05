@@ -4,7 +4,7 @@ import { MdPlayCircleOutline } from "react-icons/md";
 import axios from "axios";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress } from '../actions';
+import { songChange, songPress, newSongAddedToHistory } from '../actions';
 
 class SongPreview extends Component {
 	constructor(props) {
@@ -66,6 +66,18 @@ class SongPreview extends Component {
 			plays: this.state.song.plays
 		});
 		this.props.songPress();
+		if(this.props.songHistory.currentSongId !== this.state.song._id) {
+			this.props.newSongAddedToHistory({ 
+				_id: this.state.song._id,
+				name: this.state.song.name,
+				albumPlaylist: this.state.albumPlaylist,
+				artist: this.state.artist,
+				url: this.state.song.url,
+				imageUrl: this.state.song.imageUrl,
+				length: this.state.song.length,
+			});
+		}
+
 
 		axios.put(`http://localhost:4000/songs/update/${this.state.song._id}`, {
 			name: this.state.song.name,
@@ -118,10 +130,12 @@ class SongPreview extends Component {
 }
 
 const mapStateToProps = state => ({ 
-	currentSong: state.currentSong  
+	currentSong: state.currentSong,
+	songHistory: state.songHistory
 });
 
 export default connect(mapStateToProps, { 
 	songChange,
-	songPress
+	songPress,
+	newSongAddedToHistory
 })(SongPreview);

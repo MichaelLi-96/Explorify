@@ -75,6 +75,9 @@ class AlbumPlaylist extends Component {
 	}
 
 	loadSongs = () => {
+		if(this.state.albumPlaylist === undefined || JSON.stringify(this.state.albumPlaylist) === '{}')  {
+			return;
+		}
 		const songRows = [];
 		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
 			const songId = this.state.albumPlaylist.songs[i];
@@ -102,11 +105,7 @@ class AlbumPlaylist extends Component {
 				</div>
 
 				<div id="albumPlaylistSongsContainer">
-					{ this.state.loading === false ? (
-						this.loadSongs()
-					) : (
-						<div />
-					)}
+					{ this.loadSongs() }
 				</div>
 			</div>
 	    );

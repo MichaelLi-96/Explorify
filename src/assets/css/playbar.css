@@ -91,6 +91,10 @@ audio {
 	font-size: 40px;
 }
 
+#playbarPauseButton {
+	font-size: 40px;
+}
+
 .playbarIcons:hover {
 	color: white;
 }

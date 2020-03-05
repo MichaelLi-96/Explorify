@@ -181,6 +181,22 @@ class Playbar extends Component {
 			this.playSong();
 			this.props.songPress();
 		}
+
+		const playbarPrevSongIcon = document.getElementById("playbarPrevSongIcon");
+		if(this.props.songHistory.currentSongHistoryIndex <= 0) {
+			playbarPrevSongIcon.style.pointerEvents = "none";
+		}
+		else {
+			playbarPrevSongIcon.style.pointerEvents = "auto";
+		}
+
+		const playbarNextSongIcon = document.getElementById("playbarNextSongIcon");
+		if(this.props.songHistory.currentSongHistoryIndex === this.props.songHistory.currentSongHistoryLength - 1) {
+			playbarNextSongIcon.style.pointerEvents = "none";
+		}
+		else {
+			playbarNextSongIcon.style.pointerEvents = "auto";
+		}
 	}
 
   	render() {
@@ -218,13 +234,13 @@ class Playbar extends Component {
 					<audio id="playbarAudio" />
 					<div id="playbarControlButtons">
 						<MdShuffle className="playbarIcons" />
-						<MdSkipPrevious className="playbarIcons" onClick={this.toPreviousSong} />
+						<MdSkipPrevious id="playbarPrevSongIcon" className="playbarIcons" onClick={this.toPreviousSong} />
 						{!this.state.playing ? (
 							<MdPlayCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.playSong} />
 						) : (
-							<MdPauseCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.pauseSong} />
+							<MdPauseCircleOutline className="playbarIcons" id="playbarPauseButton" onClick={this.pauseSong} />
 						)}
-						<MdSkipNext className="playbarIcons" onClick={this.toNextSong} />
+						<MdSkipNext id="playbarNextSongIcon" className="playbarIcons" onClick={this.toNextSong} />
 						{!this.state.repeat ? (
 							<MdRepeat className="playbarIcons" onClick={this.repeat} />
 						) : (

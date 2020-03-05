@@ -66,7 +66,7 @@ class SongRow extends Component {
 			plays: this.state.song.plays
 		});
 		this.props.songPress();
-		if(this.props.songHistory.currentSongId === this.state.song._id) {
+		if(this.props.songHistory.currentSongId !== this.state.song._id) {
 			this.props.newSongAddedToHistory({ 
 				_id: this.state.song._id,
 				name: this.state.song.name,
