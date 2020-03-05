@@ -47,9 +47,10 @@ class Home extends Component {
 	}
 
 	loadTracks = () => {
+		const shuffledSongs = this.shuffle(this.state.songs).splice(0, 10);
 		const songs = [];
-		for(let i = 0; i < this.state.songs.length; i++) {
-			const song = this.state.songs[i];
+		for(let i = 0; i < shuffledSongs.length; i++) {
+			const song = shuffledSongs[i];
 			songs.push(
 				<SongPreview 
 					key={song._id}
@@ -57,8 +58,7 @@ class Home extends Component {
 				/>
 			)
 		}
-		this.shuffle(songs);
-		return songs.slice(0, 10);
+		return songs;
 	}
 
 	// Shuffle an array: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -86,11 +86,11 @@ class Home extends Component {
 			<div id="home">
 				<div id="homeTitle">Discover Weekly</div>
 				<div id="homeListsContainer"> 
-					<div id="homeSubtitle">Popular Artists</div>
+					<div className="homeSubtitle">Popular Artists</div>
 					<div className="homeListContainer">
 						{this.loadArtists()}
 					</div>
-					<div id="homeSubtitle">Featured Tracks</div>
+					<div className="homeSubtitle">Featured Tracks</div>
 					<div className="homeListContainer">
 						{this.loadTracks()}
 					</div>
