@@ -5,6 +5,7 @@ import ArtistPreview from "./artistPreview";
 import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import SongPreview from "./songPreview";
 import axios from "axios";
+import { API_URL } from "../url"
 
 class Search extends Component {
 	constructor(props) {
@@ -19,7 +20,7 @@ class Search extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/artists/')
+		axios.get(`${API_URL}/artists/`)
 	  	.then((response) => {
 	  		this.setState({ artists: response.data });
 	  	})
@@ -27,7 +28,7 @@ class Search extends Component {
 	  		console.log(error);
 	  	});
 
-	  	axios.get('http://localhost:4000/albumPlaylists/')
+	  	axios.get(`${API_URL}/albumPlaylists/`)
 	  	.then((response) => {
 	  		this.setState({ albums: response.data });
 	  	})
@@ -35,7 +36,7 @@ class Search extends Component {
 	  		console.log(error);
 	  	});
 
-		axios.get('http://localhost:4000/songs/')
+		axios.get(`${API_URL}/songs/`)
 	  	.then((response) => {
 	  		this.setState({ songs: response.data });
 	  	})

@@ -3,7 +3,7 @@ import '../assets/css/albumPlaylist.css';
 import axios from "axios";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
-import { IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
+import { API_URL } from "../url"
 
 class AlbumPlaylist extends Component {
 	constructor(props) {
@@ -15,7 +15,7 @@ class AlbumPlaylist extends Component {
 	}
 
 	componentDidMount() {
-		axios.get(`http://localhost:4000/albumPlaylists/${this.state.albumPlaylistId}`)
+		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
 	  	.then((response) => {
 	  		this.setState({ albumPlaylist: response.data, loading: false });
 	  	})

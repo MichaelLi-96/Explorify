@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import '../assets/css/songPreview.css';
 import { MdPlayCircleOutline } from "react-icons/md";
 import axios from "axios";
+import { API_URL } from "../url"
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { songChange, songPress, newSongAddedToHistory } from '../actions';
@@ -20,13 +21,13 @@ class SongPreview extends Component {
 
 	componentDidMount() {
 		this._isMounted = true;
-		axios.get(`http://localhost:4000/songs/${this.props.songId}`)
+		axios.get(`${API_URL}/songs/${this.props.songId}`)
 	  	.then((response) => {
 	  		if(this._isMounted) {
 		  		this.setState({ song: response.data, loading: false });
 		  	}
 
-	  		axios.get(`http://localhost:4000/albumPlaylists/${this.state.song.albumPlaylist}`)
+	  		axios.get(`${API_URL}/albumPlaylists/${this.state.song.albumPlaylist}`)
 		  	.then((response) => {
 		  		if(this._isMounted) {
 			  		this.setState({ albumPlaylist: response.data });
@@ -36,7 +37,7 @@ class SongPreview extends Component {
 		  		console.log(error);
 		  	});
 
-		  	axios.get(`http://localhost:4000/artists/${this.state.song.artist}`)
+		  	axios.get(`${API_URL}/artists/${this.state.song.artist}`)
 		  	.then((response) => {
 		  		if(this._isMounted) {
 		  			this.setState({ artist: response.data });

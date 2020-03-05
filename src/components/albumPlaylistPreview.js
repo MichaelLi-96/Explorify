@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/albumPlaylistPreview.css';
 import axios from "axios";
+import { API_URL } from "../url"
 import { Link } from "react-router-dom";
 
 class AlbumPlaylistPreview extends Component {
@@ -16,7 +17,7 @@ class AlbumPlaylistPreview extends Component {
 
 	componentDidMount() {
 		this._isMounted = true;
-		axios.get(`http://localhost:4000/albumPlaylists/${this.props.albumId}`)
+		axios.get(`${API_URL}/albumPlaylists/${this.props.albumId}`)
 	  	.then((response) => {
 	  		if(this._isMounted) {
 		  		this.setState({ albumPlaylist: response.data, loading: false });

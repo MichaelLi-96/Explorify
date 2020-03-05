@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/artistPreview.css';
 import axios from "axios";
+import { API_URL } from "../url"
 import { MdInfo } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -16,7 +17,7 @@ class ArtistPreview extends Component {
 
 	componentDidMount() {
 		this._isMounted = true;
-		axios.get(`http://localhost:4000/artists/${this.props.artistId}`)
+		axios.get(`${API_URL}/artists/${this.props.artistId}`)
 	  	.then((response) => {
 	  		if(this._isMounted) {
 	  			this.setState({ artist: response.data, loading: false });

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/artist.css';
 import axios from "axios";
+import { API_URL } from "../url"
 import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
@@ -18,18 +19,18 @@ class Artist extends Component {
 	}
 
 	componentDidMount() {
-		axios.get(`http://localhost:4000/artists/${this.state.artistId}`)
+		axios.get(`${API_URL}/artists/${this.state.artistId}`)
 	  	.then((response) => {
 	  		this.setState({ artist: response.data });
 
 	  		for(let i = 0; i < this.state.artist.albumPlaylists.length; i++) {
-	  			axios.get(`http://localhost:4000/albumPlaylists/${this.state.artist.albumPlaylists[i]}`)
+	  			axios.get(`${API_URL}/albumPlaylists/${this.state.artist.albumPlaylists[i]}`)
 			  	.then((response) => {
 			  		this.state.albumPlaylists.push(response.data);
 			  		this.setState({ albumPlaylists: this.state.albumPlaylists });
 
 			  		for(let j = 0; j < response.data.songs.length; j++) {
-			  			axios.get(`http://localhost:4000/songs/${response.data.songs[j]}`)
+			  			axios.get(`${API_URL}/songs/${response.data.songs[j]}`)
 			  			.then((response) => {
 			  				this.state.songs.push(response.data);
 			  				this.setState({ songs: this.state.songs });

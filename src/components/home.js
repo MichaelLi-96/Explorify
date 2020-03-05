@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { API_URL } from "../url"
 import ArtistPreview from "./artistPreview";
 import SongPreview from "./songPreview";
 import '../assets/css/home.css';
@@ -15,7 +16,7 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/artists/')
+		axios.get(`${API_URL}/artists/`)
 	  	.then((response) => {
 	  		this.setState({ artists: response.data, loading: false });
 	  	})
@@ -23,7 +24,7 @@ class Home extends Component {
 	  		console.log(error);
 	  	});
 
-		axios.get('http://localhost:4000/songs/')
+		axios.get(`${API_URL}/songs/`)
 	  	.then((response) => {
 	  		this.setState({ songs: response.data, loading: false });
 	  	})
