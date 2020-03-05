@@ -57,3 +57,32 @@
 #input:focus {
 	outline: none;
 }
+
+#searchListsContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 100px;
+}
+
+.searchSubtitle {
+	width: 80%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	font-size: 34px;
+	font-weight: bold;
+}
+
+.searchListContainer {
+	width: auto;
+	display: flex;
+	padding-left: 100px;
+	padding-right: 100px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 50px;
+}

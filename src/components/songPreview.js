@@ -8,6 +8,7 @@ import { songChange, songPress } from '../actions';
 class SongPreview extends Component {
 	constructor(props) {
 		super(props);
+		this._isMounted = false;
 		this.state = {
 			loading: true,
 			song: {},
@@ -17,13 +18,18 @@ class SongPreview extends Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
 		axios.get(`http://localhost:4000/songs/${this.props.songId}`)
 	  	.then((response) => {
-	  		this.setState({ song: response.data, loading: false });
+	  		if(this._isMounted) {
+		  		this.setState({ song: response.data, loading: false });
+		  	}
 
 	  		axios.get(`http://localhost:4000/albumPlaylists/${this.state.song.albumPlaylist}`)
 		  	.then((response) => {
-		  		this.setState({ albumPlaylist: response.data });
+		  		if(this._isMounted) {
+			  		this.setState({ albumPlaylist: response.data });
+			  	}
 		  	})
 		  	.catch(function (error) {
 		  		console.log(error);
@@ -31,7 +37,9 @@ class SongPreview extends Component {
 
 		  	axios.get(`http://localhost:4000/artists/${this.state.song.artist}`)
 		  	.then((response) => {
-		  		this.setState({ artist: response.data });
+		  		if(this._isMounted) {
+		  			this.setState({ artist: response.data });
+		  		}
 		  	})
 		  	.catch(function (error) {
 		  		console.log(error);
@@ -40,6 +48,10 @@ class SongPreview extends Component {
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+	}
+
+	componentWillUnmount() {
+	   this._isMounted = false;
 	}
 
 	playSong = () => {

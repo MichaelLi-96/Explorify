@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 class AlbumPlaylistPreview extends Component {
 	constructor(props) {
 		super(props);
+		this._isMounted = false
 		this.state = {
 			loading: true,
 			albumPlaylist: {},
@@ -14,14 +15,21 @@ class AlbumPlaylistPreview extends Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
 		axios.get(`http://localhost:4000/albumPlaylists/${this.props.albumId}`)
 	  	.then((response) => {
-	  		this.setState({ albumPlaylist: response.data, loading: false });
-	  		this.setState({ numberOfSongs: this.state.albumPlaylist.songs.length });
+	  		if(this._isMounted) {
+		  		this.setState({ albumPlaylist: response.data, loading: false });
+		  		this.setState({ numberOfSongs: this.state.albumPlaylist.songs.length });
+		  	}
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+	}
+
+	componentWillUnmount() {
+	   this._isMounted = false;
 	}
 
   	render() {

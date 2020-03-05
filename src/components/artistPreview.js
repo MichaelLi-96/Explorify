@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 class ArtistPreview extends Component {
 	constructor(props) {
 		super(props);
+		this._isMounted = false;
 		this.state = {
 			loading: true,
 			artist: {}
@@ -14,13 +15,20 @@ class ArtistPreview extends Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
 		axios.get(`http://localhost:4000/artists/${this.props.artistId}`)
 	  	.then((response) => {
-	  		this.setState({ artist: response.data, loading: false });
+	  		if(this._isMounted) {
+	  			this.setState({ artist: response.data, loading: false });
+	  		}
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+	}
+
+	componentWillUnmount() {
+	   this._isMounted = false;
 	}
 
   	render() {
