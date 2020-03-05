@@ -5,7 +5,7 @@ import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious,
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress } from '../actions';
+import { songChange, songPress, prevSongPressed, nextSongPressed, shufflePressed } from '../actions';
 
 class Playbar extends Component {
 	constructor(props) {
@@ -64,12 +64,49 @@ class Playbar extends Component {
 		this.setState({ repeat: false });
 	}
 
+	toPreviousSong = () => {
+		if(this.props.songHistory.currentSongHistoryIndex > 0) {
+			this.props.prevSongPressed();
+			const prevIndex = this.props.songHistory.currentSongHistoryIndex - 1;
+
+			this.props.songChange({ 
+				name: this.props.songHistory.songHistoryPlaylist[prevIndex].name,
+				albumPlaylist: this.props.songHistory.songHistoryPlaylist[prevIndex].albumPlaylist,
+				artist: this.props.songHistory.songHistoryPlaylist[prevIndex].artist,
+				url: this.props.songHistory.songHistoryPlaylist[prevIndex].url,
+				imageUrl: this.props.songHistory.songHistoryPlaylist[prevIndex].imageUrl,
+				length: this.props.songHistory.songHistoryPlaylist[prevIndex].length,
+				plays: this.props.songHistory.songHistoryPlaylist[prevIndex].plays
+			});
+			this.props.songPress();
+		}
+	}
+
+	toNextSong = () => {
+		if(this.props.songHistory.currentSongHistoryIndex < this.props.songHistory.currentSongHistoryLength - 1) {
+			this.props.nextSongPressed();
+			const nextIndex = this.props.songHistory.currentSongHistoryIndex + 1;
+
+			this.props.songChange({ 
+				name: this.props.songHistory.songHistoryPlaylist[nextIndex].name,
+				albumPlaylist: this.props.songHistory.songHistoryPlaylist[nextIndex].albumPlaylist,
+				artist: this.props.songHistory.songHistoryPlaylist[nextIndex].artist,
+				url: this.props.songHistory.songHistoryPlaylist[nextIndex].url,
+				imageUrl: this.props.songHistory.songHistoryPlaylist[nextIndex].imageUrl,
+				length: this.props.songHistory.songHistoryPlaylist[nextIndex].length,
+				plays: this.props.songHistory.songHistoryPlaylist[nextIndex].plays
+			});
+			this.props.songPress();
+		}
+	}
+
+
 	componentDidMount() {
 		this.interval = setInterval(() => this.setState({ }), 0);
 
 		const audio = document.getElementById("playbarAudio");
 		const songProgress = document.getElementById("playbarSongProgress");
-		const volumeBar = document.getElementById("playbarVolumeBar");
+		//const volumeBar = document.getElementById("playbarVolumeBar");
 		document.getElementById("playbarSongProgressContainer").addEventListener("click", function (e) {
 			const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
@@ -181,13 +218,13 @@ class Playbar extends Component {
 					<audio id="playbarAudio" />
 					<div id="playbarControlButtons">
 						<MdShuffle className="playbarIcons" />
-						<MdSkipPrevious className="playbarIcons" />
+						<MdSkipPrevious className="playbarIcons" onClick={this.toPreviousSong} />
 						{!this.state.playing ? (
 							<MdPlayCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.playSong} />
 						) : (
 							<MdPauseCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.pauseSong} />
 						)}
-						<MdSkipNext className="playbarIcons" />
+						<MdSkipNext className="playbarIcons" onClick={this.toNextSong} />
 						{!this.state.repeat ? (
 							<MdRepeat className="playbarIcons" onClick={this.repeat} />
 						) : (
@@ -221,10 +258,15 @@ class Playbar extends Component {
 
 const mapStateToProps = state => ({ 
 	currentSong: state.currentSong,
-	songPressed: state.songPressed 
+	songPressed: state.songPressed,
+	songHistory: state.songHistory
 });
 
 export default connect(mapStateToProps, { 
 	songChange,
-	songPress
+	songPress,
+	prevSongPressed,
+	nextSongPressed,
+	shufflePressed
+
 })(Playbar);

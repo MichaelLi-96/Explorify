@@ -5,13 +5,13 @@ import {
 
 export const songChange = (songDetails) => {
 	return {
-		type: 'SONG_CHANGED',
+		type: SONG_CHANGED,
 		payload: songDetails
 	};
 }
 
 export const songPress = () => {
 	return {
-		type: 'SONG_PRESSED'
+		type: SONG_PRESSED
 	};
 }

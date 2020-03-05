@@ -56,7 +56,7 @@ class Search extends Component {
 		const filteredArtists = [];
 		for(let i = 0; i < this.state.artists.length; i++) {
 			const artist = this.state.artists[i];
-			if(artist.name.toLowerCase().includes(this.state.filterString)) {
+			if(artist.name.toLowerCase().includes(this.state.filterString.toLowerCase())) {
 				filteredArtists.push(
 					<ArtistPreview 
 						key={artist._id}
@@ -87,7 +87,7 @@ class Search extends Component {
 		const filteredAlbums = [];
 		for(let i = 0; i < this.state.albums.length; i++) {
 			const album = this.state.albums[i];
-			if(album.name.toLowerCase().includes(this.state.filterString)) {
+			if(album.name.toLowerCase().includes(this.state.filterString.toLowerCase())) {
 				filteredAlbums.push(
 					<AlbumPlaylistPreview
 						key={album._id}
@@ -118,7 +118,7 @@ class Search extends Component {
 		const filteredSongs = [];
 		for(let i = 0; i < this.state.songs.length; i++) {
 			const song = this.state.songs[i];
-			if(song.name.toLowerCase().includes(this.state.filterString)) {
+			if(song.name.toLowerCase().includes(this.state.filterString.toLowerCase())) {
 				filteredSongs.push(
 					<SongPreview 
 						key={song._id}
