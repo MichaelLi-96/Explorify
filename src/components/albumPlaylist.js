@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/albumPlaylist.css';
 import axios from "axios";
+import { MdPlayCircleOutline } from "react-icons/md";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
@@ -157,7 +158,10 @@ class AlbumPlaylist extends Component {
 			<div id="albumPlaylist">
 				<BackButton history={this.props.history} />
 				<div id="albumPlaylistInfoContainer">
-					<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} id="albumPlaylistImg"></img>
+					<div id="albumPlaylistImgContainer">
+						<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} id="albumPlaylistImg"></img>
+						<div id="albumPlaylistImgPlaySongIconContainer" onClick={this.playAlbumPlaylist}><MdPlayCircleOutline id="albumPlaylistImgPlaySongIcon" /></div>
+					</div>
 					<div id="albumPlaylistName">{this.state.albumPlaylist.name}</div>
 					<div id="albumPlaylistArtist">{this.state.albumPlaylist.artist}</div>
 					<div id="albumPlaylistPlayButton" className="noselect" onClick={this.playAlbumPlaylist}>Play</div>

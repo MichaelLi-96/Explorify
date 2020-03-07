@@ -13,7 +13,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	transition: 0.3s;
+	transition: 0.5s;
 }
 
 .songPreviewPlaySongIconContainer {
@@ -24,7 +24,7 @@
 	margin-top: -225px;
 	width: 225px;
 	height: 225px;
-	transition: 0.3s;
+	transition: 0.5s;
 	background-color: transparent;
 }
 
