@@ -5,7 +5,7 @@ import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious,
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress, prevSongPressed, nextSongPressed, shufflePressed } from '../actions';
+import { songChange, songPress, prevSongPressed, nextSongPressed, shufflePressed, unshufflePressed } from '../actions';
 
 class Playbar extends Component {
 	constructor(props) {
@@ -16,7 +16,8 @@ class Playbar extends Component {
 			volumeBarValue: 0,
 			songProgressValue: 0,
 			ended: false,
-			repeat: false
+			repeat: false,
+			shuffle: false
 		}
 	}
 
@@ -62,6 +63,20 @@ class Playbar extends Component {
 		const audio = document.getElementById("playbarAudio");
 		audio.loop = false;
 		this.setState({ repeat: false });
+	}
+
+	shuffle = () => {
+		if(this.props.songHistory.isPlayingAlbumPlaylist) {
+			this.props.shufflePressed();
+			this.setState({ shuffle: true });
+		}
+	}
+
+	unshuffle = () => {
+		if(this.props.songHistory.isPlayingAlbumPlaylist) {
+			this.props.unshufflePressed();
+			this.setState({ shuffle: false });
+		}
 	}
 
 	toPreviousSong = () => {
@@ -175,10 +190,13 @@ class Playbar extends Component {
 			this.setState({ muted: false });
 		}
 
-		// If song is clicked, play it as current song
+		// If song is clicked, play it as current song and turn shuffle off
 		if(this.props.songPressed) {
 			audio.setAttribute("src", this.props.currentSong.url);
 			this.playSong();
+			if(!this.props.songHistory.isPlayingAlbumPlaylist) {
+				this.setState({ shuffle: false });
+			}
 			this.props.songPress();
 		}
 
@@ -196,6 +214,14 @@ class Playbar extends Component {
 		}
 		else {
 			playbarNextSongIcon.style.pointerEvents = "auto";
+		}
+
+		const playbarShuffleIcon = document.getElementById("playbarShuffleIcon");
+		if(!this.props.songHistory.isPlayingAlbumPlaylist) {
+			playbarShuffleIcon.style.pointerEvents = "none";
+		}
+		else {
+			playbarShuffleIcon.style.pointerEvents = "auto";
 		}
 
 		// Autoplay song if exists next song in song history
@@ -238,7 +264,11 @@ class Playbar extends Component {
 				<div id="playbarNowPlaying">
 					<audio id="playbarAudio" />
 					<div id="playbarControlButtons">
-						<MdShuffle className="playbarIcons" />
+						{!this.state.shuffle ? (
+							<MdShuffle id="playbarShuffleIcon" className="playbarIcons" onClick={this.shuffle} />
+						) : (
+							<MdShuffle id="playbarShuffleIcon" className="playbarSelectedIcons" onClick={this.unshuffle} />
+						)}
 						<MdSkipPrevious id="playbarPrevSongIcon" className="playbarIcons" onClick={this.toPreviousSong} />
 						{!this.state.playing ? (
 							<MdPlayCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.playSong} />
@@ -288,6 +318,6 @@ export default connect(mapStateToProps, {
 	songPress,
 	prevSongPressed,
 	nextSongPressed,
-	shufflePressed
-
+	shufflePressed,
+	unshufflePressed
 })(Playbar);
