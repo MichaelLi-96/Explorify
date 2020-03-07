@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_URL } from "../url"
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress, newSongAddedToHistory } from '../actions';
+import { songChange, songPress, newSongAddedToHistory, singleSongPlayed } from '../actions';
 
 class SongPreview extends Component {
 	constructor(props) {
@@ -57,6 +57,9 @@ class SongPreview extends Component {
 	}
 
 	playSong = () => {
+		if(this.props.songHistory.isPlayingAlbumPlaylist) {
+			this.props.singleSongPlayed();
+		}
 		this.props.songChange({ 
 			name: this.state.song.name,
 			albumPlaylist: this.state.albumPlaylist,
@@ -138,5 +141,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { 
 	songChange,
 	songPress,
-	newSongAddedToHistory
+	newSongAddedToHistory,
+	singleSongPlayed
 })(SongPreview);

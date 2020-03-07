@@ -13,7 +13,7 @@ class Artist extends Component {
 			artistId: this.props.location.state.artistId,
 			artist: {},
 			albumPlaylists: [],
-			songsIds: [],
+			songs: [],
 			loading: true,
 		}
 	}
@@ -30,10 +30,10 @@ class Artist extends Component {
 			  		this.setState({ albumPlaylists: this.state.albumPlaylists });
 
 			  		for(let j = 0; j < response.data.songs.length; j++) {
-			  			axios.get(`${API_URL}/songsIds/${response.data.songs[j]}`)
+			  			axios.get(`${API_URL}/songs/${response.data.songs[j]}`)
 			  			.then((response) => {
 			  				this.state.songs.push(response.data);
-			  				this.setState({ songsIds: this.state.songs });
+			  				this.setState({ songs: this.state.songs });
 			  			})
 			  			.catch(function (error) {
 					  		console.log(error);
@@ -109,7 +109,7 @@ class Artist extends Component {
 	}
 
 	loadPopularSongs = () => {
-		const sortedSongs = this.state.songsIds.sort((a,b) => b.plays - a.plays).slice(0, 8);
+		const sortedSongs = this.state.songs.sort((a,b) => b.plays - a.plays).slice(0, 8);
 		if(sortedSongs === undefined || sortedSongs.length < 8)  {
 			return;
 		}

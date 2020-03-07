@@ -5,7 +5,7 @@ import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
 import { connect } from 'react-redux';
-import { songChange, songPress, newSongAddedToHistory } from '../actions';
+import { songChange, songPress, playlistAlbumPlayed } from '../actions';
 
 
 class AlbumPlaylist extends Component {
@@ -15,7 +15,8 @@ class AlbumPlaylist extends Component {
 			albumPlaylistId: this.props.location.state.albumPlaylistId,
 			albumPlaylist: {},
 			songs: [],
-			numberOfSongs: 0
+			numberOfSongs: 0,
+			idToSongMap: {}
 		}
 	}
 
@@ -48,9 +49,10 @@ class AlbumPlaylist extends Component {
 				  		console.log(error);
 				  	});
 
-			  		const newSongs = this.state.songs;
-			  		newSongs.push(song);
-			  		this.setState({ songs: newSongs });
+			  		this.state.songs.push(song);
+			  		const mapping = {};
+			  		mapping[songId] = song;
+			  		this.setState({ songs: this.state.songs, idToSongMap: {...this.state.idToSongMap, ...mapping} });
 			  	})
 			  	.catch(function (error) {
 			  		console.log(error);
@@ -131,44 +133,23 @@ class AlbumPlaylist extends Component {
 	}
 
 	playAlbumPlaylist = () => {
-		this.props.songChange({ 
-			name: this.state.song.name,
-			albumPlaylist: this.state.albumPlaylist,
-			artist: this.state.artist,
-			url: this.state.song.url,
-			imageUrl: this.state.song.imageUrl,
-			length: this.state.song.length,
-			plays: this.state.song.plays
-		});
-		this.props.songPress();
-		if(this.props.songHistory.currentSongId !== this.state.song._id) {
-			this.props.newSongAddedToHistory({ 
-				_id: this.state.song._id,
-				name: this.state.song.name,
-				albumPlaylist: this.state.albumPlaylist,
-				artist: this.state.artist,
-				url: this.state.song.url,
-				imageUrl: this.state.song.imageUrl,
-				length: this.state.song.length,
-			});
+		const sortedSongs = [];
+		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
+			const songId = this.state.albumPlaylist.songs[i];
+			sortedSongs.push(this.state.idToSongMap[songId]);
 		}
 
-
-		axios.put(`http://localhost:4000/songs/update/${this.state.song._id}`, {
-			name: this.state.song.name,
-			albumPlaylist: this.state.albumPlaylist._id,
-			artist: this.state.artist._id,
-			url: this.state.song.url,
-			imageUrl: this.state.song.imageUrl,
-			length: this.state.song.length,
-			plays: this.state.song.plays + 1
-		})
-	  	.then((response) => {
-	  		//console.log(response);
-	  	})
-	  	.catch(function (error) {
-	  		console.log(error);
+		this.props.songChange({ 
+			name: sortedSongs[0].name,
+			albumPlaylist: sortedSongs[0].albumPlaylist,
+			artist: sortedSongs[0].artist,
+			url: sortedSongs[0].url,
+			imageUrl: sortedSongs[0].imageUrl,
+			length: sortedSongs[0].length,
+			plays: sortedSongs[0].plays
 		});
+		this.props.songPress();
+		this.props.playlistAlbumPlayed(sortedSongs);
 	}
 
   	render() {
@@ -179,7 +160,7 @@ class AlbumPlaylist extends Component {
 					<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} id="albumPlaylistImg"></img>
 					<div id="albumPlaylistName">{this.state.albumPlaylist.name}</div>
 					<div id="albumPlaylistArtist">{this.state.albumPlaylist.artist}</div>
-					<div id="albumPlaylistPlayButton" className="noselect">Play</div>
+					<div id="albumPlaylistPlayButton" className="noselect" onClick={this.playAlbumPlaylist}>Play</div>
 					<div id="albumPlaylistYearAndSongs">{this.state.albumPlaylist.year} • {this.state.numberOfSongs} SONGS</div>
 				</div>
 
@@ -199,5 +180,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { 
 	songChange,
 	songPress,
-	newSongAddedToHistory
+	playlistAlbumPlayed
 })(AlbumPlaylist);

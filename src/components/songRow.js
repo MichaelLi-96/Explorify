@@ -5,7 +5,7 @@ import { API_URL } from "../url"
 import { IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { songChange, songPress, newSongAddedToHistory } from '../actions';
+import { songChange, songPress, newSongAddedToHistory, singleSongPlayed } from '../actions';
 
 class SongRow extends Component {
 	constructor(props) {
@@ -57,6 +57,9 @@ class SongRow extends Component {
 	}
 
 	playSong = () => {
+		if(this.props.songHistory.isPlayingAlbumPlaylist) {
+			this.props.singleSongPlayed();
+		}
 		this.props.songChange({ 
 			name: this.state.song.name,
 			albumPlaylist: this.state.albumPlaylist,
@@ -160,5 +163,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { 
 	songChange,
 	songPress,
-	newSongAddedToHistory
+	newSongAddedToHistory,
+	singleSongPlayed
 })(SongRow);

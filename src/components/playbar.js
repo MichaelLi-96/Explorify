@@ -156,11 +156,6 @@ class Playbar extends Component {
 				this.playSong();
 				this.setState({ ended: false });
 			}
-
-			// Autoplay song if exists next song in song history
-			if(this.props.songHistory.currentSongHistoryIndex < this.props.songHistory.currentSongHistoryLength - 1) {
-				this.toNextSong();
-			}
 		}
 
 		// Update the position of the progress bar circle indicator using the ratio of song completed (0.0 - 1.0) * div width
@@ -201,6 +196,11 @@ class Playbar extends Component {
 		}
 		else {
 			playbarNextSongIcon.style.pointerEvents = "auto";
+		}
+
+		// Autoplay song if exists next song in song history
+		if(this.props.songHistory.currentSongHistoryIndex < this.props.songHistory.currentSongHistoryLength - 1 && audio.ended) {
+			this.toNextSong();
 		}
 	}
 
