@@ -4,13 +4,18 @@ import axios from "axios";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
+import { connect } from 'react-redux';
+import { songChange, songPress, newSongAddedToHistory } from '../actions';
+
 
 class AlbumPlaylist extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			albumPlaylistId: this.props.location.state.albumPlaylistId,
-			albumPlaylist: {}
+			albumPlaylist: {},
+			songs: [],
+			numberOfSongs: 0
 		}
 	}
 
@@ -18,6 +23,39 @@ class AlbumPlaylist extends Component {
 		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
 	  	.then((response) => {
 	  		this.setState({ albumPlaylist: response.data, loading: false });
+	  		this.setState({ numberOfSongs: this.state.albumPlaylist.songs.length });
+
+	  		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
+	  			const songId = this.state.albumPlaylist.songs[i];
+	  			let song = {};
+	  			axios.get(`${API_URL}/songs/${songId}`)
+			  	.then((response) => {
+			  		song = response.data;
+
+			  		axios.get(`${API_URL}/albumPlaylists/${response.data.albumPlaylist}`)
+				  	.then((response) => {
+				  		song.albumPlaylist = response.data;
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+
+				  	axios.get(`${API_URL}/artists/${response.data.artist}`)
+				  	.then((response) => {
+				  		song.artist = response.data;
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+
+			  		const newSongs = this.state.songs;
+			  		newSongs.push(song);
+			  		this.setState({ songs: newSongs });
+			  	})
+			  	.catch(function (error) {
+			  		console.log(error);
+			  	});
+	  		}
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
@@ -92,6 +130,47 @@ class AlbumPlaylist extends Component {
 		return songRows;
 	}
 
+	playAlbumPlaylist = () => {
+		this.props.songChange({ 
+			name: this.state.song.name,
+			albumPlaylist: this.state.albumPlaylist,
+			artist: this.state.artist,
+			url: this.state.song.url,
+			imageUrl: this.state.song.imageUrl,
+			length: this.state.song.length,
+			plays: this.state.song.plays
+		});
+		this.props.songPress();
+		if(this.props.songHistory.currentSongId !== this.state.song._id) {
+			this.props.newSongAddedToHistory({ 
+				_id: this.state.song._id,
+				name: this.state.song.name,
+				albumPlaylist: this.state.albumPlaylist,
+				artist: this.state.artist,
+				url: this.state.song.url,
+				imageUrl: this.state.song.imageUrl,
+				length: this.state.song.length,
+			});
+		}
+
+
+		axios.put(`http://localhost:4000/songs/update/${this.state.song._id}`, {
+			name: this.state.song.name,
+			albumPlaylist: this.state.albumPlaylist._id,
+			artist: this.state.artist._id,
+			url: this.state.song.url,
+			imageUrl: this.state.song.imageUrl,
+			length: this.state.song.length,
+			plays: this.state.song.plays + 1
+		})
+	  	.then((response) => {
+	  		//console.log(response);
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+		});
+	}
+
   	render() {
 	    return(
 			<div id="albumPlaylist">
@@ -112,4 +191,13 @@ class AlbumPlaylist extends Component {
   	}
 }
 
-export default AlbumPlaylist;
+const mapStateToProps = state => ({ 
+	currentSong: state.currentSong,
+	songHistory: state.songHistory
+});
+
+export default connect(mapStateToProps, { 
+	songChange,
+	songPress,
+	newSongAddedToHistory
+})(AlbumPlaylist);

@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 	currentSongId: ''
 };
 
-const songChangeReducer = (state = INITIAL_STATE, action) => {
+const songHistoryReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case NEW_SONG_ADDED_TO_HISTORY:
 			const newSongHistoryPlaylist = state.songHistoryPlaylist;
@@ -37,4 +37,4 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 	}
 }
 
-export default songChangeReducer;
+export default songHistoryReducer;
