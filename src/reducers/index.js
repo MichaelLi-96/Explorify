@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import SongChangeReducer from './songChangeReducer';
-import songHistoryReducer from './songHistoryReducer';
+import SongHistoryReducer from './songHistoryReducer';
 import SongPressReducer from './songPressReducer';
+import AuthReducer from './authReducer';
 
 export default combineReducers({
 	currentSong: SongChangeReducer,
 	songPressed: SongPressReducer,
-	songHistory: songHistoryReducer
+	songHistory: SongHistoryReducer,
+	auth: AuthReducer
 });
 

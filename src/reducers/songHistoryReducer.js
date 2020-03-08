@@ -40,9 +40,11 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 			};
 		case SINGLE_SONG_PLAYED:
 			return {
-				...INITIAL_STATE, 
 				songHistoryPlaylist: [],
 				unshuffledSongHistoryPlaylist: [],
+				currentSongHistoryIndex: -1,
+				currentSongHistoryLength: 0,
+				currentSongId: '',
 				isPlayingAlbumPlaylist: false
 			}
 		case PLAYLIST_ALBUM_PLAYED:
@@ -60,7 +62,6 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 
 			let shuffledRemaining = state.songHistoryPlaylist;
 			shuffledRemaining = shuffledRemaining.slice(state.currentSongHistoryIndex + 1, state.currentSongHistoryLength);
-			
 			// Shuffle remaining songs
 			var currentIndex = shuffledRemaining.length, temporaryValue, randomIndex;
 			while (0 !== currentIndex) {
