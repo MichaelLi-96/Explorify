@@ -8,6 +8,8 @@ import "./assets/css/app.css"
 
 //components
 import LandingPage from "./components/landingPage";
+import SignIn from "./components/signIn";
+import SignUp from "./components/signUp";
 import Navbar from "./components/navbar";
 import Playbar from "./components/playbar";
 import Home from "./components/home";
@@ -35,6 +37,8 @@ class App extends Component {
 		  	  	{ this.props.authDetails.userIsLoggedIn ? (
 		  	  		<Router>
 						<Route exact path='/' component={LandingPage} />
+						<Route exact path='/signIn' component={SignIn} />
+						<Route exact path='/signUp' component={SignUp} />
 					</Router>
 		  	  	) : (
 					<Router>

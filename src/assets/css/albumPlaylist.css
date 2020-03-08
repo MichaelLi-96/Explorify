@@ -54,7 +54,7 @@
 	margin-top: -300px;
 	width: 300px;
 	height: 300px;
-	transition: 0.5s;
+	transition: 0.3s;
 	background-color: transparent;
 }
 
@@ -94,20 +94,19 @@
 	margin-top: 30px;
 	margin-bottom: 20px;
 	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
-	width: 100px;
 	text-align: center;
 	border-radius: 20px;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 50px 10px 50px;
 	cursor: pointer;
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 18px;
-	transition: 0.5s;
+	transition: 0.3s;
 }
 
 #albumPlaylistPlayButton:hover {
 	cursor: pointer;
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 #albumPlaylistYearAndSongs {

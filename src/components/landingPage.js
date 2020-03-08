@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../assets/css/landingPage.css';
 import logo from "../assets/images/logo.png";
+import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { songChange, songPress } from '../actions';
 import { API_URL } from "../url"
@@ -11,9 +12,12 @@ class landingPage extends Component {
 			<div id="landingPage">
 				<div id="landingPageLogoTitleContainer">
 					<img id="landingPageLogo" className="noselect" alt="Explorify" src={logo} />
-					<div id="landingPageTitle" className="noselect">Explorify</div>
+					<div id="landingPageTitlesContainer">
+						<div id="landingPageTitle" className="noselect">Explorify</div>
+						<div id="landingPageSubtitle" className="noselect">All your music in one place.</div>
+					</div>
 				</div>
-				<div id="landingPageLogInButton" className="noselect">Log In</div>
+				<NavLink exact id="landingPageLogInButton" to="/signIn">Sign In</NavLink>
 			</div>
 	    );
   	}

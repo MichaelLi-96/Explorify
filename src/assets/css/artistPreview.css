@@ -14,7 +14,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	transition: 0.5s;
+	transition: 0.3s;
 	box-shadow: 0 0 20px rgba(0,0,0,1);
 }
 
@@ -27,7 +27,7 @@
 	width: 225px;
 	height: 225px;
 	border-radius: 50%;
-	transition: 0.5s;
+	transition: 0.3s;
 	background-color: transparent; 
 }
 

@@ -226,11 +226,14 @@ class Playbar extends Component {
 		}
 
 		const playbarPlayIcon = document.getElementById("playbarPlayIcon");
+		const playbarCurrentSongImg = document.getElementById("playbarCurrentSongImg");
 		if(this.props.currentSong.url === "") {
 			playbarPlayIcon.style.pointerEvents = "none";
+			playbarCurrentSongImg.style.display = "none";
 		}
 		else {
 			playbarPlayIcon.style.pointerEvents = "auto";
+			playbarCurrentSongImg.style.display = "block";
 		}
 
 		// Autoplay song if exists next song in song history

@@ -87,10 +87,6 @@ audio {
 	cursor: pointer;
 }
 
-#playbarPlayIcon {
-	font-size: 40px;
-}
-
 .playbarIcons:hover {
 	color: white;
 }
@@ -101,6 +97,10 @@ audio {
 	margin-right: 15px;
 	color: white;
 	cursor: pointer;
+}
+
+#playbarPlayIcon {
+	font-size: 40px;
 }
 
 .playbarProgressBarContainer {
@@ -168,7 +168,7 @@ progress::-webkit-progress-value {
 }
 
 progress::-moz-progress-bar {
-	background: #404040;
+	background: white;
 	border-radius: 2px; 
 }
 
