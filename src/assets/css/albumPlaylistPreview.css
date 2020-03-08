@@ -14,10 +14,11 @@
 	justify-content: center;
 	align-items: center;
 	transition: 0.3s;
+	box-shadow: 0 0 20px rgba(0,0,0,1);
 }
 
 .albumPlaylistPreviewImg:hover {
-	opacity: 70%;
+	opacity: 60%;
 	cursor: pointer;
 }
 

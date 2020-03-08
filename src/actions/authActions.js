@@ -25,9 +25,9 @@ export const userLoggedOut = () => {
 	};
 }
 
-export const checkedJwtToken = (jwtIsActive) => {
+export const checkedJwtToken = (jwt) => {
 	return {
 		type: CHECKED_JWT_TOKEN,
-		payload: jwtIsActive
+		payload: jwt
 	};
 }

@@ -11,6 +11,7 @@ class Playbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			played: false,
 			playing: false,
 			muted: false,
 			volumeBarValue: 0,
@@ -224,6 +225,14 @@ class Playbar extends Component {
 			playbarShuffleIcon.style.pointerEvents = "auto";
 		}
 
+		const playbarPlayIcon = document.getElementById("playbarPlayIcon");
+		if(this.props.currentSong.url === "") {
+			playbarPlayIcon.style.pointerEvents = "none";
+		}
+		else {
+			playbarPlayIcon.style.pointerEvents = "auto";
+		}
+
 		// Autoplay song if exists next song in song history
 		if(this.props.songHistory.currentSongHistoryIndex < this.props.songHistory.currentSongHistoryLength - 1 && audio.ended) {
 			this.toNextSong();
@@ -271,9 +280,9 @@ class Playbar extends Component {
 						)}
 						<MdSkipPrevious id="playbarPrevSongIcon" className="playbarIcons" onClick={this.toPreviousSong} />
 						{!this.state.playing ? (
-							<MdPlayCircleOutline className="playbarIcons" id="playbarPlayButton" onClick={this.playSong} />
+							<MdPlayCircleOutline id="playbarPlayIcon" className="playbarIcons" onClick={this.playSong} />
 						) : (
-							<MdPauseCircleOutline className="playbarIcons" id="playbarPauseButton" onClick={this.pauseSong} />
+							<MdPauseCircleOutline id="playbarPlayIcon" className="playbarIcons" onClick={this.pauseSong} />
 						)}
 						<MdSkipNext id="playbarNextSongIcon" className="playbarIcons" onClick={this.toNextSong} />
 						{!this.state.repeat ? (

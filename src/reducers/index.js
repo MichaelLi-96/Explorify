@@ -8,6 +8,6 @@ export default combineReducers({
 	currentSong: SongChangeReducer,
 	songPressed: SongPressReducer,
 	songHistory: SongHistoryReducer,
-	auth: AuthReducer
+	authDetails: AuthReducer
 });
 

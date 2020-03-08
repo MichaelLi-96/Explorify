@@ -87,11 +87,7 @@ audio {
 	cursor: pointer;
 }
 
-#playbarPlayButton {
-	font-size: 40px;
-}
-
-#playbarPauseButton {
+#playbarPlayIcon {
 	font-size: 40px;
 }
 

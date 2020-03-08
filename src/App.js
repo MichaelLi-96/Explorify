@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route  } from "react-router-dom";
+import { connect } from 'react-redux';
+import { songChange, songPress, newSongAddedToHistory, singleSongPlayed } from './actions';
 
 //css
 import "./assets/css/app.css"
 
 //components
+import LandingPage from "./components/landingPage";
 import Navbar from "./components/navbar";
 import Playbar from "./components/playbar";
 import Home from "./components/home";
@@ -15,20 +18,48 @@ import Artist from "./components/artist";
 import AccountButton from "./components/accountButton";
 
 class App extends Component {
-  render() {
-    return(
-		<Router>
-			<Route exact path='/' component={Home} />
-			<Route exact path='/search' component={Search} />
-			<Route exact path='/yourLibrary' component={YourLibrary} />	
-			<Route exact path='/artists/:artistname' component={Artist} />
-			<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
-			<AccountButton />
-			<Navbar />
-			<Playbar />
-		</Router>
-    );
-  }
+	constructor(props) {
+		super(props)
+		this.state = {
+			userId: '',
+		}
+	}
+
+	componentDidMount() {
+		console.log(localStorage.getItem("jwt"));
+	}
+
+	render() {
+		return(
+			<div id="app">
+		  	  	{ this.props.authDetails.userIsLoggedIn ? (
+		  	  		<Router>
+						<Route exact path='/' component={LandingPage} />
+					</Router>
+		  	  	) : (
+					<Router>
+						<Route exact path='/' component={Home} />
+						<Route exact path='/search' component={Search} />
+						<Route exact path='/yourLibrary' component={YourLibrary} />	
+						<Route exact path='/artists/:artistname' component={Artist} />
+						<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
+						<AccountButton />
+						<Navbar />
+						<Playbar />
+					</Router>
+				)}
+			</div>
+	    );
+	}
 }
 
-export default App;
+const mapStateToProps = state => ({ 
+	authDetails: state.authDetails
+});
+
+export default connect(mapStateToProps, { 
+	songChange,
+	songPress,
+	newSongAddedToHistory,
+	singleSongPlayed
+})(App);
