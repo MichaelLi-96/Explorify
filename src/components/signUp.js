@@ -39,9 +39,9 @@ class signUp extends Component {
 		else {
 			errorMsg.style.display = "none";
 			axios.post(`${API_URL}/users/add`, {
-				email: this.state.email,
+				email: this.state.email.trim(),
 				password: this.state.password,
-				name: this.state.name
+				name: this.state.name.trim()
 			})
 		  	.then((response) => {
 		  		const jwt = response.data.token;
@@ -65,9 +65,9 @@ class signUp extends Component {
 				  		albumPlaylistsWithLikedSongsId.push(albumPlaylistId);
 
 				  		axios.put(`${API_URL}/users/update/${userId}`, {
-							email: this.state.email,
+							email: this.state.email.trim(),
 							password: this.state.password,
-							name: this.state.name,
+							name: this.state.name.trim(),
 							albumPlaylists: albumPlaylistsWithLikedSongsId
 						})
 					  	.then((response) => {

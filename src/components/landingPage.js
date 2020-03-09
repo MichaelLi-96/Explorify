@@ -4,7 +4,6 @@ import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { songChange, songPress } from '../actions';
-import { API_URL } from "../url"
 
 class landingPage extends Component {
   	render() {

@@ -4,7 +4,8 @@ import axios from "axios";
 import logo from "../assets/images/logo.png";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress } from '../actions';
+import { userLoggedIn } from '../actions';
+import { API_URL } from "../url"
 
 class logIn extends Component {
 	constructor(props) {
@@ -16,7 +17,51 @@ class logIn extends Component {
 	}
 
 	logIn = () => {
-
+		const errorMsg = document.getElementById("logInErrorMessage");
+		if(this.state.email.trim() === "") {
+			errorMsg.innerHTML = "Email address cannot be blank.";
+			errorMsg.style.display = "flex";
+		}
+		else if(this.state.password === "") {
+			errorMsg.innerHTML = "Password cannot be blank.";
+			errorMsg.style.display = "flex";
+		}
+		else {
+			errorMsg.style.display = "none";
+			axios.post(`${API_URL}/auth/login`, {
+				email: this.state.email,
+				password: this.state.password
+			})
+		  	.then((response) => {
+		  		const jwt = response.data.token;
+		  		axios.post(`${API_URL}/auth/decodeJwt`, {
+		  			token: jwt
+		  		})
+			  	.then((response) => {
+			  		const userId = response.data.userId;
+			  		
+			  		axios.get(`${API_URL}/users/${userId}`)
+				  	.then((response) => {
+				  		const userObject = response.data;
+				  		this.props.userLoggedIn({
+				  			token: jwt,
+				  			user: userObject
+				  		})
+				  		this.props.history.push("/");
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+			  	})
+			  	.catch(function (error) {
+			  		console.log(error);
+			  	});
+		  	})
+		  	.catch((error) => {
+		  		errorMsg.innerHTML = error.response.data.msg;
+				errorMsg.style.display = "flex";
+			});
+		}	
 	}
 
 	demoLogIn = () => {
@@ -73,11 +118,10 @@ class logIn extends Component {
 }
 
 const mapStateToProps = state => ({ 
-	currentSong: state.currentSong  
+
 });
 
 export default connect(mapStateToProps, { 
-	songChange,
-	songPress
+	userLoggedIn
 })(logIn);
 
