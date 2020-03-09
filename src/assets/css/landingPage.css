@@ -1,5 +1,4 @@
 #landingPage {
-	background: rgb(42,42,42);
 	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
 	width: 100vw;
 	height: 100vh;
@@ -7,6 +6,8 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	color: white;
+	overflow: hidden;
 }
 
 #landingPageLogoTitleContainer {
@@ -26,7 +27,6 @@
 }
 
 #landingPageTitle {
-	color: white;
 	font-size: 100px;
 	font-weight: 600;
 }
@@ -46,7 +46,7 @@
 	cursor: pointer;
 	letter-spacing: 1px;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 22px;
 	transition: 0.3s;
 	text-decoration: none;
 }

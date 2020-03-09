@@ -148,7 +148,7 @@ class Search extends Component {
 				<div id="searchTitle">Find artists, albums, or songs</div>
 				<div id="searchBarContainer">
 					<MdSearch id="searchIcon" />
-					<input type="text" id="input" onChange={this.handleChange} placeholder="Search.." autoComplete="off" maxLength={50} />
+					<input type="text" id="searchBarInput" onChange={this.handleChange} placeholder="Search.." autoComplete="off" maxLength={50} />
 				</div>
 				<div id="searchListsContainer">
 					<div id="searchSubtitle_Artists" className="searchSubtitle">Artists</div>

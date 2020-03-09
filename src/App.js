@@ -8,7 +8,7 @@ import "./assets/css/app.css"
 
 //components
 import LandingPage from "./components/landingPage";
-import SignIn from "./components/signIn";
+import LogIn from "./components/logIn";
 import SignUp from "./components/signUp";
 import Navbar from "./components/navbar";
 import Playbar from "./components/playbar";
@@ -34,10 +34,10 @@ class App extends Component {
 	render() {
 		return(
 			<div id="app">
-		  	  	{ this.props.authDetails.userIsLoggedIn ? (
+		  	  	{ !this.props.authDetails.userIsLoggedIn ? (
 		  	  		<Router>
 						<Route exact path='/' component={LandingPage} />
-						<Route exact path='/signIn' component={SignIn} />
+						<Route exact path='/logIn' component={LogIn} />
 						<Route exact path='/signUp' component={SignUp} />
 					</Router>
 		  	  	) : (

@@ -1,7 +1,5 @@
 #artist {
-	background: rgb(42,42,42);
 	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
-	/*background-color: #181818;*/
 	position: fixed; 
 	top: 0; 
 	left: 0; 
@@ -33,7 +31,6 @@
 	width: 350px;
 	height: 350px;
 	border-radius: 50%;
-	box-shadow: 0 0 20px rgba(0,0,0,1);
 }
 
 #artistName {
