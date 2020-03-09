@@ -1,0 +1,152 @@
+#signUp {
+	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	color: white;
+	overflow-x: hidden;
+}
+
+#signUpLogoContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#signUpLogo {
+	width: 100px;
+	height: 100px;
+	margin-top: 25px;
+	margin-left: 25px;
+}
+
+#signUpTitle {
+	font-size: 60px;
+	font-weight: 600;
+	text-align: center;
+}
+
+#signUpSubtitle {
+	color: #9B9B9B;
+	font-size: 28px;
+	font-weight: lighter;
+	text-align: center;
+}
+
+#signUpFormContainer {
+	margin-top: 50px;
+	margin-bottom: 25px;
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #2A2A2A;
+	padding: 30px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.35);
+	box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.35);
+}
+
+#signUpErrorMessage {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	background-color: rgb(220,53,69, 1);
+	margin-bottom: 30px;
+	border-radius: 10px;
+	font-size: 16px;
+	display: none;
+}
+
+#signUpForm {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.signUpInputContainer {
+	display: flex;
+	flex-direction: column; 
+	width: 80%;
+	margin-bottom: 25px;
+}
+
+.signUpFormLabel {
+	color: #9B9B9B;
+	margin-bottom: 10px;
+}
+
+.signUpInput {
+	height: 40px;
+	background-color: #262626;
+	border: solid;
+	border-width: 1px;
+	border-color: black;
+	border-radius: 5px;
+	color: white;
+	font-size: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.signUpInput:focus {
+	outline: none;
+	border-image: linear-gradient(90deg, rgb(138,37,177), rgb(23,97,160)) 1;
+	border-image-width: 1px;
+}
+
+#signUpButton {
+	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
+	color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding: 10px 30px 10px 30px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.3s;
+	text-decoration: none;
+	border: none;
+	width: 150px;
+	margin-top: 20px;
+}
+
+#signUpButton:hover {
+	cursor: pointer;
+	transform: scale(1.05);
+}
+
+#signUpRegisterContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 310px;
+	padding-bottom: 50px;
+}
+
+#signUpRegisterQuestion {
+	color: #9B9B9B;
+}
+
+#signUpRegister {
+	color: white;
+	text-decoration: none;
+}
+
+#signUpRegister:hover {
+	text-decoration: underline;
+}

@@ -16,7 +16,7 @@ class logIn extends Component {
 	}
 
 	logIn = () => {
-		
+
 	}
 
 	demoLogIn = () => {
@@ -41,7 +41,7 @@ class logIn extends Component {
 				</div>
 
 				<div id="logInTitle" className="noselect">Welcome back!</div>
-				<div id="logInSubtitle" className="noselect">Log in to start listening to your favorite songs.</div>
+				<div id="logInSubtitle" className="noselect">Start listening to all your favorite songs and playlists.</div>
 				<div id="logInFormContainer">
 					<div id="logInErrorMessage">Error</div>
 					<div id="logInForm">
