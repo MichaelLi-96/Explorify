@@ -12,60 +12,138 @@ class logIn extends Component {
 		super(props);
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
+			demoButtonClicked: false
 		}
 	}
 
 	logIn = () => {
-		const errorMsg = document.getElementById("logInErrorMessage");
-		if(this.state.email.trim() === "") {
-			errorMsg.innerHTML = "Email address cannot be blank.";
-			errorMsg.style.display = "flex";
-		}
-		else if(this.state.password === "") {
-			errorMsg.innerHTML = "Password cannot be blank.";
-			errorMsg.style.display = "flex";
-		}
-		else {
-			errorMsg.style.display = "none";
-			axios.post(`${API_URL}/auth/login`, {
-				email: this.state.email,
-				password: this.state.password
-			})
-		  	.then((response) => {
-		  		const jwt = response.data.token;
-		  		axios.post(`${API_URL}/auth/decodeJwt`, {
-		  			token: jwt
-		  		})
+		if(!this.state.demoButtonClicked) {
+			const errorMsg = document.getElementById("logInErrorMessage");
+			if(this.state.email.trim() === "") {
+				errorMsg.innerHTML = "Email address cannot be blank.";
+				errorMsg.style.display = "flex";
+			}
+			else if(this.state.password === "") {
+				errorMsg.innerHTML = "Password cannot be blank.";
+				errorMsg.style.display = "flex";
+			}
+			else {
+				errorMsg.style.display = "none";
+				axios.post(`${API_URL}/auth/login`, {
+					email: this.state.email,
+					password: this.state.password
+				})
 			  	.then((response) => {
-			  		const userId = response.data.userId;
-			  		
-			  		axios.get(`${API_URL}/users/${userId}`)
+			  		const jwt = response.data.token;
+			  		axios.post(`${API_URL}/auth/decodeJwt`, {
+			  			token: jwt
+			  		})
 				  	.then((response) => {
-				  		const userObject = response.data;
-				  		this.props.userLoggedIn({
-				  			token: jwt,
-				  			user: userObject
-				  		})
-				  		this.props.history.push("/");
+				  		const userId = response.data.userId;
+				  		
+				  		axios.get(`${API_URL}/users/${userId}`)
+					  	.then((response) => {
+					  		const userObject = response.data;
+					  		this.props.userLoggedIn({
+					  			token: jwt,
+					  			user: userObject
+					  		})
+					  		this.props.history.push("/");
+					  	})
+					  	.catch(function (error) {
+					  		console.log(error);
+					  	});
 				  	})
 				  	.catch(function (error) {
 				  		console.log(error);
 				  	});
 			  	})
-			  	.catch(function (error) {
-			  		console.log(error);
-			  	});
-		  	})
-		  	.catch((error) => {
-		  		errorMsg.innerHTML = error.response.data.msg;
-				errorMsg.style.display = "flex";
-			});
-		}	
+			  	.catch((error) => {
+			  		errorMsg.innerHTML = error.response.data.msg;
+					errorMsg.style.display = "flex";
+				});
+			}
+		}
 	}
 
 	demoLogIn = () => {
+		if(!this.state.demoButtonClicked) {
+			const errorMsg = document.getElementById("logInErrorMessage");
+			errorMsg.style.display = "none";
+			this.setState({ demoButtonClicked: true });
 
+			let i = 0;
+			const demoEmailAddress = "DemoUser@demo.com";
+			const emailAddressInput = document.getElementById("emailAddress");
+			emailAddressInput.value = "";
+
+			function emailAddressWriter() {
+			  if (i < demoEmailAddress.length) {
+			    emailAddressInput.value += demoEmailAddress.charAt(i);
+			    i++;
+			    setTimeout(emailAddressWriter, 100);
+			  }
+			}
+
+			emailAddressWriter();
+
+			let j = 0;
+			const demoPassword = "demoPassword";
+			const passwordInput = document.getElementById("password");
+			passwordInput.value = "";
+
+			function passwordWriter() {
+			  if (j < demoPassword.length) {
+			    passwordInput.value += demoPassword.charAt(j);
+			    j++;
+			    setTimeout(passwordWriter, 100);
+			  }
+			}
+			console.log(demoPassword.length);
+			setTimeout(() => { passwordWriter() }, 2100);
+
+			setTimeout(() => {
+				axios.post(`${API_URL}/auth/login`, {
+					email: "DemoUser@demo.com",
+					password: "demoPassword"
+				})
+			  	.then((response) => {
+			  		const jwt = response.data.token;
+			  		axios.post(`${API_URL}/auth/decodeJwt`, {
+			  			token: jwt
+			  		})
+				  	.then((response) => {
+				  		const userId = response.data.userId;
+				  		
+				  		axios.get(`${API_URL}/users/${userId}`)
+					  	.then((response) => {
+					  		const userObject = response.data;
+					  		this.props.userLoggedIn({
+					  			token: jwt,
+					  			user: userObject
+					  		})
+					  		this.props.history.push("/");
+					  	})
+					  	.catch(function (error) {
+					  		console.log(error);
+					  	});
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+			  	})
+			  	.catch((error) => {
+			  		errorMsg.innerHTML = error.response.data.msg;
+					errorMsg.style.display = "flex";
+				});
+			}, 3900);
+
+		}
+	}
+
+	componentDidUpdate() {
+		console.log(this.state.email);
 	}
 
 	handleEmailChange = (event) => {
