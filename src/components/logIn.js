@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import '../assets/css/logIn.css';
+import axios from "axios";
 import logo from "../assets/images/logo.png";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { songChange, songPress } from '../actions';
-import { API_URL } from "../url"
 
 class logIn extends Component {
 	constructor(props) {
