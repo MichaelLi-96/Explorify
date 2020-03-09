@@ -25,6 +25,50 @@ class SongRow extends Component {
 	  	.then((response) => {
 	  		if(this._isMounted) {
 	  			this.setState({ song: response.data });
+
+	  			const songRow = document.getElementById(`songRow/${this.state.song._id}`);
+
+				// On hover song, change music note icon to play icon
+				songRow.addEventListener("mouseenter", () => {
+					const musicNote = songRow.children[0].children[0];
+					const play = songRow.children[0].children[1];
+					musicNote.style.display = "none";
+					play.style.display = "block";
+				})
+
+				// On unhover song, change play icon to music note icon
+				songRow.addEventListener("mouseleave", () => {
+					const musicNote = songRow.children[0].children[0];
+					const play = songRow.children[0].children[1];
+					musicNote.style.display = "block";
+					play.style.display = "none";
+				})
+
+				// On click more info icon, show more info panel
+				const moreInfoIcon = songRow.children[2].children[0];
+				moreInfoIcon.addEventListener("click", () => {
+					const moreInfoPanel = songRow.children[2].children[1];
+					if(moreInfoPanel.style.display === "" || moreInfoPanel.style.display === "none") {
+						moreInfoPanel.style.display = "block";
+					}
+					else {
+						moreInfoPanel.style.display = "none";
+					}
+				})
+
+				// Hide more info panel when mouse leaves song div
+				songRow.addEventListener("mouseleave", () => {
+					const moreInfoPanel = songRow.children[2].children[1];
+					moreInfoPanel.style.display = "none";
+				})
+
+				if(this.props.isFirst) {
+					songRow.style.marginTop = "10%";
+				}
+
+				if(this.props.isLast) {
+					songRow.style.marginBottom = "10%";
+				}
 	  		}
 
 	  		axios.get(`${API_URL}/albumPlaylists/${this.state.song.albumPlaylist}`)
@@ -101,7 +145,7 @@ class SongRow extends Component {
 
   	render() {
 	    return(
-	    	<div className="songRow" >
+	    	<div id={`songRow/${this.state.song._id}`} className="songRow" >
 				<div className="songRowMusicNoteIconContainer">
 					<IoMdMusicalNote className="songRowMusicNoteIcon" />
 					<IoMdPlay className="songRowPlayIcon" onClick={this.playSong} />
@@ -143,7 +187,7 @@ class SongRow extends Component {
 					)}
 				</div> 
 				<div className="songRowMusicMoreInfoIconContainer">
-					<IoIosMore className="songRowMusicMoreInfoIcon" />
+					<IoIosMore className="songRowMusicMoreInfoIcon noselect" />
 					<div className="songRowMoreInfoPanel">
 						<div className="songRowMoreInfoOption">Add to Playlist</div>
 						<div className="songRowMoreInfoOption">Save to your Liked Songs</div>

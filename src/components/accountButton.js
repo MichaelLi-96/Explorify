@@ -10,7 +10,7 @@ class AccountButton extends Component {
 			const upArrowIcon = accountButton.children[2];
 			const panel = accountButton.children[3];
 
-			if(upArrowIcon.style.display === "none") {
+			if(upArrowIcon.style.display === "" || upArrowIcon.style.display === "none") {
 				downArrowIcon.style.display = "none";
 				upArrowIcon.style.display = "block";
 				panel.style.display = "block";

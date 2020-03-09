@@ -28,7 +28,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		console.log(localStorage.getItem("jwt"));
+		//console.log(localStorage.getItem("jwt"));
 	}
 
 	render() {
