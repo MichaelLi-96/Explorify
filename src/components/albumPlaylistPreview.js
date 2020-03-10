@@ -3,6 +3,7 @@ import '../assets/css/albumPlaylistPreview.css';
 import axios from "axios";
 import { API_URL } from "../url"
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 class AlbumPlaylistPreview extends Component {
 	constructor(props) {
@@ -36,14 +37,26 @@ class AlbumPlaylistPreview extends Component {
   	render() {
 	    return(
 			<div className="albumPlaylistPreviewContainer">
-				<Link to={{
-					pathname: `/albums/${this.state.albumPlaylist.artist}/${this.state.albumPlaylist.name}`,
-					state: {
-						albumPlaylistId: this.state.albumPlaylist._id
-					}}
-				}>
-					<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} className="albumPlaylistPreviewImg"></img>
-				</Link>
+				{ this.state.albumPlaylist.isAlbum ? (
+					<Link to={{
+						pathname: `/albums/${this.state.albumPlaylist.artist}/${this.state.albumPlaylist.name}`,
+						state: {
+							albumPlaylistId: this.state.albumPlaylist._id
+						}}
+					}>
+						<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} className="albumPlaylistPreviewImg"></img>
+					</Link>
+				) :(
+					<Link to={{
+						pathname: `/playlists/${this.props.authDetails.user.name}/${this.state.albumPlaylist.name}`,
+						state: {
+							albumPlaylistId: this.state.albumPlaylist._id
+						}}
+					}>
+						<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} className="albumPlaylistPreviewImg"></img>
+					</Link>
+				)}
+					
 				<div className="albumPlaylistPreviewName">{this.state.albumPlaylist.name}</div>
 				<div className="albumPlaylistPreviewSongs">{this.state.numberOfSongs} SONGS</div>
 			</div>
@@ -51,4 +64,9 @@ class AlbumPlaylistPreview extends Component {
   	}
 }
 
-export default AlbumPlaylistPreview;
+const mapStateToProps = state => ({ 
+	authDetails: state.authDetails
+});
+
+export default connect(mapStateToProps, { 
+})(AlbumPlaylistPreview);

@@ -6,7 +6,7 @@ import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
 import { connect } from 'react-redux';
-import { songChange, songPress, playlistAlbumPlayed } from '../actions';
+import { songChange, songPress, playlistAlbumPlayed, checkedJwtToken } from '../actions';
 
 
 class AlbumPlaylist extends Component {
@@ -22,6 +22,48 @@ class AlbumPlaylist extends Component {
 	}
 
 	componentDidMount() {
+		const newAuthState = {
+			jwt: this.props.authDetails.jwt,
+			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
+			user: this.props.authDetails.user
+		}
+
+		if(this.props.authDetails.jwt === "" || this.props.authDetails.jwt === null) {
+			newAuthState.jwt = null;
+			newAuthState.userIsLoggedIn = false;
+			newAuthState.user = {};
+			this.props.checkedJwtToken(newAuthState);
+		}
+		else {
+			axios.post(`${API_URL}/auth/decodeJwt`, {
+				token: this.props.authDetails.jwt
+			})
+		  	.then((response) => {
+		  		if(!this.props.authDetails.userIsLoggedIn) {
+					const userId = response.data.userId;
+					axios.get(`${API_URL}/users/${userId}`)
+				  	.then((response) => {
+						newAuthState.userIsLoggedIn = true;
+						newAuthState.user = response.data;
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+				}
+		  	})
+		  	.catch(function (error) {
+				newAuthState.jwt = null;
+				newAuthState.userIsLoggedIn = false;
+				newAuthState.user = {};
+		  	})
+		  	.finally(() => {
+		  		this.props.checkedJwtToken(newAuthState);
+		  		if(!newAuthState.userIsLoggedIn) {
+		  			this.props.history.push("/");
+		  		}
+		  	});
+		}
+
 		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
 	  	.then((response) => {
 	  		this.setState({ albumPlaylist: response.data, loading: false });
@@ -69,6 +111,9 @@ class AlbumPlaylist extends Component {
 		if(this.state.albumPlaylist === undefined || JSON.stringify(this.state.albumPlaylist) === '{}')  {
 			return;
 		}
+		if(this.state.albumPlaylist.songs.length === 0) {
+			const emptyMsg = [];
+		}
 		const songRows = [];
 		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
 			const songId = this.state.albumPlaylist.songs[i];
@@ -110,6 +155,10 @@ class AlbumPlaylist extends Component {
 	}
 
 	playAlbumPlaylist = () => {
+		if(this.state.albumPlaylist.songs.length === 0) {
+			return;
+		}
+
 		const sortedSongs = [];
 		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
 			const songId = this.state.albumPlaylist.songs[i];
@@ -139,12 +188,22 @@ class AlbumPlaylist extends Component {
 						<div id="albumPlaylistImgPlaySongIconContainer" onClick={this.playAlbumPlaylist}><MdPlayCircleOutline id="albumPlaylistImgPlaySongIcon" /></div>
 					</div>
 					<div id="albumPlaylistName">{this.state.albumPlaylist.name}</div>
-					<div id="albumPlaylistArtist">{this.state.albumPlaylist.artist}</div>
+					{ this.state.albumPlaylist.isAlbum ? (
+						<div id="albumPlaylistArtist">{this.state.albumPlaylist.artist}</div>
+					) : (
+						<div />
+					)}
 					<div id="albumPlaylistPlayButton" className="noselect" onClick={this.playAlbumPlaylist}>Play</div>
-					<div id="albumPlaylistYearAndSongs">{this.state.albumPlaylist.year} • {this.state.numberOfSongs} SONGS</div>
+					{ this.state.albumPlaylist.isAlbum ? (
+						<div id="albumPlaylistYearAndSongs">{this.state.albumPlaylist.year} • {this.state.numberOfSongs} SONGS</div>
+					) : (
+						<div id="albumPlaylistYearAndSongs">{this.state.numberOfSongs} SONGS</div>
+					)}
 				</div>
 
 				<div id="albumPlaylistSongsContainer">
+					<div>It's a bit empty in here!</div>
+					<div>Find some songs to add into this playlist.</div>
 					{ this.loadSongs() }
 				</div>
 			</div>
@@ -154,11 +213,13 @@ class AlbumPlaylist extends Component {
 
 const mapStateToProps = state => ({ 
 	currentSong: state.currentSong,
-	songHistory: state.songHistory
+	songHistory: state.songHistory,
+	authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, { 
 	songChange,
 	songPress,
-	playlistAlbumPlayed
+	playlistAlbumPlayed,
+	checkedJwtToken
 })(AlbumPlaylist);

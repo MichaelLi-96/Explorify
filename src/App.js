@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { API_URL } from "./url"
-import { BrowserRouter as Router, Route  } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { checkedJwtToken } from './actions';
 
@@ -36,11 +36,11 @@ class App extends Component {
 			user: this.props.authDetails.user
 		}
 
+		// If jwt is empty or null
 		if(this.props.authDetails.jwt === "" || this.props.authDetails.jwt === null) {
 			newAuthState.jwt = null;
 			newAuthState.userIsLoggedIn = false;
 			newAuthState.user = {};
-
 			this.props.checkedJwtToken(newAuthState);
 		}
 		else {
@@ -48,6 +48,7 @@ class App extends Component {
 				token: this.props.authDetails.jwt
 			})
 		  	.then((response) => {
+		  		// If user is not logged in but the token is valid
 		  		if(!this.props.authDetails.userIsLoggedIn) {
 					const userId = response.data.userId;
 					axios.get(`${API_URL}/users/${userId}`)
@@ -62,11 +63,14 @@ class App extends Component {
 				}
 		  	})
 		  	.catch(function (error) {
+		  		// If the jwt has expired
 				newAuthState.jwt = null;
 				newAuthState.userIsLoggedIn = false;
 				newAuthState.user = {};
-				this.props.checkedJwtToken(newAuthState);
 		  	})
+		  	.finally(() => {
+		  		this.props.checkedJwtToken(newAuthState);
+		  	});
 		}
 	}
 
@@ -75,17 +79,22 @@ class App extends Component {
 			<div id="app">
 		  	  	{ !this.props.authDetails.userIsLoggedIn ? (
 		  	  		<Router>
-						<Route exact path='/' component={LandingPage} />
-						<Route exact path='/logIn' component={LogIn} />
-						<Route exact path='/signUp' component={SignUp} />
+		  	  			<Switch>
+							<Route exact path='/' component={LandingPage} />
+							<Route exact path='/logIn' component={LogIn} />
+							<Route exact path='/signUp' component={SignUp} />
+						</Switch>
 					</Router>
 		  	  	) : (
 					<Router>
-						<Route exact path='/' component={Home} />
-						<Route exact path='/search' component={Search} />
-						<Route exact path='/yourLibrary' component={YourLibrary} />	
-						<Route exact path='/artists/:artistname' component={Artist} />
-						<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
+						<Switch>
+							<Route exact path='/' component={Home} />
+							<Route exact path='/search' component={Search} />
+							<Route exact path='/yourLibrary' component={YourLibrary} />	
+							<Route exact path='/artists/:artistname' component={Artist} />
+							<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
+							<Route exact path='/playlists/:username/:playlistname' component={AlbumPlaylist} />
+						</Switch>
 						<AccountButton />
 						<Navbar />
 						<Playbar />

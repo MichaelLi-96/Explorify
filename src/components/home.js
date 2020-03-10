@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from 'react-redux';
 import { API_URL } from "../url"
+import { checkedJwtToken } from '../actions';
 import ArtistPreview from "./artistPreview";
 import SongPreview from "./songPreview";
 import '../assets/css/home.css';
@@ -16,6 +18,48 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
+		const newAuthState = {
+			jwt: this.props.authDetails.jwt,
+			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
+			user: this.props.authDetails.user
+		}
+
+		if(this.props.authDetails.jwt === "" || this.props.authDetails.jwt === null) {
+			newAuthState.jwt = null;
+			newAuthState.userIsLoggedIn = false;
+			newAuthState.user = {};
+			this.props.checkedJwtToken(newAuthState);
+		}
+		else {
+			axios.post(`${API_URL}/auth/decodeJwt`, {
+				token: this.props.authDetails.jwt
+			})
+		  	.then((response) => {
+		  		if(!this.props.authDetails.userIsLoggedIn) {
+					const userId = response.data.userId;
+					axios.get(`${API_URL}/users/${userId}`)
+				  	.then((response) => {
+						newAuthState.userIsLoggedIn = true;
+						newAuthState.user = response.data;
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+				}
+		  	})
+		  	.catch(function (error) {
+				newAuthState.jwt = null;
+				newAuthState.userIsLoggedIn = false;
+				newAuthState.user = {};
+		  	})
+		  	.finally(() => {
+		  		this.props.checkedJwtToken(newAuthState);
+		  		if(!newAuthState.userIsLoggedIn) {
+		  			this.props.history.push("/");
+		  		}
+		  	});
+		}
+
 		axios.get(`${API_URL}/artists/`)
 	  	.then((response) => {
 	  		this.setState({ artists: response.data, loading: false });
@@ -101,4 +145,10 @@ class Home extends Component {
   	}
 }
 
-export default Home;
+const mapStateToProps = state => ({ 
+	authDetails: state.authDetails  
+});
+
+export default connect(mapStateToProps, { 
+	checkedJwtToken
+})(Home);

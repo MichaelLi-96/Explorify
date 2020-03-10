@@ -1,21 +1,77 @@
 import React, { Component } from "react";
 import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import '../assets/css/yourLibrary.css';
+import axios from "axios";
 import { connect } from 'react-redux';
-import { songChange, songPress } from '../actions';
 import { API_URL } from "../url"
+import { checkedJwtToken } from '../actions';
 
 class yourLibrary extends Component {
-	playSong = () => {
-		this.props.songChange({ src:"https://spotify-clone.s3-us-west-1.amazonaws.com/Taylor+Swift+-+Red/taylor_swift-starlight-IroMusic-581.mp3", name: "Starlight"});
-		this.props.songPress();
+
+	componentDidMount() {
+		const newAuthState = {
+			jwt: this.props.authDetails.jwt,
+			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
+			user: this.props.authDetails.user
+		}
+
+		if(this.props.authDetails.jwt === "" || this.props.authDetails.jwt === null) {
+			newAuthState.jwt = null;
+			newAuthState.userIsLoggedIn = false;
+			newAuthState.user = {};
+			this.props.checkedJwtToken(newAuthState);
+		}
+		else {
+			axios.post(`${API_URL}/auth/decodeJwt`, {
+				token: this.props.authDetails.jwt
+			})
+		  	.then((response) => {
+		  		if(!this.props.authDetails.userIsLoggedIn) {
+					const userId = response.data.userId;
+					axios.get(`${API_URL}/users/${userId}`)
+				  	.then((response) => {
+						newAuthState.userIsLoggedIn = true;
+						newAuthState.user = response.data;
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+				}
+		  	})
+		  	.catch(function (error) {
+				newAuthState.jwt = null;
+				newAuthState.userIsLoggedIn = false;
+				newAuthState.user = {};
+		  	})
+		  	.finally(() => {
+		  		this.props.checkedJwtToken(newAuthState);
+		  		if(!newAuthState.userIsLoggedIn) {
+		  			this.props.history.push("/");
+		  		}
+		  	});
+		}
+	}
+
+	loadAlbums = () => {
+		const playlistAlbums = [];
+		for(let i = 0; i < this.props.authDetails.user.albumPlaylists.length; i++) {
+			const playlistAlbumId = this.props.authDetails.user.albumPlaylists[i];
+			playlistAlbums.push(
+				<AlbumPlaylistPreview
+					key={playlistAlbumId}
+					albumId={playlistAlbumId}
+				/>
+			)
+		}
+		return playlistAlbums;
 	}
 
   	render() {
-	    return(
-			<div id="yourLibrary">
+  	    return(
+	    	<div id="yourLibrary">
 				<div id="yourLibraryTitle">Playlists</div>
 				<div className="yourLibraryPlaylistsListContainer">
+					{this.loadAlbums()}
 				</div>
 			</div>
 	    );
@@ -23,10 +79,9 @@ class yourLibrary extends Component {
 }
 
 const mapStateToProps = state => ({ 
-	currentSong: state.currentSong  
+	authDetails: state.authDetails  
 });
 
 export default connect(mapStateToProps, { 
-	songChange,
-	songPress
+	checkedJwtToken
 })(yourLibrary);

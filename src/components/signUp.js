@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { userRegistered } from '../actions';
 import { API_URL } from "../url"
 
-class signUp extends Component {
+class SignUp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -171,4 +171,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { 
 	userRegistered
-})(signUp);
+})(SignUp);

@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import '../assets/css/landingPage.css';
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import { songChange, songPress } from '../actions';
 
-class landingPage extends Component {
+class LandingPage extends Component {
   	render() {
 	    return(
 			<div id="landingPage">
@@ -22,12 +20,5 @@ class landingPage extends Component {
   	}
 }
 
-const mapStateToProps = state => ({ 
-	currentSong: state.currentSong  
-});
-
-export default connect(mapStateToProps, { 
-	songChange,
-	songPress
-})(landingPage);
+export default LandingPage;
 

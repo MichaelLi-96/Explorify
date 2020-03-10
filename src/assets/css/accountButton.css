@@ -30,10 +30,11 @@
 }
 
 #accountButtonOptionPanel {
-  width: 150px;
+  width: 100%;
   position: absolute;
-  margin-top: 40px;
-  margin-left: -50px;
+  top: 0;
+  left: 0;
+  margin-top: 55px; 
   background-color: #121212;
   display: none;
 }

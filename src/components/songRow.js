@@ -143,6 +143,10 @@ class SongRow extends Component {
 		});
 	}
 
+	addSongToLikedSongs = () => {
+		
+	}
+
   	render() {
 	    return(
 	    	<div id={`songRow/${this.state.song._id}`} className="songRow" >
