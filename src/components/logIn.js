@@ -100,7 +100,6 @@ class logIn extends Component {
 			    setTimeout(passwordWriter, 100);
 			  }
 			}
-			console.log(demoPassword.length);
 			setTimeout(() => { passwordWriter() }, 2100);
 
 			setTimeout(() => {
@@ -140,10 +139,6 @@ class logIn extends Component {
 			}, 3900);
 
 		}
-	}
-
-	componentDidUpdate() {
-		console.log(this.state.email);
 	}
 
 	handleEmailChange = (event) => {

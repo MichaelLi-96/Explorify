@@ -25,9 +25,9 @@ export const userLoggedOut = () => {
 	};
 }
 
-export const checkedJwtToken = (jwt) => {
+export const checkedJwtToken = (authDetails) => {
 	return {
 		type: CHECKED_JWT_TOKEN,
-		payload: jwt
+		payload: authDetails
 	};
 }

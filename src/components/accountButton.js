@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import '../assets/css/accountButton.css';
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { connect } from 'react-redux';
+import { userLoggedOut } from '../actions';
 
 class AccountButton extends Component {
 	componentDidMount() {
@@ -21,16 +23,20 @@ class AccountButton extends Component {
 				panel.style.display = "none";
 			}
 		})
+
+		const accountButtonName = document.getElementById("accountButtonName");
+		const name = this.props.authDetails.user.name;
+		const firstName = name.substr(0, name.indexOf(' '));
+		accountButtonName.innerHTML = firstName;
 	}
 
   	render() {
 	    return(
 			<div id="accountButton">
-				<div className="noselect">Michael</div>
+				<div id="accountButtonName" className="noselect"></div>
 				<FaCaretDown id="downArrowIcon" className="accountButtonArrowIcon" />
 				<FaCaretUp id="upArrowIcon" className="accountButtonArrowIcon" />
 				<div id="accountButtonOptionPanel">
-					<div className="accountButtonOptionPanelOption noselect">Log out</div>
 					<div className="accountButtonOptionPanelOption noselect">Log out</div>
 				</div>
 			</div>
@@ -38,4 +44,10 @@ class AccountButton extends Component {
   	}
 }
 
-export default AccountButton;
+const mapStateToProps = state => ({ 
+	authDetails: state.authDetails
+});
+
+export default connect(mapStateToProps, { 
+	userLoggedOut
+})(AccountButton);

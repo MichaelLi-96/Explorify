@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { API_URL } from "./url"
 import { BrowserRouter as Router, Route  } from "react-router-dom";
 import { connect } from 'react-redux';
-import { songChange, songPress, newSongAddedToHistory, singleSongPlayed } from './actions';
+import { checkedJwtToken } from './actions';
 
 //css
 import "./assets/css/app.css"
@@ -28,7 +30,46 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		console.log(localStorage.getItem("jwt"));
+		//console.log(localStorage.getItem("jwt"));
+		//console.log(this.props.authDetails);
+		const newAuthState = {
+			jwt: this.props.authDetails.jwt,
+			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
+			user: this.props.authDetails.user
+		}
+
+		if(this.props.authDetails.jwt === "" || this.props.authDetails.jwt === null) {
+			newAuthState.jwt = null;
+			newAuthState.userIsLoggedIn = false;
+			newAuthState.user = {};
+
+			this.props.checkedJwtToken(newAuthState);
+		}
+		else {
+			axios.post(`${API_URL}/auth/decodeJwt`, {
+				token: this.props.authDetails.jwt
+			})
+		  	.then((response) => {
+		  		if(!this.props.authDetails.userIsLoggedIn) {
+					const userId = response.data.userId;
+					axios.get(`${API_URL}/users/${userId}`)
+				  	.then((response) => {
+						newAuthState.userIsLoggedIn = true;
+						newAuthState.user = response.data;
+						this.props.checkedJwtToken(newAuthState);
+				  	})
+				  	.catch(function (error) {
+				  		console.log(error);
+				  	});
+				}
+		  	})
+		  	.catch(function (error) {
+				newAuthState.jwt = null;
+				newAuthState.userIsLoggedIn = false;
+				newAuthState.user = {};
+				this.props.checkedJwtToken(newAuthState);
+		  	})
+		}
 	}
 
 	render() {
@@ -62,8 +103,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { 
-	songChange,
-	songPress,
-	newSongAddedToHistory,
-	singleSongPlayed
+	checkedJwtToken
 })(App);
