@@ -122,3 +122,24 @@
 	overflow-y: scroll;
 }
 
+#albumPlaylistMsgContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding-top: 30%;
+}
+
+#albumPlaylistEmptyMsg {
+	font-size: 55px;
+	font-weight: 600;
+}
+
+#albumPlaylistFindSongsMsg {
+	margin-top: 20px;
+	font-size: 26px;
+	letter-spacing: 1px;
+	font-weight: lighter;
+	color: #9B9B9B;
+}

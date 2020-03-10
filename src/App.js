@@ -69,6 +69,7 @@ class App extends Component {
 				newAuthState.user = {};
 		  	})
 		  	.finally(() => {
+		  		// Set redux auth details to new state
 		  		this.props.checkedJwtToken(newAuthState);
 		  	});
 		}

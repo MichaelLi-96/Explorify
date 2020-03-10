@@ -112,7 +112,12 @@ class AlbumPlaylist extends Component {
 			return;
 		}
 		if(this.state.albumPlaylist.songs.length === 0) {
-			const emptyMsg = [];
+			return (
+				<div id="albumPlaylistMsgContainer">
+					<div id="albumPlaylistEmptyMsg">It's a bit empty in here!</div>
+					<div id="albumPlaylistFindSongsMsg">Find some songs to add into this playlist.</div>
+				</div>
+			);
 		}
 		const songRows = [];
 		for(let i = 0; i < this.state.albumPlaylist.songs.length; i++) {
@@ -202,8 +207,6 @@ class AlbumPlaylist extends Component {
 				</div>
 
 				<div id="albumPlaylistSongsContainer">
-					<div>It's a bit empty in here!</div>
-					<div>Find some songs to add into this playlist.</div>
 					{ this.loadSongs() }
 				</div>
 			</div>
