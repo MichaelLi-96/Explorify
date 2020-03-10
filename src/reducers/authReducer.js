@@ -47,7 +47,7 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 		case USER_CHANGED_DATA:
 			return { 
 				...state,
-				user: action.payload.user
+				user: action.payload
 			};
 		default:
 			return state;

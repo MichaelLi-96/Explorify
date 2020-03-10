@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import '../assets/css/albumPlaylist.css';
 import axios from "axios";
 import { MdPlayCircleOutline } from "react-icons/md";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
 import { connect } from 'react-redux';
-import { songChange, songPress, playlistAlbumPlayed, checkedJwtToken } from '../actions';
+import { songChange, songPress, playlistAlbumPlayed, checkedJwtToken, userChangedData } from '../actions';
 
 
 class AlbumPlaylist extends Component {
@@ -17,7 +18,8 @@ class AlbumPlaylist extends Component {
 			albumPlaylist: {},
 			songs: [],
 			numberOfSongs: 0,
-			idToSongMap: {}
+			idToSongMap: {},
+			isFavorited: false
 		}
 	}
 
@@ -62,6 +64,10 @@ class AlbumPlaylist extends Component {
 		  			this.props.history.push("/");
 		  		}
 		  	});
+		}
+
+		if(this.props.authDetails.user.albumPlaylists.includes(this.state.albumPlaylistId)) {
+			this.setState({ isFavorited: true });
 		}
 
 		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
@@ -186,6 +192,37 @@ class AlbumPlaylist extends Component {
 		this.props.playlistAlbumPlayed(sortedSongs);
 	}
 
+	addAlbumToLibrary = () => {
+		const currentUserWithUpdatedLibrary = this.props.authDetails.user;
+		const albumPlaylistWithAddedAlbum = currentUserWithUpdatedLibrary.albumPlaylists;
+		albumPlaylistWithAddedAlbum.push(this.state.albumPlaylistId);
+		currentUserWithUpdatedLibrary.albumPlaylists = albumPlaylistWithAddedAlbum;
+		
+	  	axios.put(`${API_URL}/users/update/${this.props.authDetails.user._id}`, currentUserWithUpdatedLibrary)
+	  	.then((response) => {
+	  		this.props.userChangedData(currentUserWithUpdatedLibrary);
+	  		this.setState({ isFavorited: true });
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+	}
+
+	removeAlbumToLibrary = () => {
+		const currentUserWithUpdatedLibrary = this.props.authDetails.user;
+		const albumPlaylistWithRemovedAlbum = currentUserWithUpdatedLibrary.albumPlaylists.filter(albumId => albumId !== this.state.albumPlaylistId);
+		currentUserWithUpdatedLibrary.albumPlaylists = albumPlaylistWithRemovedAlbum;
+		
+	  	axios.put(`${API_URL}/users/update/${this.props.authDetails.user._id}`, currentUserWithUpdatedLibrary)
+	  	.then((response) => {
+	  		this.props.userChangedData(currentUserWithUpdatedLibrary);
+	  		this.setState({ isFavorited: false });
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+	}
+
   	render() {
 	    return(
 			<div id="albumPlaylist">
@@ -207,6 +244,16 @@ class AlbumPlaylist extends Component {
 					) : (
 						<div id="albumPlaylistYearAndSongs">{this.state.numberOfSongs} SONGS</div>
 					)}
+
+					{ this.state.albumPlaylist.isAlbum ? (
+						!this.state.isFavorited ? (
+							<FaRegHeart id="albumPlaylistHeartOutline" onClick={this.addAlbumToLibrary} />
+						) : (
+							<FaHeart id="albumPlaylistHeart" onClick={this.removeAlbumToLibrary} />
+						)
+					) : (
+						<div />
+					)}
 				</div>
 
 				<div id="albumPlaylistSongsContainer">
@@ -227,5 +274,6 @@ export default connect(mapStateToProps, {
 	songChange,
 	songPress,
 	playlistAlbumPlayed,
-	checkedJwtToken
+	checkedJwtToken,
+	userChangedData
 })(AlbumPlaylist);

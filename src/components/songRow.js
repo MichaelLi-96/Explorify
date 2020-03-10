@@ -186,25 +186,25 @@ class SongRow extends Component {
 
 	  	axios.get(`${API_URL}/albumPlaylists/${userLikedSongsPlaylistId}`)
 	  	.then((response) => {
-	  			const userLikedSongsAlbumPlaylist = response.data;
-	  			const likedSongsAfterRemoved = userLikedSongsAlbumPlaylist.songs.filter(songId => songId !== this.state.song._id);
-	  			userLikedSongsAlbumPlaylist.songs = likedSongsAfterRemoved;
+  			const userLikedSongsAlbumPlaylist = response.data;
+  			const likedSongsAfterRemoved = userLikedSongsAlbumPlaylist.songs.filter(songId => songId !== this.state.song._id);
+  			userLikedSongsAlbumPlaylist.songs = likedSongsAfterRemoved;
 
-		  		axios.put(`${API_URL}/albumPlaylists/update/${userLikedSongsPlaylistId}`, userLikedSongsAlbumPlaylist)
-			  	.then((response) => {
-			  		const songRow = document.getElementById(`songRow/${this.state.song._id}`);
-			  		const moreInfoPanel = songRow.children[2].children[1];
-			  		moreInfoPanel.style.display = "none";
-			  		if(this._isMounted) {
-			  			this.setState({ currentUsersLikedSongsAlbumPlaylist: likedSongsAfterRemoved });
-			  			if(!this.props.isAlbum) {
-			  				window.location.reload(false);
-			  			}
-			  		}
-			  	})
-			  	.catch(function (error) {
-			  		console.log(error);
-				});
+	  		axios.put(`${API_URL}/albumPlaylists/update/${userLikedSongsPlaylistId}`, userLikedSongsAlbumPlaylist)
+		  	.then((response) => {
+		  		const songRow = document.getElementById(`songRow/${this.state.song._id}`);
+		  		const moreInfoPanel = songRow.children[2].children[1];
+		  		moreInfoPanel.style.display = "none";
+		  		if(this._isMounted) {
+		  			this.setState({ currentUsersLikedSongsAlbumPlaylist: likedSongsAfterRemoved });
+		  			if(!this.props.isAlbum) {
+		  				window.location.reload(false);
+		  			}
+		  		}
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+			});
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
