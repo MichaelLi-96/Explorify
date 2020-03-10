@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../assets/css/accountButton.css';
+import { withRouter } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { connect } from 'react-redux';
 import { userLoggedOut } from '../actions';
@@ -32,6 +33,7 @@ class AccountButton extends Component {
 
 	logOut = () => {
 		this.props.userLoggedOut();
+		this.props.history.push("/");
 	}
 
   	render() {
@@ -52,6 +54,6 @@ const mapStateToProps = state => ({
 	authDetails: state.authDetails
 });
 
-export default connect(mapStateToProps, { 
+export default withRouter(connect(mapStateToProps, { 
 	userLoggedOut
-})(AccountButton);
+})(AccountButton));

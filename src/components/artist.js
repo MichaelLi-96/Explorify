@@ -127,6 +127,7 @@ class Artist extends Component {
 					showPlays={true}
 					isFirst={false}
 					isLast={false}
+					isAlbum={true}
 				/>
 			)
 		}
