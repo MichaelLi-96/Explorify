@@ -130,6 +130,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={true}
 						isLast={false}
+						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
 			}
@@ -141,6 +142,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={false}
 						isLast={true}
+						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
 			}
@@ -152,6 +154,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={false}
 						isLast={false}
+						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
 			}

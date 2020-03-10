@@ -2,7 +2,8 @@ import {
 	USER_REGISTERED, 
 	USER_LOGGED_IN, 
 	USER_LOGGED_OUT,
-	CHECKED_JWT_TOKEN
+	CHECKED_JWT_TOKEN,
+	USER_CHANGED_DATA
 } from './types';
 
 export const userRegistered = (userAndToken) => {
@@ -29,5 +30,12 @@ export const checkedJwtToken = (authDetails) => {
 	return {
 		type: CHECKED_JWT_TOKEN,
 		payload: authDetails
+	};
+}
+
+export const userChangedData = (user) => {
+	return {
+		type: USER_CHANGED_DATA,
+		payload: user
 	};
 }

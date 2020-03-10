@@ -15,7 +15,8 @@ class SongRow extends Component {
 			loading: true,
 			song: {},
 			albumPlaylist: {},
-			artist: {}
+			artist: {},
+			currentUsersLikedSongsAlbumPlaylist: []
 		}
 	}
 
@@ -94,6 +95,16 @@ class SongRow extends Component {
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+
+	  	axios.get(`${API_URL}/albumPlaylists/${this.props.authDetails.user.albumPlaylists[0]}`)
+		  	.then((response) => {
+		  		if(this._isMounted) {
+		  			this.setState({ currentUsersLikedSongsAlbumPlaylist: response.data.songs });
+		  		}
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+		});
 	}
 
 	componentWillUnmount() {
@@ -154,6 +165,12 @@ class SongRow extends Component {
 		  		axios.put(`${API_URL}/albumPlaylists/update/${userLikedSongsPlaylistId}`, userLikedSongsAlbumPlaylist)
 			  	.then((response) => {
 			  		//console.log(response);
+			  		const songRow = document.getElementById(`songRow/${this.state.song._id}`);
+			  		const moreInfoPanel = songRow.children[2].children[1];
+			  		moreInfoPanel.style.display = "none";
+			  		if(this._isMounted) {
+			  			this.setState({ currentUsersLikedSongsAlbumPlaylist:userLikedSongsAlbumPlaylist.songs });
+			  		}
 			  	})
 			  	.catch(function (error) {
 			  		console.log(error);
@@ -162,8 +179,36 @@ class SongRow extends Component {
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+	}
 
-		
+	removeSongFromLikedSongs = () => {
+		const userLikedSongsPlaylistId = this.props.authDetails.user.albumPlaylists[0];
+
+	  	axios.get(`${API_URL}/albumPlaylists/${userLikedSongsPlaylistId}`)
+	  	.then((response) => {
+	  			const userLikedSongsAlbumPlaylist = response.data;
+	  			const likedSongsAfterRemoved = userLikedSongsAlbumPlaylist.songs.filter(songId => songId !== this.state.song._id);
+	  			userLikedSongsAlbumPlaylist.songs = likedSongsAfterRemoved;
+
+		  		axios.put(`${API_URL}/albumPlaylists/update/${userLikedSongsPlaylistId}`, userLikedSongsAlbumPlaylist)
+			  	.then((response) => {
+			  		const songRow = document.getElementById(`songRow/${this.state.song._id}`);
+			  		const moreInfoPanel = songRow.children[2].children[1];
+			  		moreInfoPanel.style.display = "none";
+			  		if(this._isMounted) {
+			  			this.setState({ currentUsersLikedSongsAlbumPlaylist: likedSongsAfterRemoved });
+			  			if(!this.props.isAlbum) {
+			  				window.location.reload(false);
+			  			}
+			  		}
+			  	})
+			  	.catch(function (error) {
+			  		console.log(error);
+				});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
 	}
 
   	render() {
@@ -213,7 +258,11 @@ class SongRow extends Component {
 					<IoIosMore className="songRowMusicMoreInfoIcon noselect" />
 					<div className="songRowMoreInfoPanel">
 						<div className="songRowMoreInfoOption">Add to Playlist</div>
-						<div className="songRowMoreInfoOption" onClick={this.addSongToLikedSongs}>Save to your Liked Songs</div>
+						{!this.state.currentUsersLikedSongsAlbumPlaylist.includes(this.state.song._id) ? (
+							<div className="songRowMoreInfoOption" onClick={this.addSongToLikedSongs}>Save to your Liked Songs</div>
+						) : (
+							<div className="songRowMoreInfoOption" onClick={this.removeSongFromLikedSongs}>Remove from your Liked Songs</div>
+						)}
 					</div>
 				</div>
 				<div className="songRowMusicSongLength">{this.state.song.length}</div>
@@ -232,5 +281,5 @@ export default connect(mapStateToProps, {
 	songChange,
 	songPress,
 	newSongAddedToHistory,
-	singleSongPlayed
+	singleSongPlayed,
 })(SongRow);

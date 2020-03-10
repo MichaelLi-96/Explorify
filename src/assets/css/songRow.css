@@ -84,7 +84,7 @@
 
 .songRowMoreInfoPanel {
 	position: absolute;
-	width: 250px;
+	width: 275px;
 	height: auto;
 	background-color: #121212;
 	top: 0;
@@ -98,8 +98,8 @@
 
 .songRowMoreInfoOption {
 	padding: 10px 15px 10px 15px;
-	font-size: 16px;
-	font-weight: bold;
+	font-size: 14px;
+	font-weight: 600;
 	color: #9B9B9B;
 	transition: 0.3s;
 	cursor: pointer;

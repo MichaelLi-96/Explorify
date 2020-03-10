@@ -134,6 +134,7 @@
 #albumPlaylistEmptyMsg {
 	font-size: 55px;
 	font-weight: 600;
+	text-align: center;
 }
 
 #albumPlaylistFindSongsMsg {
@@ -141,5 +142,6 @@
 	font-size: 26px;
 	letter-spacing: 1px;
 	font-weight: lighter;
+	text-align: center;
 	color: #9B9B9B;
 }

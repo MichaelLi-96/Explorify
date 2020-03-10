@@ -2,7 +2,8 @@ import {
 	USER_REGISTERED, 
 	USER_LOGGED_IN, 
 	USER_LOGGED_OUT,
-	CHECKED_JWT_TOKEN
+	CHECKED_JWT_TOKEN,
+	USER_CHANGED_DATA
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -41,6 +42,11 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 			return { 
 				jwt: action.payload.jwt,
 				userIsLoggedIn: action.payload.userIsLoggedIn, 
+				user: action.payload.user
+			};
+		case USER_CHANGED_DATA:
+			return { 
+				...state,
 				user: action.payload.user
 			};
 		default:
