@@ -20,6 +20,7 @@ import YourLibrary from "./components/yourLibrary";
 import AlbumPlaylist from "./components/albumPlaylist";
 import Artist from "./components/artist";
 import AccountButton from "./components/accountButton";
+import CreatePlaylistModal from "./components/createPlaylistModal";
 
 class App extends Component {
 	constructor(props) {
@@ -99,6 +100,11 @@ class App extends Component {
 						<AccountButton />
 						<Navbar />
 						<Playbar />
+						{ this.props.showCreatePlaylistModal ? (
+							<CreatePlaylistModal />
+						) : (
+							<div />
+						)}
 					</Router>
 				)}
 			</div>
@@ -107,7 +113,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({ 
-	authDetails: state.authDetails
+	authDetails: state.authDetails,
+	showCreatePlaylistModal: state.showCreatePlaylistModal
 });
 
 export default connect(mapStateToProps, { 

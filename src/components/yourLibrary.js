@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import AlbumPlaylistPreview from "./albumPlaylistPreview";
 import '../assets/css/yourLibrary.css';
+import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { connect } from 'react-redux';
 import { API_URL } from "../url"
-import { checkedJwtToken } from '../actions';
+import { checkedJwtToken, showCreatePlaylistModal } from '../actions';
 
-class yourLibrary extends Component {
+class YourLibrary extends Component {
 
 	componentDidMount() {
 		const newAuthState = {
@@ -66,12 +67,22 @@ class yourLibrary extends Component {
 		return playlistAlbums;
 	}
 
+	showCreatePlaylistModal = () => {
+		this.props.showCreatePlaylistModal();
+	}
+
   	render() {
   	    return(
 	    	<div id="yourLibrary">
 				<div id="yourLibraryTitle">Playlists</div>
-				<div className="yourLibraryPlaylistsListContainer">
+				<div id="yourLibraryPlaylistsListContainer">
 					{this.loadAlbums()}
+					<div id="yourLibraryAddPlaylistContainer" onClick={this.showCreatePlaylistModal}>
+						<div id="yourLibraryAddPlaylistImg">
+							<FaPlus id="yourLibraryPlusIcon" />
+						</div>
+						<div id="yourLibraryAddPlaylistName">Create Playlist</div>
+					</div>
 				</div>
 			</div>
 	    );
@@ -83,5 +94,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { 
-	checkedJwtToken
-})(yourLibrary);
+	checkedJwtToken,
+	showCreatePlaylistModal
+})(YourLibrary);
