@@ -144,6 +144,25 @@ class SongRow extends Component {
 	}
 
 	addSongToLikedSongs = () => {
+		const userLikedSongsPlaylistId = this.props.authDetails.user.albumPlaylists[0];
+
+	  	axios.get(`${API_URL}/albumPlaylists/${userLikedSongsPlaylistId}`)
+	  	.then((response) => {
+	  			const userLikedSongsAlbumPlaylist = response.data;
+	  			userLikedSongsAlbumPlaylist.songs.push(this.state.song._id);
+
+		  		axios.put(`${API_URL}/albumPlaylists/update/${userLikedSongsPlaylistId}`, userLikedSongsAlbumPlaylist)
+			  	.then((response) => {
+			  		//console.log(response);
+			  	})
+			  	.catch(function (error) {
+			  		console.log(error);
+				});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+
 		
 	}
 
@@ -194,7 +213,7 @@ class SongRow extends Component {
 					<IoIosMore className="songRowMusicMoreInfoIcon noselect" />
 					<div className="songRowMoreInfoPanel">
 						<div className="songRowMoreInfoOption">Add to Playlist</div>
-						<div className="songRowMoreInfoOption">Save to your Liked Songs</div>
+						<div className="songRowMoreInfoOption" onClick={this.addSongToLikedSongs}>Save to your Liked Songs</div>
 					</div>
 				</div>
 				<div className="songRowMusicSongLength">{this.state.song.length}</div>
@@ -205,7 +224,8 @@ class SongRow extends Component {
 
 const mapStateToProps = state => ({ 
 	currentSong: state.currentSong,
-	songHistory: state.songHistory
+	songHistory: state.songHistory,
+	authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, { 

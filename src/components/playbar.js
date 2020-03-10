@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import '../assets/css/playbar.css';
-import sound from "../assets/songs/Shelter.mp3";
 import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious, 
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
