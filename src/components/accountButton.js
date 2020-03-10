@@ -30,6 +30,10 @@ class AccountButton extends Component {
 		accountButtonName.innerHTML = firstName;
 	}
 
+	logOut = () => {
+		this.props.userLoggedOut();
+	}
+
   	render() {
 	    return(
 			<div id="accountButton">
@@ -37,7 +41,7 @@ class AccountButton extends Component {
 				<FaCaretDown id="downArrowIcon" className="accountButtonArrowIcon" />
 				<FaCaretUp id="upArrowIcon" className="accountButtonArrowIcon" />
 				<div id="accountButtonOptionPanel">
-					<div className="accountButtonOptionPanelOption noselect">Log out</div>
+					<div id="accountButtonLogOut" className="accountButtonOptionPanelOption noselect" onClick={this.logOut}>Log out</div>
 				</div>
 			</div>
 	    );

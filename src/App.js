@@ -30,8 +30,6 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		//console.log(localStorage.getItem("jwt"));
-		//console.log(this.props.authDetails);
 		const newAuthState = {
 			jwt: this.props.authDetails.jwt,
 			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
