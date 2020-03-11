@@ -5,7 +5,7 @@
   Explorify
 </h1>
 <p align="center">
-  Explorify is a clone of the popular music streaming platform Spotify.
+  A music streaming web application inspired by Spotify.
 </p>
 <p align="center">
   View the app <a href="https://explorifyy.herokuapp.com/" target="_blank" rel="nofollow noopener noreferrer">here</a>!
