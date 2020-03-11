@@ -106,6 +106,7 @@ class Artist extends Component {
 				<AlbumPlaylistPreview
 					key={albumId}
 					albumId={albumId}
+					addingSongToPlaylist={false}
 				/>
 			)
 		}
@@ -163,7 +164,7 @@ class Artist extends Component {
 		// )}
 	    return(
 			<div id="artist">
-				<BackButton history={this.props.history} />
+				<BackButton history={this.props.history} fromAddSongToPlaylist={false} />
 				<div id="artistImageNameContainer">
 					<img src={this.state.artist.imageUrl} alt={this.state.artist.name} id="artistImage"></img>
 					<div id="artistName">{this.state.artist.name}</div>

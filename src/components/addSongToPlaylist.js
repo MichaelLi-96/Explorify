@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import AlbumPlaylistPreview from "./albumPlaylistPreview";
-import '../assets/css/yourLibrary.css';
+import { withRouter } from "react-router-dom";
+import BackButton from "./backButton";
+import '../assets/css/addSongToPlaylist.css';
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { connect } from 'react-redux';
 import { API_URL } from "../url"
 import { checkedJwtToken, showCreatePlaylistModal } from '../actions';
 
-class YourLibrary extends Component {
+
+class AddSongToPlaylist extends Component {
 
 	componentDidMount() {
 		const newAuthState = {
@@ -53,15 +56,15 @@ class YourLibrary extends Component {
 		}
 	}
 
-	loadAlbums = () => {
+	loadPlaylists = () => {
 		const playlistAlbums = [];
-		for(let i = 0; i < this.props.authDetails.user.albumPlaylists.length; i++) {
+		for(let i = 1; i < this.props.authDetails.user.albumPlaylists.length; i++) {
 			const playlistAlbumId = this.props.authDetails.user.albumPlaylists[i];
 			playlistAlbums.push(
 				<AlbumPlaylistPreview
 					key={playlistAlbumId}
 					albumId={playlistAlbumId}
-					addingSongToPlaylist={false}
+					addingSongToPlaylist={true}
 				/>
 			)
 		}
@@ -74,15 +77,16 @@ class YourLibrary extends Component {
 
   	render() {
   	    return(
-	    	<div id="yourLibrary">
-				<div id="yourLibraryTitle">Playlists</div>
-				<div id="yourLibraryPlaylistsListContainer">
-					{this.loadAlbums()}
-					<div id="yourLibraryAddPlaylistContainer" onClick={this.showCreatePlaylistModal}>
-						<div id="yourLibraryAddPlaylistImg">
-							<FaPlus id="yourLibraryPlusIcon" />
+	    	<div id="addSongToPlaylist">
+	    		<BackButton history={this.props.history} fromAddSongToPlaylist={true} />
+				<div id="addSongToPlaylistTitle">Playlists</div>
+				<div id="addSongToPlaylistPlaylistsListContainer">
+					{this.loadPlaylists()}
+					<div id="addSongToPlaylistAddPlaylistContainer" onClick={this.showCreatePlaylistModal}>
+						<div id="addSongToPlaylistAddPlaylistImg">
+							<FaPlus id="addSongToPlaylistPlusIcon" />
 						</div>
-						<div id="yourLibraryAddPlaylistName">Create Playlist</div>
+						<div id="addSongToPlaylistAddPlaylistName">Create Playlist</div>
 					</div>
 				</div>
 			</div>
@@ -91,10 +95,10 @@ class YourLibrary extends Component {
 }
 
 const mapStateToProps = state => ({ 
-	authDetails: state.authDetails  
+	authDetails: state.authDetails
 });
 
-export default connect(mapStateToProps, { 
+export default withRouter(connect(mapStateToProps, { 
 	checkedJwtToken,
 	showCreatePlaylistModal
-})(YourLibrary);
+})(AddSongToPlaylist));

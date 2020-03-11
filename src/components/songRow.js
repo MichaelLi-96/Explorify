@@ -5,7 +5,7 @@ import { API_URL } from "../url"
 import { IoMdMusicalNote, IoIosMore, IoMdPlay } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { songChange, songPress, newSongAddedToHistory, singleSongPlayed } from '../actions';
+import { songChange, songPress, newSongAddedToHistory, singleSongPlayed, storeSongToBeAddedToPlaylist } from '../actions';
 
 class SongRow extends Component {
 	constructor(props) {
@@ -154,6 +154,37 @@ class SongRow extends Component {
 		});
 	}
 
+	addSongToPlaylist = () => {
+		this.props.storeSongToBeAddedToPlaylist(this.state.song);
+	}
+
+	removeSongFromPlaylist = () => {
+		const albumPlaylistIdContainingSong = this.props.albumPlaylistId;
+
+		axios.get(`${API_URL}/albumPlaylists/${albumPlaylistIdContainingSong}`)
+	  	.then((response) => {
+	  		const updatedAlbumPlaylist = response.data;
+	  		const updatedAlbumPlaylistSongs = updatedAlbumPlaylist.songs.filter(songId => songId !== this.state.song._id);
+			updatedAlbumPlaylist.songs = updatedAlbumPlaylistSongs;
+
+			axios.put(`${API_URL}/albumPlaylists/update/${albumPlaylistIdContainingSong}`, updatedAlbumPlaylist)
+		  	.then((response) => {
+		  		const songRow = document.getElementById(`songRow/${this.state.song._id}`);
+		  		const moreInfoPanel = songRow.children[2].children[1];
+		  		moreInfoPanel.style.display = "none";
+		  		if(this._isMounted) {
+		  			window.location.reload(false);
+		  		}
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+			});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+	}
+
 	addSongToLikedSongs = () => {
 		const userLikedSongsPlaylistId = this.props.authDetails.user.albumPlaylists[0];
 
@@ -257,7 +288,12 @@ class SongRow extends Component {
 				<div className="songRowMusicMoreInfoIconContainer">
 					<IoIosMore className="songRowMusicMoreInfoIcon noselect" />
 					<div className="songRowMoreInfoPanel">
-						<div className="songRowMoreInfoOption">Add to Playlist</div>
+						{this.props.isAlbum ? (
+							<div className="songRowMoreInfoOption" onClick={this.addSongToPlaylist}>Add to Playlist</div>
+						) : (
+							<div className="songRowMoreInfoOption" onClick={this.removeSongFromPlaylist}>Remove from this Playlist</div>
+						)}
+						
 						{!this.state.currentUsersLikedSongsAlbumPlaylist.includes(this.state.song._id) ? (
 							<div className="songRowMoreInfoOption" onClick={this.addSongToLikedSongs}>Save to your Liked Songs</div>
 						) : (
@@ -274,7 +310,8 @@ class SongRow extends Component {
 const mapStateToProps = state => ({ 
 	currentSong: state.currentSong,
 	songHistory: state.songHistory,
-	authDetails: state.authDetails
+	authDetails: state.authDetails,
+	songToAddToPlaylist: state.songToAddToPlaylist
 });
 
 export default connect(mapStateToProps, { 
@@ -282,4 +319,5 @@ export default connect(mapStateToProps, {
 	songPress,
 	newSongAddedToHistory,
 	singleSongPlayed,
+	storeSongToBeAddedToPlaylist
 })(SongRow);

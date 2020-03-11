@@ -21,6 +21,7 @@ import AlbumPlaylist from "./components/albumPlaylist";
 import Artist from "./components/artist";
 import AccountButton from "./components/accountButton";
 import CreatePlaylistModal from "./components/createPlaylistModal";
+import AddSongToPlaylist from "./components/addSongToPlaylist";
 
 class App extends Component {
 	constructor(props) {
@@ -97,13 +98,18 @@ class App extends Component {
 							<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
 							<Route exact path='/yourLibrary/:playlistname' component={AlbumPlaylist} />
 						</Switch>
+						{ this.props.songToAddToPlaylist.isBeingAdded ? (
+							<AddSongToPlaylist />
+						) : (
+							null
+						)}
 						<AccountButton />
 						<Navbar />
 						<Playbar />
 						{ this.props.showCreatePlaylistModal ? (
 							<CreatePlaylistModal />
 						) : (
-							<div />
+							null
 						)}
 					</Router>
 				)}
@@ -114,7 +120,8 @@ class App extends Component {
 
 const mapStateToProps = state => ({ 
 	authDetails: state.authDetails,
-	showCreatePlaylistModal: state.showCreatePlaylistModal
+	showCreatePlaylistModal: state.showCreatePlaylistModal,
+	songToAddToPlaylist: state.songToAddToPlaylist
 });
 
 export default connect(mapStateToProps, { 

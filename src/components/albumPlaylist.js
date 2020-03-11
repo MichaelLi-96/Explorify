@@ -152,6 +152,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={true}
 						isLast={false}
+						albumPlaylistId={this.state.albumPlaylist._id}
 						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
@@ -164,6 +165,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={false}
 						isLast={true}
+						albumPlaylistId={this.state.albumPlaylist._id}
 						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
@@ -176,6 +178,7 @@ class AlbumPlaylist extends Component {
 						showPlays={false}
 						isFirst={false}
 						isLast={false}
+						albumPlaylistId={this.state.albumPlaylist._id}
 						isAlbum={this.state.albumPlaylist.isAlbum}
 					/>
 				)
@@ -264,7 +267,7 @@ class AlbumPlaylist extends Component {
   	render() {
 	    return(
 			<div id="albumPlaylist">
-				<BackButton history={this.props.history} />
+				<BackButton history={this.props.history} fromAddSongToPlaylist={false} />
 				<div id="albumPlaylistInfoContainer">
 					<div id="albumPlaylistImgContainer">
 						<img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} id="albumPlaylistImg"></img>
