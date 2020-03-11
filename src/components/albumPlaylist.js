@@ -3,6 +3,7 @@ import '../assets/css/albumPlaylist.css';
 import axios from "axios";
 import { MdPlayCircleOutline } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { IoIosMore } from "react-icons/io";
 import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
@@ -69,6 +70,21 @@ class AlbumPlaylist extends Component {
 		if(this.props.authDetails.user.albumPlaylists.includes(this.state.albumPlaylistId)) {
 			this.setState({ isFavorited: true });
 		}
+
+		const albumPlaylistMoreIcon = document.getElementById("albumPlaylistMoreIcon");
+		const albumPlaylistOptionPanel = document.getElementById("albumPlaylistOptionPanel");
+		albumPlaylistMoreIcon.addEventListener("click", () => {
+			if(albumPlaylistOptionPanel.style.display === "" || albumPlaylistOptionPanel.style.display === "none") {
+				albumPlaylistOptionPanel.style.display = "block";
+			}
+			else {
+				albumPlaylistOptionPanel.style.display = "none";
+			}
+		})
+
+		albumPlaylistOptionPanel.addEventListener("mouseleave", () => {
+			albumPlaylistOptionPanel.style.display = "none";
+		})
 
 		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
 	  	.then((response) => {
@@ -208,7 +224,7 @@ class AlbumPlaylist extends Component {
 	  	});
 	}
 
-	removeAlbumToLibrary = () => {
+	removeAlbumFromLibrary = () => {
 		const currentUserWithUpdatedLibrary = this.props.authDetails.user;
 		const albumPlaylistWithRemovedAlbum = currentUserWithUpdatedLibrary.albumPlaylists.filter(albumId => albumId !== this.state.albumPlaylistId);
 		currentUserWithUpdatedLibrary.albumPlaylists = albumPlaylistWithRemovedAlbum;
@@ -221,6 +237,28 @@ class AlbumPlaylist extends Component {
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
+	}
+
+	removePlaylist = () => {
+		axios.delete(`${API_URL}/albumPlaylists/delete/${this.state.albumPlaylistId}`)
+	  	.then((response) => {
+	  		const currentUserWithUpdatedLibrary = this.props.authDetails.user;
+			const albumPlaylistWithRemovedAlbum = currentUserWithUpdatedLibrary.albumPlaylists.filter(playlistId => playlistId !== this.state.albumPlaylistId);
+			currentUserWithUpdatedLibrary.albumPlaylists = albumPlaylistWithRemovedAlbum;
+			
+		  	axios.put(`${API_URL}/users/update/${this.props.authDetails.user._id}`, currentUserWithUpdatedLibrary)
+		  	.then((response) => {
+		  		this.props.userChangedData(currentUserWithUpdatedLibrary);
+		  		this.props.history.goBack();
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+		  	});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
+
 	}
 
   	render() {
@@ -236,7 +274,7 @@ class AlbumPlaylist extends Component {
 					{ this.state.albumPlaylist.isAlbum ? (
 						<div id="albumPlaylistArtist">{this.state.albumPlaylist.artist}</div>
 					) : (
-						<div />
+						<div id="albumPlaylistArtist">{this.props.authDetails.user.name.substr(0, this.props.authDetails.user.name.indexOf(' '))}</div>
 					)}
 					<div id="albumPlaylistPlayButton" className="noselect" onClick={this.playAlbumPlaylist}>Play</div>
 					{ this.state.albumPlaylist.isAlbum ? (
@@ -247,12 +285,17 @@ class AlbumPlaylist extends Component {
 
 					{ this.state.albumPlaylist.isAlbum ? (
 						!this.state.isFavorited ? (
-							<FaRegHeart id="albumPlaylistHeartOutline" onClick={this.addAlbumToLibrary} />
+							<FaRegHeart id="albumPlaylistHeartOutlineIcon" onClick={this.addAlbumToLibrary} />
 						) : (
-							<FaHeart id="albumPlaylistHeart" onClick={this.removeAlbumToLibrary} />
+							<FaHeart id="albumPlaylistHeartIcon" onClick={this.removeAlbumFromLibrary} />
 						)
 					) : (
-						<div />
+						<div id="albumPlaylistMoreIconOptionPanelContainer">
+							<IoIosMore id="albumPlaylistMoreIcon" />
+							<div id="albumPlaylistOptionPanel">
+								<div className="albumPlaylistOptionPanelOption noselect" onClick={this.removePlaylist}>Delete Playlist</div>
+							</div>
+						</div>
 					)}
 				</div>
 

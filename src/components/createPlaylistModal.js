@@ -3,7 +3,7 @@ import '../assets/css/createPlaylistModal.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import { API_URL } from "../url"
-import { hideCreatePlaylistModal } from '../actions';
+import { hideCreatePlaylistModal, userChangedData } from '../actions';
 
 class CreatePlaylistModal extends Component {
 	constructor(props) {
@@ -22,7 +22,34 @@ class CreatePlaylistModal extends Component {
 	}
 
 	created = () => {
-		
+		axios.post(`${API_URL}/albumPlaylists/add`, {
+			name: this.state.playlistName,
+			isAlbum: false,
+			imageUrl: "https://explorify.s3-us-west-1.amazonaws.com/defaultPlaylistImg.jpg",
+			artist: this.props.authDetails.user.name,
+			year: "",
+			songs: []
+		})
+	  	.then((response) => {
+	  		const albumPlaylistId = response.data.albumPlaylist._id;
+	  		const updatedUserObj = this.props.authDetails.user;
+	  		const updatedAlbumPlaylists = updatedUserObj.albumPlaylists;
+	  		updatedAlbumPlaylists.push(albumPlaylistId);
+	  		updatedUserObj.albumPlaylists = updatedAlbumPlaylists;
+
+	  		axios.put(`${API_URL}/users/update/${this.props.authDetails.user._id}`, updatedUserObj)
+		  	.then((response) => {
+		  		this.props.userChangedData(updatedUserObj);
+		  		this.props.hideCreatePlaylistModal();
+
+		  	})
+		  	.catch(function (error) {
+		  		console.log(error);
+			});
+	  	})
+	  	.catch(function (error) {
+	  		console.log(error);
+	  	});
 	}
 
   	render() {
@@ -49,5 +76,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { 
-	hideCreatePlaylistModal
+	hideCreatePlaylistModal,
+	userChangedData
 })(CreatePlaylistModal);

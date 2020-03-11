@@ -48,7 +48,7 @@ class AlbumPlaylistPreview extends Component {
 					</Link>
 				) :(
 					<Link to={{
-						pathname: `/playlists/${this.props.authDetails.user.name}/${this.state.albumPlaylist.name}`,
+						pathname: `/yourLibrary/${this.state.albumPlaylist.name}`,
 						state: {
 							albumPlaylistId: this.state.albumPlaylist._id
 						}}

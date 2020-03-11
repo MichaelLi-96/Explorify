@@ -95,7 +95,7 @@ class App extends Component {
 							<Route exact path='/yourLibrary' component={YourLibrary} />	
 							<Route exact path='/artists/:artistname' component={Artist} />
 							<Route exact path='/albums/:artistname/:albumname' component={AlbumPlaylist} />
-							<Route exact path='/playlists/:username/:playlistname' component={AlbumPlaylist} />
+							<Route exact path='/yourLibrary/:playlistname' component={AlbumPlaylist} />
 						</Switch>
 						<AccountButton />
 						<Navbar />

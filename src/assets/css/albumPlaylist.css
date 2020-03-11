@@ -114,15 +114,51 @@
 	margin-bottom: 30px;
 }
 
-#albumPlaylistHeartOutline {
+#albumPlaylistHeartOutlineIcon {
 	font-size: 30px;
 	cursor: pointer;
 }
 
-#albumPlaylistHeart {
+#albumPlaylistHeartIcon {
 	font-size: 30px;
 	color: #5043A9;
 	cursor: pointer;
+}
+
+#albumPlaylistMoreIconOptionPanelContainer {
+	position: relative;
+}
+
+#albumPlaylistMoreIcon {
+	font-size: 30px;
+	cursor: pointer;
+}
+
+#albumPlaylistOptionPanel {
+	width: 150px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 30px;
+	margin-left: 10px; 
+	background-color: #121212;
+	display: none;
+}
+
+.albumPlaylistOptionPanelOption {
+	padding: 10px 10px 10px 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #9B9B9B;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.albumPlaylistOptionPanelOption:hover {
+	color: white;
+	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
 }
 
 #albumPlaylistSongsContainer {
@@ -149,7 +185,7 @@
 }
 
 #albumPlaylistFindSongsMsg {
-	margin-top: 20px;
+	margin-top: 10px;
 	font-size: 26px;
 	letter-spacing: 1px;
 	font-weight: lighter;
