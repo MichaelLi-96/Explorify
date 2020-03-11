@@ -83,7 +83,7 @@ class SongPreview extends Component {
 		}
 
 
-		axios.put(`http://localhost:4000/songs/update/${this.state.song._id}`, {
+		axios.put(`${ API_URL }/songs/update/${this.state.song._id}`, {
 			name: this.state.song.name,
 			albumPlaylist: this.state.albumPlaylist._id,
 			artist: this.state.artist._id,
