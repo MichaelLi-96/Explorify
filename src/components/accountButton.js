@@ -28,11 +28,11 @@ class AccountButton extends Component {
 		const accountButtonName = document.getElementById("accountButtonName");
 		const name = this.props.authDetails.user.name;
 		if(name.indexOf(' ') === -1) {
-			accountButtonName.innerHTML = name;
+			accountButtonName.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
 		}
 		else {
 			const firstName = name.substr(0, name.indexOf(' '));
-			accountButtonName.innerHTML = firstName;
+			accountButtonName.innerHTML = firstName.charAt(0).toUpperCase() + firstName.slice(1);
 		}
 	}
 
