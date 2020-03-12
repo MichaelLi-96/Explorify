@@ -27,8 +27,13 @@ class AccountButton extends Component {
 
 		const accountButtonName = document.getElementById("accountButtonName");
 		const name = this.props.authDetails.user.name;
-		const firstName = name.substr(0, name.indexOf(' '));
-		accountButtonName.innerHTML = firstName;
+		if(name.indexOf(' ') === -1) {
+			accountButtonName.innerHTML = name;
+		}
+		else {
+			const firstName = name.substr(0, name.indexOf(' '));
+			accountButtonName.innerHTML = firstName;
+		}
 	}
 
 	logOut = () => {
