@@ -4,7 +4,7 @@ import { MdPlayCircleOutline, MdPauseCircleOutline, MdSkipPrevious,
 	MdSkipNext, MdRepeat, MdShuffle, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { songChange, songPress, prevSongPressed, nextSongPressed, shufflePressed, unshufflePressed } from '../actions';
+import { songChange, songPress, prevSongPressed, nextSongPressed, shufflePressed, unshufflePressed, playPlaylistAlbumPressed} from '../actions';
 
 class Playbar extends Component {
 	constructor(props) {
@@ -200,6 +200,10 @@ class Playbar extends Component {
 			this.props.songPress();
 		}
 
+		if(this.props.playAlbumPlaylistPressed) {
+			this.setState({ shuffle: false });
+		}
+
 		const playbarPrevSongIcon = document.getElementById("playbarPrevSongIcon");
 		if(this.props.songHistory.currentSongHistoryIndex <= 0) {
 			playbarPrevSongIcon.style.pointerEvents = "none";
@@ -321,7 +325,8 @@ class Playbar extends Component {
 const mapStateToProps = state => ({ 
 	currentSong: state.currentSong,
 	songPressed: state.songPressed,
-	songHistory: state.songHistory
+	songHistory: state.songHistory,
+	playAlbumPlaylistPressed: state.playAlbumPlaylistPressed
 });
 
 export default connect(mapStateToProps, { 
@@ -330,5 +335,6 @@ export default connect(mapStateToProps, {
 	prevSongPressed,
 	nextSongPressed,
 	shufflePressed,
-	unshufflePressed
+	unshufflePressed,
+	playPlaylistAlbumPressed
 })(Playbar);

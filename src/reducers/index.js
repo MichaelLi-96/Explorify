@@ -5,6 +5,7 @@ import SongPressReducer from './songPressReducer';
 import AuthReducer from './authReducer';
 import CreatePlaylistModalReducer from './createPlaylistModalReducer';
 import SongToAddToPlaylistReducer from "./songToAddToPlaylistReducer";
+import PlayAlbumPlaylistPressReducer from "./playAlbumPlaylistPressReducer";
 
 export default combineReducers({
 	currentSong: SongChangeReducer,
@@ -12,6 +13,7 @@ export default combineReducers({
 	songHistory: SongHistoryReducer,
 	authDetails: AuthReducer,
 	showCreatePlaylistModal: CreatePlaylistModalReducer,
-	songToAddToPlaylist: SongToAddToPlaylistReducer
+	songToAddToPlaylist: SongToAddToPlaylistReducer,
+	playAlbumPlaylistPressed: PlayAlbumPlaylistPressReducer
 });
 

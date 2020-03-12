@@ -5,7 +5,8 @@ import {
 	SINGLE_SONG_PLAYED,
 	PLAYLIST_ALBUM_PLAYED,
 	SHUFFLE_PRESSED,
-	UNSHUFFLE_PRESSED
+	UNSHUFFLE_PRESSED,
+	PLAY_ALBUM_PLAYLIST_PRESSED
 } from './types';
 
 export const newSongAddedToHistory = (songDetails) => {
@@ -37,6 +38,12 @@ export const playlistAlbumPlayed = (songs) => {
 	return {
 		type: PLAYLIST_ALBUM_PLAYED,
 		payload: songs
+	};
+}
+
+export const playPlaylistAlbumPressed = () => {
+	return {
+		type: PLAY_ALBUM_PLAYLIST_PRESSED
 	};
 }
 
