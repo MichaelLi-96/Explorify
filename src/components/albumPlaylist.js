@@ -8,7 +8,7 @@ import BackButton from "./backButton";
 import SongRow from "./songRow";
 import { API_URL } from "../url"
 import { connect } from 'react-redux';
-import { songChange, songPress, playlistAlbumPlayed, checkedJwtToken, userChangedData, playPlaylistAlbumPressed } from '../actions';
+import { songChange, songPress, playlistAlbumPlayed, checkedJwtToken, userChangedData, playAlbumPlaylistPress } from '../actions';
 
 
 class AlbumPlaylist extends Component {
@@ -207,7 +207,7 @@ class AlbumPlaylist extends Component {
 			length: sortedSongs[0].length,
 			plays: sortedSongs[0].plays
 		});
-		this.props.playPlaylistAlbumPressed();
+		this.props.playAlbumPlaylistPress();
 		this.props.songPress();
 		this.props.playlistAlbumPlayed(sortedSongs);
 	}
@@ -323,5 +323,5 @@ export default connect(mapStateToProps, {
 	playlistAlbumPlayed,
 	checkedJwtToken,
 	userChangedData,
-	playPlaylistAlbumPressed
+	playAlbumPlaylistPress
 })(AlbumPlaylist);

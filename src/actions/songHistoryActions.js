@@ -41,7 +41,7 @@ export const playlistAlbumPlayed = (songs) => {
 	};
 }
 
-export const playPlaylistAlbumPressed = () => {
+export const playAlbumPlaylistPress = () => {
 	return {
 		type: PLAY_ALBUM_PLAYLIST_PRESSED
 	};
