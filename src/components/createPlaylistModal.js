@@ -22,12 +22,16 @@ class CreatePlaylistModal extends Component {
 	}
 
 	created = () => {
+		let name = "";
 		if(this.state.playlistName === "") {
-			this.setState({ playlistName: "New Playlist" });
+			name = "New Playlist";
+		}
+		else {
+			name = this.state.playlistName;
 		}
 
 		axios.post(`${API_URL}/albumPlaylists/add`, {
-			name: this.state.playlistName,
+			name: name,
 			isAlbum: false,
 			imageUrl: "https://explorify.s3-us-west-1.amazonaws.com/defaultPlaylistImg.jpg",
 			artist: this.props.authDetails.user.name,
