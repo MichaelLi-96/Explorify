@@ -9,7 +9,7 @@ class CreatePlaylistModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			playlistName: "New Playlist"
+			playlistName: ""
 		}
 	}
 
@@ -22,6 +22,10 @@ class CreatePlaylistModal extends Component {
 	}
 
 	created = () => {
+		if(this.state.playlistName === "") {
+			this.setState({ playlistName: "New Playlist" });
+		}
+
 		axios.post(`${API_URL}/albumPlaylists/add`, {
 			name: this.state.playlistName,
 			isAlbum: false,
