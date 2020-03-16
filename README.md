@@ -40,6 +40,13 @@
 * Users can shuffle songs, go to previous song, play songs, go to next song, and loop songs
 * Users can play an entire album or playlist
 
+## Entity Relationship Diagram (ERD)
+
+<div align="center">
+  <img alt="ERD" src="./src/assets/images/erd.png" width="1000" />
+</div>
+
+
 ## Authentication
 
 Authentication was done using JSON Web Tokens (JWT). When a user logs in or registers, a JWT with an expiry time of 1 hour is created and stored in the user's local storage. On each screen load, the client makes an server call to decode the stored JWT. If the JWT has expired, the user is redirected out back to the landing page and must log in again to access the application.
