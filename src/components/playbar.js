@@ -133,7 +133,7 @@ class Playbar extends Component {
 		});
 
 		let playbarSongProgressContainerMouseDown = false;
-		let tempAudioVolume = 0;
+		let tempAudioVolume = audio.volume;
 
 		document.getElementById("playbarSongProgressContainer").addEventListener("mousedown", function (e) {
 			playbarSongProgressContainerMouseDown = true;
