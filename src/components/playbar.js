@@ -17,7 +17,8 @@ class Playbar extends Component {
 			songProgressValue: 0,
 			ended: false,
 			repeat: false,
-			shuffle: false
+			shuffle: false,
+			playbarSongProgressContainerMouseDown: false
 		}
 	}
 
@@ -131,10 +132,75 @@ class Playbar extends Component {
 			}
 		});
 
+		let playbarSongProgressContainerMouseDown = false;
+		let tempAudioVolume = 0;
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mousedown", function (e) {
+			playbarSongProgressContainerMouseDown = true;
+			tempAudioVolume = audio.volume;
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mousedown", (e) => {
+			this.setState({ playbarSongProgressContainerMouseDown: true });
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mouseup", function (e) {
+			playbarSongProgressContainerMouseDown = false;
+			audio.volume = tempAudioVolume;
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mouseup", (e) => {
+			this.setState({ playbarSongProgressContainerMouseDown: false });
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mouseleave", function (e) {
+			playbarSongProgressContainerMouseDown = false;
+			audio.volume = tempAudioVolume;
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mouseleave", (e) => {
+			this.setState({ playbarSongProgressContainerMouseDown: false });
+		});
+
+		document.getElementById("playbarSongProgressContainer").addEventListener("mousemove", function (e) {
+			if(playbarSongProgressContainerMouseDown) {
+				const x = e.pageX - this.offsetLeft;
+		    	const currentProgress = x / this.offsetWidth;
+			    if(audio.currentSrc !== "") {
+			    	audio.volume = 0;
+				  	audio.currentTime = currentProgress * audio.duration;
+				  	songProgress.setAttribute("value", currentProgress * 100);
+				}
+			}
+		});
+
+
 		document.getElementById('playbarVolumeBarContainer').addEventListener("click", function (e) {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
+		});
+
+		let playbarVolumeBarContainerMouseDown = false;
+
+		document.getElementById("playbarVolumeBarContainer").addEventListener("mousedown", function (e) {
+			playbarVolumeBarContainerMouseDown = true;
+		});
+
+		document.getElementById("playbarVolumeBarContainer").addEventListener("mouseup", function (e) {
+			playbarVolumeBarContainerMouseDown = false;
+		});
+
+		document.getElementById("playbarVolumeBarContainer").addEventListener("mouseleave", function (e) {
+			playbarVolumeBarContainerMouseDown = false;
+		});
+
+		document.getElementById("playbarVolumeBarContainer").addEventListener("mousemove", function (e) {
+			if(playbarVolumeBarContainerMouseDown) {
+				const x = e.pageX - this.offsetLeft;
+			    const currentProgress = x / this.offsetWidth;
+			  	audio.volume = currentProgress;
+			}
 		});
 	}
 
@@ -183,7 +249,9 @@ class Playbar extends Component {
 		
 		// Update the volume bar according to audio volume
 		const volumeBar = document.getElementById("playbarVolumeBar");
-		volumeBar.setAttribute("value", audio.volume * 100);
+		if(!this.state.playbarSongProgressContainerMouseDown) {
+			volumeBar.setAttribute("value", audio.volume * 100);
+		}	
 
 		// If muted and volume bar clicked, unmute
 		if(this.state.muted && volumeBar.getAttribute("value") > 0) {
