@@ -141,11 +141,11 @@
 	color: #9B9B9B;
 }
 
-#signUpRegister {
+#signUpLogIn {
 	color: white;
 	text-decoration: none;
 }
 
-#signUpRegister:hover {
+#signUpLogIn:hover {
 	text-decoration: underline;
 }

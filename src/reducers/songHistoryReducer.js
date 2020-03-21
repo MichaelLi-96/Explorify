@@ -4,7 +4,8 @@ import { NEW_SONG_ADDED_TO_HISTORY,
 		SINGLE_SONG_PLAYED,
 		PLAYLIST_ALBUM_PLAYED,
 		SHUFFLE_PRESSED,
-		UNSHUFFLE_PRESSED } from '../actions/types';
+		UNSHUFFLE_PRESSED,
+		SONG_HISTORY_CLEARED } from '../actions/types';
 
 const INITIAL_STATE = { 
 	songHistoryPlaylist: [],
@@ -91,6 +92,8 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 				songHistoryPlaylist: state.unshuffledSongHistoryPlaylist,
 				currentSongHistoryIndex: newStartingIndex
 			}
+		case SONG_HISTORY_CLEARED: 
+			return INITIAL_STATE;
 		default:
 			return state;
 	}

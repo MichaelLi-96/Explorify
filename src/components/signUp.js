@@ -38,6 +38,10 @@ class SignUp extends Component {
 		}
 		else {
 			errorMsg.style.display = "none";
+
+			const logInHereLink = document.getElementById("signUpLogIn");
+			logInHereLink.style.pointerEvents = "none";
+
 			axios.post(`${API_URL}/users/add`, {
 				email: this.state.email.trim(),
 				password: this.state.password,
@@ -158,7 +162,7 @@ class SignUp extends Component {
 				</div>
 				<div id="signUpRegisterContainer">
 					<div id="signUpRegisterQuestion" className="noselect">Already have an account?</div>
-					<Link to="/logIn" id="signUpRegister">Log in here</Link>
+					<Link to="/logIn" id="signUpLogIn">Log in here</Link>
 				</div>
 			</div>
 	    );

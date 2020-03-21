@@ -6,7 +6,8 @@ import {
 	PLAYLIST_ALBUM_PLAYED,
 	SHUFFLE_PRESSED,
 	UNSHUFFLE_PRESSED,
-	PLAY_ALBUM_PLAYLIST_PRESSED
+	PLAY_ALBUM_PLAYLIST_PRESSED,
+	SONG_HISTORY_CLEARED
 } from './types';
 
 export const newSongAddedToHistory = (songDetails) => {
@@ -57,4 +58,10 @@ export const unshufflePressed = () => {
 	return {
 		type: UNSHUFFLE_PRESSED
 	};
+}
+
+export const songHistoryCleared = () => {
+	return {
+		type: SONG_HISTORY_CLEARED
+	};	
 }

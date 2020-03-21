@@ -73,6 +73,9 @@ class LogIn extends Component {
 			errorMsg.style.display = "none";
 			this.setState({ demoButtonClicked: true });
 
+			const registerHereLink = document.getElementById("logInRegister");
+			registerHereLink.style.pointerEvents = "none";
+
 			let i = 0;
 			const demoEmailAddress = "DemoUser@demo.com";
 			const emailAddressInput = document.getElementById("emailAddress");

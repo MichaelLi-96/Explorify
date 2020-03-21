@@ -1,4 +1,4 @@
-import { SONG_CHANGED } from '../actions/types';
+import { SONG_CHANGED, CURRENT_SONG_CLEARED } from '../actions/types';
 
 const INITIAL_STATE = { 
 	name: '',
@@ -22,6 +22,8 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 				length: action.payload.length, 
 				plays: action.payload.plays 
 			};
+		case CURRENT_SONG_CLEARED:
+			return INITIAL_STATE;
 		default:
 			return state;
 	}

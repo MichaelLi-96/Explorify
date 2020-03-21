@@ -1,6 +1,6 @@
 import { PLAY_ALBUM_PLAYLIST_PRESSED } from '../actions/types';
 
-const songPressReducer = (state = false, action) => {
+const playAlbumPlaylistPressReducer = (state = false, action) => {
 	switch (action.type) {
 		case PLAY_ALBUM_PLAYLIST_PRESSED:
 			return !state;
@@ -9,5 +9,5 @@ const songPressReducer = (state = false, action) => {
 	}
 }
 
-export default songPressReducer;
+export default playAlbumPlaylistPressReducer;
 

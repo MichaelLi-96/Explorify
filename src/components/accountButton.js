@@ -3,7 +3,10 @@ import '../assets/css/accountButton.css';
 import { withRouter } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { connect } from 'react-redux';
-import { userLoggedOut } from '../actions';
+import { userLoggedOut,
+     	 songToBeAddedToPlaylistCleared,
+		 currentSongCleared,
+		 songHistoryCleared } from '../actions';
 
 class AccountButton extends Component {
 	componentDidMount() {
@@ -38,6 +41,9 @@ class AccountButton extends Component {
 
 	logOut = () => {
 		this.props.userLoggedOut();
+		this.props.songToBeAddedToPlaylistCleared();
+		this.props.currentSongCleared();
+		this.props.songHistoryCleared();
 		this.props.history.push("/");
 	}
 
@@ -60,5 +66,8 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(connect(mapStateToProps, { 
-	userLoggedOut
+	userLoggedOut,
+	songToBeAddedToPlaylistCleared,
+	currentSongCleared,
+	songHistoryCleared
 })(AccountButton));
