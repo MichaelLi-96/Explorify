@@ -23,7 +23,15 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
 				plays: action.payload.plays 
 			};
 		case CURRENT_SONG_CLEARED:
-			return INITIAL_STATE;
+			return { 
+				name: '',
+				albumPlaylist: {},
+				artist: {},
+				url: '',
+				imageUrl: '',
+				length: '',
+				plays: 0
+			};
 		default:
 			return state;
 	}

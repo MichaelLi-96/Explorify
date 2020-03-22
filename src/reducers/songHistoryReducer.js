@@ -16,7 +16,6 @@ const INITIAL_STATE = {
 	isPlayingAlbumPlaylist: false
 };
 
-
 const songHistoryReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case NEW_SONG_ADDED_TO_HISTORY:
@@ -47,7 +46,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 				currentSongHistoryLength: 0,
 				currentSongId: '',
 				isPlayingAlbumPlaylist: false
-			}
+			};
 		case PLAYLIST_ALBUM_PLAYED:
 			return {
 				songHistoryPlaylist: action.payload,
@@ -56,7 +55,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 				currentSongHistoryLength: action.payload.length,
 				currentSongId: action.payload[0]._id,
 				isPlayingAlbumPlaylist: true
-			}
+			};
 		case SHUFFLE_PRESSED:
 			let beforeRemaining = state.songHistoryPlaylist;
 			beforeRemaining = beforeRemaining.slice(0, state.currentSongHistoryIndex + 1);
@@ -78,7 +77,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				songHistoryPlaylist: newSongHistory
-			}
+			};
 		case UNSHUFFLE_PRESSED:
 			let newStartingIndex = 0;
 			for(let i = 0; i < state.currentSongHistoryLength; i++) {
@@ -91,9 +90,16 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				songHistoryPlaylist: state.unshuffledSongHistoryPlaylist,
 				currentSongHistoryIndex: newStartingIndex
-			}
+			};
 		case SONG_HISTORY_CLEARED: 
-			return INITIAL_STATE;
+			return { 
+				songHistoryPlaylist: [],
+				unshuffledSongHistoryPlaylist: [],
+				currentSongHistoryIndex: -1,
+				currentSongHistoryLength: 0,
+				currentSongId: '',
+				isPlayingAlbumPlaylist: false
+			};
 		default:
 			return state;
 	}
