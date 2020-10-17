@@ -15,6 +15,22 @@ class CreatePlaylistModal extends Component {
 
 	handleNameChange = (event) => {
 		this.setState({ playlistName: event.target.value });
+		const createPlaylistModalInput = document.getElementById("createPlaylistModalInput");
+		const createPlaylistModalCreateButton = document.getElementById("createPlaylistModalCreateButton");
+		if(event.target.value.toLowerCase() === "liked songs") {
+			createPlaylistModalInput.style.color = "rgb(220,53,69, 1)";
+			createPlaylistModalInput.style.textDecoration = "line-through";
+			createPlaylistModalCreateButton.style.transition = "0s";
+			createPlaylistModalCreateButton.style.background = "#282828";
+			createPlaylistModalCreateButton.style.pointerEvents = "none";
+		}
+		else {
+			createPlaylistModalInput.style.color = "white";
+			createPlaylistModalInput.style.textDecoration = "none";
+			createPlaylistModalCreateButton.style.transition = "0.3s";
+			createPlaylistModalCreateButton.style.background = "linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%)";
+			createPlaylistModalCreateButton.style.pointerEvents = "auto";
+		}
 	}
 
 	canceled = () => {
@@ -23,7 +39,11 @@ class CreatePlaylistModal extends Component {
 
 	created = () => {
 		let name = "";
-		if(this.state.playlistName === "") {
+		if(this.state.playlistName.toLowerCase() === "liked songs") {
+			alert("Please enter another playlist name.");
+			return;
+		}
+		else if(this.state.playlistName === "") {
 			name = "New Playlist";
 		}
 		else {

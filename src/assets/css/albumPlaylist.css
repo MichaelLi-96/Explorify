@@ -126,6 +126,7 @@
 }
 
 #albumPlaylistMoreIconOptionPanelContainer {
+	display: none;
 	position: relative;
 }
 

@@ -13,8 +13,8 @@ class Playbar extends Component {
 			played: false,
 			playing: false,
 			muted: false,
-			volumeBarValue: 0,
-			songProgressValue: 0,
+			currentVolumeBarVolume: 1,
+			savedVolumeBarValue: 0,
 			ended: false,
 			repeat: false,
 			shuffle: false,
@@ -41,7 +41,7 @@ class Playbar extends Component {
 	mute = () => {
 		const audio = document.getElementById("playbarAudio");
 		const volumeBar = document.getElementById("playbarVolumeBar");
-		this.setState({ muted: true, volumeBarValue: audio.volume });
+		this.setState({ muted: true, savedVolumeBarValue: audio.volume });
 		volumeBar.setAttribute("value", 0);
 		audio.volume = 0;
 	}
@@ -50,8 +50,8 @@ class Playbar extends Component {
 		const audio = document.getElementById("playbarAudio");
 		const volumeBar = document.getElementById("playbarVolumeBar");
 		this.setState({ muted: false });
-		volumeBar.setAttribute("value", this.state.volumeBarValue * 100);
-		audio.volume = this.state.volumeBarValue;
+		volumeBar.setAttribute("value", this.state.savedVolumeBarValue * 100);
+		audio.volume = this.state.savedVolumeBarValue;
 	}
 
 	repeat = () => {
@@ -174,11 +174,12 @@ class Playbar extends Component {
 			}
 		});
 
-
+		const self = this;
 		document.getElementById('playbarVolumeBarContainer').addEventListener("click", function (e) {
 		    const x = e.pageX - this.offsetLeft;
 		    const currentProgress = x / this.offsetWidth;
 		  	audio.volume = currentProgress;
+		  	self.setState({currentVolumeBarVolume: currentProgress});
 		});
 
 		let playbarVolumeBarContainerMouseDown = false;
@@ -200,6 +201,7 @@ class Playbar extends Component {
 				const x = e.pageX - this.offsetLeft;
 			    const currentProgress = x / this.offsetWidth;
 			  	audio.volume = currentProgress;
+			  	self.setState({currentVolumeBarVolume: currentProgress});
 			}
 		});
 	}
@@ -210,6 +212,9 @@ class Playbar extends Component {
 
 	componentDidUpdate() {
 		const audio = document.getElementById("playbarAudio");
+		if(audio.volume !== this.state.currentVolumeBarVolume) {
+			audio.volume = this.state.currentVolumeBarVolume;
+		}
 		if(this.state.playing) {
 			// Update the current time and duration of the song 
 			const currentTime = document.getElementById("playbarCurrentTime");
@@ -226,7 +231,6 @@ class Playbar extends Component {
 
 			const songProgress = document.getElementById("playbarSongProgress");
 			songProgress.setAttribute("value", audio.currentTime * 100 / audio.duration);
-
 			if(audio.ended) {
 				this.setState({ playing: false, ended: true });
 			}
@@ -383,7 +387,7 @@ class Playbar extends Component {
 					)}
 					<div className="playbarProgressBarContainer" id="playbarVolumeBarContainer">
 						<div id="playbarVolumeBarPositionCircle" className="playbarCircle"></div>
-						<progress value="100" max="100" id="playbarVolumeBar"></progress>
+						<progress value={this.state.currentVolumeBarVolume} max="100" id="playbarVolumeBar"></progress>
 					</div>
 				</div>
 			</div>

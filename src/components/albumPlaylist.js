@@ -25,7 +25,26 @@ class AlbumPlaylist extends Component {
 	}
 
 	componentDidMount() {
-		const newAuthState = {
+		this.loadData(this.state.albumPlaylistId);
+	}
+
+	componentWillReceiveProps(nextProps) {
+	    if(this.state.albumPlaylistId !== nextProps.location.state.albumPlaylistId) {
+           this.loadData(nextProps.location.state.albumPlaylistId);
+        }
+	}
+
+    loadData = (albumPlaylistId) => {
+	    this.setState({
+			albumPlaylistId: albumPlaylistId,
+			albumPlaylist: {},
+			songs: [],
+			numberOfSongs: 0,
+			idToSongMap: {},
+			isFavorited: false
+       	});
+
+       	const newAuthState = {
 			jwt: this.props.authDetails.jwt,
 			userIsLoggedIn: this.props.authDetails.userIsLoggedIn, 
 			user: this.props.authDetails.user
@@ -67,26 +86,11 @@ class AlbumPlaylist extends Component {
 		  	});
 		}
 
-		if(this.props.authDetails.user.albumPlaylists.includes(this.state.albumPlaylistId)) {
+    	if(this.props.authDetails.user.albumPlaylists.includes(albumPlaylistId)) {
 			this.setState({ isFavorited: true });
 		}
 
-		const albumPlaylistMoreIcon = document.getElementById("albumPlaylistMoreIcon");
-		const albumPlaylistOptionPanel = document.getElementById("albumPlaylistOptionPanel");
-		albumPlaylistMoreIcon.addEventListener("click", () => {
-			if(albumPlaylistOptionPanel.style.display === "" || albumPlaylistOptionPanel.style.display === "none") {
-				albumPlaylistOptionPanel.style.display = "block";
-			}
-			else {
-				albumPlaylistOptionPanel.style.display = "none";
-			}
-		})
-
-		albumPlaylistOptionPanel.addEventListener("mouseleave", () => {
-			albumPlaylistOptionPanel.style.display = "none";
-		})
-
-		axios.get(`${API_URL}/albumPlaylists/${this.state.albumPlaylistId}`)
+		axios.get(`${API_URL}/albumPlaylists/${albumPlaylistId}`)
 	  	.then((response) => {
 	  		this.setState({ albumPlaylist: response.data, loading: false });
 	  		this.setState({ numberOfSongs: this.state.albumPlaylist.songs.length });
@@ -123,11 +127,30 @@ class AlbumPlaylist extends Component {
 			  		console.log(error);
 			  	});
 	  		}
+	  		
+		  	const albumPlaylistMoreIconOptionPanelContainer = document.getElementById("albumPlaylistMoreIconOptionPanelContainer");
+	  		if(!this.state.albumPlaylist.isAlbum && this.state.albumPlaylist.name !== "Liked Songs") {
+	  			albumPlaylistMoreIconOptionPanelContainer.style.display = "block";
+	  			const albumPlaylistMoreIcon = document.getElementById("albumPlaylistMoreIcon");
+				const albumPlaylistOptionPanel = document.getElementById("albumPlaylistOptionPanel");
+				albumPlaylistMoreIcon.addEventListener("click", () => {
+					if(albumPlaylistOptionPanel.style.display === "" || albumPlaylistOptionPanel.style.display === "none") {
+						albumPlaylistOptionPanel.style.display = "block";
+					}
+					else {
+						albumPlaylistOptionPanel.style.display = "none";
+					}
+				})
+
+				albumPlaylistOptionPanel.addEventListener("mouseleave", () => {
+					albumPlaylistOptionPanel.style.display = "none";
+				})
+		  	}
 	  	})
 	  	.catch(function (error) {
 	  		console.log(error);
 	  	});
-	}
+    }
 
 	loadSongs = () => {
 		if(this.state.albumPlaylist === undefined || JSON.stringify(this.state.albumPlaylist) === '{}')  {

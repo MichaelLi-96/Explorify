@@ -271,7 +271,7 @@ class SongRow extends Component {
 								•
 							</div>
 							&nbsp;&nbsp;
-							 <Link 
+							<Link 
 								className="songRowDetailsLink"
 								to={{
 									pathname: `/albums/${this.state.artist.name}/${this.state.albumPlaylist.name}`,
