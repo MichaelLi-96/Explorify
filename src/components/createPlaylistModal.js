@@ -39,11 +39,7 @@ class CreatePlaylistModal extends Component {
 
 	created = () => {
 		let name = "";
-		if(this.state.playlistName.toLowerCase() === "liked songs") {
-			alert("Please enter another playlist name.");
-			return;
-		}
-		else if(this.state.playlistName === "") {
+		if(this.state.playlistName === "") {
 			name = "New Playlist";
 		}
 		else {
