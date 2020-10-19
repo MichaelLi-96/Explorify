@@ -133,7 +133,7 @@ class Search extends Component {
 		const filteredAlbums = [];
 		for(let i = 0; i < this.state.albums.length; i++) {
 			const album = this.state.albums[i];
-			if(album.name.toLowerCase().includes(this.state.filterString.toLowerCase())) {
+			if(album.isAlbum && album.name.toLowerCase().includes(this.state.filterString.toLowerCase())) {
 				filteredAlbums.push(
 					<AlbumPlaylistPreview
 						key={album._id}
