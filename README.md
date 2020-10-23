@@ -53,7 +53,7 @@ Authentication was done using JSON Web Tokens (JWT). When a user logs in or regi
 
 ## Deployment
 
-The client and server side of this application were both deployed seperately using heroku. The server side uses heroku's built in mongoDB, mLab. 
+The client and server side of this application were both deployed seperately using heroku. The server side uses the cloud database service MongoDB Atlas. 
 
 ## Authors
 
