@@ -212,7 +212,7 @@ class Playbar extends Component {
 
 	componentDidUpdate() {
 		const audio = document.getElementById("playbarAudio");
-		if(audio.volume !== this.state.currentVolumeBarVolume) {
+		if(!this.state.muted && audio.volume !== this.state.currentVolumeBarVolume) {
 			audio.volume = this.state.currentVolumeBarVolume;
 		}
 		if(this.state.playing) {
