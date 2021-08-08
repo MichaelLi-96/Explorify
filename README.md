@@ -47,9 +47,14 @@
 </div>
 
 
-## Authentication
+## Authentication and Security
 
-Authentication was done using JSON Web Tokens (JWT). When a user logs in or registers, a JWT with an expiry time of 1 hour is created and stored in the user's local storage. On each screen load, the client makes an server call to decode the stored JWT. If the JWT has expired, the user is redirected out back to the landing page and must log in again to access the application.
+User authentication was done using Bcrypt (password hashing). When a user signs up, a hashed password is stored along with their user information in the database. When a user tries to log in again, the inputted password is validated by Bcrypt by comparing it to stored hashed password.
+
+## Sessions
+
+User sessions was done using JSON Web Tokens (JWT). When a user logs in or signs up, a JWT with an expiry time of 1 hour is created and stored in the user's local storage and in Redux. On each screen load, the client makes an server call to decode the stored JWT in Redux. If the JWT has expired, the user is redirected out back to the landing page and must log in again to access the application. If the user closes the application tab in their browser and revists the site, the application will look for a JWT stored in the local storage of the browser. After decoding the JWT and seeing that it is still valid, the application will fill the JWT and user information into redux resuming the user session. 
+
 
 ## Deployment
 
