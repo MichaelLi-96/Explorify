@@ -22,7 +22,6 @@
 }
 
 #downArrowIcon {
-
 }
 
 #upArrowIcon {
@@ -34,7 +33,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 55px; 
+  margin-top: 55px;
   background-color: #121212;
   display: none;
 }
@@ -45,7 +44,7 @@
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 600;
-  color: #9B9B9B;
+  color: #9b9b9b;
   transition: 0.3s;
   cursor: pointer;
   text-align: center;
@@ -53,5 +52,5 @@
 
 .accountButtonOptionPanelOption:hover {
   color: white;
-  background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
+  background: linear-gradient(90deg, rgba(138, 37, 177, 1) 0%, rgba(23, 97, 160, 1) 100%);
 }

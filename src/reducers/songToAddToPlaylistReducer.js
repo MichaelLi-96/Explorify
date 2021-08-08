@@ -1,34 +1,34 @@
-import { STORING_SONG_TO_BE_ADDED_TO_PLAYLIST,
-		 REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST,
-		 SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED } from '../actions/types';
+import {
+  STORING_SONG_TO_BE_ADDED_TO_PLAYLIST,
+  REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST,
+  SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED,
+} from '../actions/types';
 
-const INITIAL_STATE = { 
-	song: {},
-	isBeingAdded: false
+const INITIAL_STATE = {
+  song: {},
+  isBeingAdded: false,
 };
 
-
 const songToAddToPlaylistReducer = (state = INITIAL_STATE, action) => {
-	switch (action.type) {
-		case STORING_SONG_TO_BE_ADDED_TO_PLAYLIST:
-			return { 
-				song: action.payload, 
-				isBeingAdded: true
-			};
-		case REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST:
-			return { 
-				song: {}, 
-				isBeingAdded: false
-			};
-		case SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED:
-			return { 
-				song: {}, 
-				isBeingAdded: false
-			};
-		default:
-			return state;
-	}
-}
+  switch (action.type) {
+    case STORING_SONG_TO_BE_ADDED_TO_PLAYLIST:
+      return {
+        song: action.payload,
+        isBeingAdded: true,
+      };
+    case REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST:
+      return {
+        song: {},
+        isBeingAdded: false,
+      };
+    case SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED:
+      return {
+        song: {},
+        isBeingAdded: false,
+      };
+    default:
+      return state;
+  }
+};
 
 export default songToAddToPlaylistReducer;
-

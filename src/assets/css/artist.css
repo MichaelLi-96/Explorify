@@ -1,78 +1,78 @@
 #artist {
-	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
-	position: fixed; 
-	top: 0; 
-	left: 0; 
-	margin-left: 125px;
-	width: -webkit-calc(100% - 125px);
-    width:    -moz-calc(100% - 125px);
-    width:         calc(100% - 125px);
-    height: -webkit-calc(100% - 100px);
-    height:    -moz-calc(100% - 100px);
-    height:         calc(100% - 100px);
-	color: white;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	overflow-y: auto;
-	overflow-x: hidden;
+  background: linear-gradient(180deg, rgba(42, 42, 42, 1) 0%, rgba(18, 18, 18, 1) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 125px;
+  width: -webkit-calc(100% - 125px);
+  width: -moz-calc(100% - 125px);
+  width: calc(100% - 125px);
+  height: -webkit-calc(100% - 100px);
+  height: -moz-calc(100% - 100px);
+  height: calc(100% - 100px);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #artistImageNameContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 }
 
 #artistImage {
-	width: 350px;
-	height: 350px;
-	border-radius: 50%;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
 }
 
 #artistName {
-	font-size: 70px;
-	font-weight: 800;
-	margin-top: 30px;
-	margin-bottom: 30px;
+  font-size: 70px;
+  font-weight: 800;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #artistInfoContainer {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding-bottom: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
 }
 
 .artistSubtitle {
- 	width: 80%;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	font-size: 36px;
-	font-weight: bold;
+  width: 80%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 #artistAlbumContainer {
-	width: auto;
-	display: flex;
-	padding-left: 100px;
-	padding-right: 100px;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 20px;
+  width: auto;
+  display: flex;
+  padding-left: 100px;
+  padding-right: 100px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 #artistSongsContainer {
-	width: 80%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: 25px;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
 }

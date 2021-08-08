@@ -1,109 +1,108 @@
 #createPlaylistModal {
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	top: 0;
-	left: 0;
-	color: white;
-	background-color: rgba(0, 0, 0, 0.9);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 #createPlaylistModalTitle {
-	font-size: 50px;
-	font-weight: 800;
+  font-size: 50px;
+  font-weight: 800;
 }
 
 #createPlaylistModalStrip {
-	margin-top: 20px;
-	margin-bottom: 30px;
-	width: 100%;
-	background-color: #282828;
-	padding-top: 35px;
-	padding-bottom: 35px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #282828;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
 #createPlaylistModalInputContainer {
-	width: 60%;
-	background-color: #282828;
-	display: flex;
-	flex-direction: column;
+  width: 60%;
+  background-color: #282828;
+  display: flex;
+  flex-direction: column;
 }
 
-
 #createPlaylistModalInputLabel {
-	font-weight: bold;
-	margin-bottom: 5px;
-	font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 #createPlaylistModalInput {
-	font-size: 42px;
-	color: white;
-	background-color: #282828;
-	border: none;
-	font-weight: 800;
+  font-size: 42px;
+  color: white;
+  background-color: #282828;
+  border: none;
+  font-weight: 800;
 }
 
 #createPlaylistModalInput:focus {
-	outline: none;
+  outline: none;
 }
 
 #createPlaylistModalButtonsContainer {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 350px;
 }
 
 #createPlaylistModalCancelButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-	border-radius: 25px;
-	padding: 10px 30px 10px 30px;
-	cursor: pointer;
-	letter-spacing: 1px;
-	font-weight: bold;
-	font-size: 18px;
-	transition: 0.3s;
-	text-decoration: none;
-	border: none;
-	width: 75px;
-	border: solid;
-	border-width: 2px;
+  background: transparent;
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  padding: 10px 30px 10px 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+  text-decoration: none;
+  border: none;
+  width: 75px;
+  border: solid;
+  border-width: 2px;
 }
 
 #createPlaylistModalCancelButton:hover {
-	cursor: pointer;
-	transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 #createPlaylistModalCreateButton {
-	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
-	color: white;
-	text-align: center;
-	border-radius: 25px;
-	padding: 10px 30px 10px 30px;
-	cursor: pointer;
-	letter-spacing: 1px;
-	font-weight: bold;
-	font-size: 18px;
-	transition: 0.3s;
-	text-decoration: none;
-	border: none;
-	width: 75px;
+  background: linear-gradient(90deg, rgba(138, 37, 177, 1) 0%, rgba(23, 97, 160, 1) 100%);
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  padding: 10px 30px 10px 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+  text-decoration: none;
+  border: none;
+  width: 75px;
 }
 
 #createPlaylistModalCreateButton:hover {
-	cursor: pointer;
-	transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.05);
 }

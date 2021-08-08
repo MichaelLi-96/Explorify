@@ -1,195 +1,195 @@
 #albumPlaylist {
-	background: linear-gradient(180deg, rgba(42,42,42,1) 0%, rgba(18,18,18,1) 100%);
-	position: fixed; 
-	top: 0; 
-	left: 0; 
-	margin-left: 125px;
-	width: -webkit-calc(100% - 125px);
-    width:    -moz-calc(100% - 125px);
-    width:         calc(100% - 125px);
-    height: -webkit-calc(100% - 100px);
-    height:    -moz-calc(100% - 100px);
-    height:         calc(100% - 100px);
-	color: white;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
+  background: linear-gradient(180deg, rgba(42, 42, 42, 1) 0%, rgba(18, 18, 18, 1) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 125px;
+  width: -webkit-calc(100% - 125px);
+  width: -moz-calc(100% - 125px);
+  width: calc(100% - 125px);
+  height: -webkit-calc(100% - 100px);
+  height: -moz-calc(100% - 100px);
+  height: calc(100% - 100px);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #albumPlaylistInfoContainer {
-	width: 40%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #albumPlaylistImgContainer {
-	margin: 25px 25px 25px 25px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  margin: 25px 25px 25px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #albumPlaylistImg {
-	width: 300px;
-	height: 300px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	transition: 0.3s;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
 }
 
 #albumPlaylistImgPlaySongIconContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: -300px;
-	width: 300px;
-	height: 300px;
-	transition: 0.3s;
-	background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -300px;
+  width: 300px;
+  height: 300px;
+  transition: 0.3s;
+  background-color: transparent;
 }
 
 #albumPlaylistImgPlaySongIconContainer:hover {
-	background-color: rgb(0,0,0,0.4);
-	cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 #albumPlaylistImgPlaySongIconContainer:hover > #albumPlaylistImgPlaySongIcon {
-	visibility: visible;
-  	opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 #albumPlaylistImgPlaySongIcon {
-	font-size: 140px;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s, opacity 0.3s linear;
+  font-size: 140px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
 }
 
 #albumPlaylistName {
-	font-size: 36px;
-	font-weight: bold;
-	text-align: center;
-	width: 80%;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
 }
 
 #albumPlaylistArtist {
-	margin-top: 5px;
-	color: #9B9B9B;
-	font-weight: 600;
-	font-size: 20px;
+  margin-top: 5px;
+  color: #9b9b9b;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 #albumPlaylistPlayButton {
-	margin-top: 30px;
-	margin-bottom: 20px;
-	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
-	text-align: center;
-	border-radius: 20px;
-	padding: 10px 50px 10px 50px;
-	cursor: pointer;
-	letter-spacing: 1px;
-	font-weight: bold;
-	font-size: 18px;
-	transition: 0.3s;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, rgba(138, 37, 177, 1) 0%, rgba(23, 97, 160, 1) 100%);
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px 50px 10px 50px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
 }
 
 #albumPlaylistPlayButton:hover {
-	cursor: pointer;
-	transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 #albumPlaylistYearAndSongs {
-	color: #9B9B9B;
-	font-size: 14px;
-	letter-spacing: 1px;
-	font-weight: bold;
-	margin-bottom: 30px;
+  color: #9b9b9b;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 #albumPlaylistHeartOutlineIcon {
-	font-size: 30px;
-	cursor: pointer;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 #albumPlaylistHeartIcon {
-	font-size: 30px;
-	color: #5043A9;
-	cursor: pointer;
+  font-size: 30px;
+  color: #5043a9;
+  cursor: pointer;
 }
 
 #albumPlaylistMoreIconOptionPanelContainer {
-	display: none;
-	position: relative;
+  display: none;
+  position: relative;
 }
 
 #albumPlaylistMoreIcon {
-	font-size: 30px;
-	cursor: pointer;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 #albumPlaylistOptionPanel {
-	width: 150px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin-top: 30px;
-	margin-left: 10px; 
-	background-color: #121212;
-	display: none;
+  width: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 30px;
+  margin-left: 10px;
+  background-color: #121212;
+  display: none;
 }
 
 .albumPlaylistOptionPanelOption {
-	padding: 10px 10px 10px 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #9B9B9B;
-	transition: 0.3s;
-	cursor: pointer;
+  padding: 10px 10px 10px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #9b9b9b;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .albumPlaylistOptionPanelOption:hover {
-	color: white;
-	background: linear-gradient(90deg, rgba(138,37,177,1) 0%, rgba(23,97,160,1) 100%);
+  color: white;
+  background: linear-gradient(90deg, rgba(138, 37, 177, 1) 0%, rgba(23, 97, 160, 1) 100%);
 }
 
 #albumPlaylistSongsContainer {
-	width: 60%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	overflow-y: scroll;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 
 #albumPlaylistMsgContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	padding-top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 30%;
 }
 
 #albumPlaylistEmptyMsg {
-	font-size: 55px;
-	font-weight: 600;
-	text-align: center;
+  font-size: 55px;
+  font-weight: 600;
+  text-align: center;
 }
 
 #albumPlaylistFindSongsMsg {
-	margin-top: 10px;
-	font-size: 26px;
-	letter-spacing: 1px;
-	font-weight: lighter;
-	text-align: center;
-	color: #9B9B9B;
+  margin-top: 10px;
+  font-size: 26px;
+  letter-spacing: 1px;
+  font-weight: lighter;
+  text-align: center;
+  color: #9b9b9b;
 }
