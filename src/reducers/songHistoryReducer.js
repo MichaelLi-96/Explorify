@@ -6,7 +6,7 @@ import {
   PLAYLIST_ALBUM_PLAYED,
   SHUFFLE_PRESSED,
   UNSHUFFLE_PRESSED,
-  SONG_HISTORY_CLEARED,
+  SONG_HISTORY_CLEARED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   currentSongHistoryIndex: -1,
   currentSongHistoryLength: 0,
   currentSongId: '',
-  isPlayingAlbumPlaylist: false,
+  isPlayingAlbumPlaylist: false
 };
 
 const songHistoryReducer = (state = INITIAL_STATE, action) => {
@@ -28,17 +28,17 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
         songHistoryPlaylist: newSongHistoryPlaylist,
         currentSongHistoryIndex: state.currentSongHistoryIndex + 1,
         currentSongHistoryLength: state.currentSongHistoryLength + 1,
-        currentSongId: action.payload._id,
+        currentSongId: action.payload._id
       };
     case PREV_SONG_PRESSED:
       return {
         ...state,
-        currentSongHistoryIndex: state.currentSongHistoryIndex - 1,
+        currentSongHistoryIndex: state.currentSongHistoryIndex - 1
       };
     case NEXT_SONG_PRESSED:
       return {
         ...state,
-        currentSongHistoryIndex: state.currentSongHistoryIndex + 1,
+        currentSongHistoryIndex: state.currentSongHistoryIndex + 1
       };
     case SINGLE_SONG_PLAYED:
       return {
@@ -47,7 +47,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
         currentSongHistoryIndex: -1,
         currentSongHistoryLength: 0,
         currentSongId: '',
-        isPlayingAlbumPlaylist: false,
+        isPlayingAlbumPlaylist: false
       };
     case PLAYLIST_ALBUM_PLAYED:
       return {
@@ -56,7 +56,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
         currentSongHistoryIndex: 0,
         currentSongHistoryLength: action.payload.length,
         currentSongId: action.payload[0]._id,
-        isPlayingAlbumPlaylist: true,
+        isPlayingAlbumPlaylist: true
       };
     case SHUFFLE_PRESSED:
       let beforeRemaining = state.songHistoryPlaylist;
@@ -80,7 +80,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        songHistoryPlaylist: newSongHistory,
+        songHistoryPlaylist: newSongHistory
       };
     case UNSHUFFLE_PRESSED:
       let newStartingIndex = 0;
@@ -93,7 +93,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         songHistoryPlaylist: state.unshuffledSongHistoryPlaylist,
-        currentSongHistoryIndex: newStartingIndex,
+        currentSongHistoryIndex: newStartingIndex
       };
     case SONG_HISTORY_CLEARED:
       return {
@@ -102,7 +102,7 @@ const songHistoryReducer = (state = INITIAL_STATE, action) => {
         currentSongHistoryIndex: -1,
         currentSongHistoryLength: 0,
         currentSongId: '',
-        isPlayingAlbumPlaylist: false,
+        isPlayingAlbumPlaylist: false
       };
     default:
       return state;

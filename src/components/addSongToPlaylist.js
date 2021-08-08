@@ -14,7 +14,7 @@ class AddSongToPlaylist extends Component {
     const newAuthState = {
       jwt: this.props.authDetails.jwt,
       userIsLoggedIn: this.props.authDetails.userIsLoggedIn,
-      user: this.props.authDetails.user,
+      user: this.props.authDetails.user
     };
 
     if (this.props.authDetails.jwt === '' || this.props.authDetails.jwt === null) {
@@ -25,7 +25,7 @@ class AddSongToPlaylist extends Component {
     } else {
       axios
         .post(`${API_URL}/auth/decodeJwt`, {
-          token: this.props.authDetails.jwt,
+          token: this.props.authDetails.jwt
         })
         .then((response) => {
           if (!this.props.authDetails.userIsLoggedIn) {
@@ -88,12 +88,12 @@ class AddSongToPlaylist extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default withRouter(
   connect(mapStateToProps, {
     checkedJwtToken,
-    showCreatePlaylistModal,
+    showCreatePlaylistModal
   })(AddSongToPlaylist)
 );

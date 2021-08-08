@@ -14,7 +14,7 @@ class SignUp extends Component {
       email: '',
       password: '',
       confirmedPassword: '',
-      name: '',
+      name: ''
     };
   }
 
@@ -42,13 +42,13 @@ class SignUp extends Component {
         .post(`${API_URL}/users/add`, {
           email: this.state.email.trim(),
           password: this.state.password,
-          name: this.state.name.trim(),
+          name: this.state.name.trim()
         })
         .then((response) => {
           const jwt = response.data.token;
           axios
             .post(`${API_URL}/auth/decodeJwt`, {
-              token: jwt,
+              token: jwt
             })
             .then((response) => {
               const userId = response.data.userId;
@@ -60,7 +60,7 @@ class SignUp extends Component {
                   imageUrl: 'https://explorify.s3-us-west-1.amazonaws.com/likedSongsImg.jpg',
                   artist: '',
                   year: '',
-                  songs: [],
+                  songs: []
                 })
                 .then((response) => {
                   const albumPlaylistId = response.data.albumPlaylist._id;
@@ -72,7 +72,7 @@ class SignUp extends Component {
                       email: this.state.email.trim(),
                       password: this.state.password,
                       name: this.state.name.trim(),
-                      albumPlaylists: albumPlaylistsWithLikedSongsId,
+                      albumPlaylists: albumPlaylistsWithLikedSongsId
                     })
                     .then((response) => {
                       axios
@@ -81,7 +81,7 @@ class SignUp extends Component {
                           const userObject = response.data;
                           this.props.userRegistered({
                             token: jwt,
-                            user: userObject,
+                            user: userObject
                           });
                           this.props.history.push('/');
                         })
@@ -204,5 +204,5 @@ class SignUp extends Component {
 const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
-  userRegistered,
+  userRegistered
 })(SignUp);

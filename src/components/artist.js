@@ -17,7 +17,7 @@ class Artist extends Component {
       albumPlaylists: [],
       songs: [],
       loading: true,
-      added: false,
+      added: false
     };
   }
 
@@ -25,7 +25,7 @@ class Artist extends Component {
     const newAuthState = {
       jwt: this.props.authDetails.jwt,
       userIsLoggedIn: this.props.authDetails.userIsLoggedIn,
-      user: this.props.authDetails.user,
+      user: this.props.authDetails.user
     };
 
     if (this.props.authDetails.jwt === '' || this.props.authDetails.jwt === null) {
@@ -36,7 +36,7 @@ class Artist extends Component {
     } else {
       axios
         .post(`${API_URL}/auth/decodeJwt`, {
-          token: this.props.authDetails.jwt,
+          token: this.props.authDetails.jwt
         })
         .then((response) => {
           if (!this.props.authDetails.userIsLoggedIn) {
@@ -170,9 +170,9 @@ class Artist extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, {
-  checkedJwtToken,
+  checkedJwtToken
 })(Artist);

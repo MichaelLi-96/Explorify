@@ -11,7 +11,7 @@ class ArtistPreview extends Component {
     this._isMounted = false;
     this.state = {
       loading: true,
-      artist: {},
+      artist: {}
     };
   }
 
@@ -42,8 +42,8 @@ class ArtistPreview extends Component {
           to={{
             pathname: `/artists/${this.state.artist.name}`,
             state: {
-              artistId: this.state.artist._id,
-            },
+              artistId: this.state.artist._id
+            }
           }}
         >
           <MdInfo className="artistPreviewMoreInfoIcon" />

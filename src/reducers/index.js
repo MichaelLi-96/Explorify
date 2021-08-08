@@ -14,5 +14,5 @@ export default combineReducers({
   authDetails: AuthReducer,
   showCreatePlaylistModal: CreatePlaylistModalReducer,
   songToAddToPlaylist: SongToAddToPlaylistReducer,
-  playAlbumPlaylistPressed: PlayAlbumPlaylistPressReducer,
+  playAlbumPlaylistPressed: PlayAlbumPlaylistPressReducer
 });

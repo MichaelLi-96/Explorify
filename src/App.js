@@ -27,7 +27,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: ''
     };
   }
 
@@ -35,7 +35,7 @@ class App extends Component {
     const newAuthState = {
       jwt: this.props.authDetails.jwt,
       userIsLoggedIn: this.props.authDetails.userIsLoggedIn,
-      user: this.props.authDetails.user,
+      user: this.props.authDetails.user
     };
 
     // If jwt is empty or null
@@ -47,7 +47,7 @@ class App extends Component {
     } else {
       axios
         .post(`${API_URL}/auth/decodeJwt`, {
-          token: this.props.authDetails.jwt,
+          token: this.props.authDetails.jwt
         })
         .then((response) => {
           // If user is not logged in but the token is valid
@@ -114,9 +114,9 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   authDetails: state.authDetails,
   showCreatePlaylistModal: state.showCreatePlaylistModal,
-  songToAddToPlaylist: state.songToAddToPlaylist,
+  songToAddToPlaylist: state.songToAddToPlaylist
 });
 
 export default connect(mapStateToProps, {
-  checkedJwtToken,
+  checkedJwtToken
 })(App);

@@ -1,12 +1,12 @@
 import {
   STORING_SONG_TO_BE_ADDED_TO_PLAYLIST,
   REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST,
-  SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED,
+  SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED
 } from '../actions/types';
 
 const INITIAL_STATE = {
   song: {},
-  isBeingAdded: false,
+  isBeingAdded: false
 };
 
 const songToAddToPlaylistReducer = (state = INITIAL_STATE, action) => {
@@ -14,17 +14,17 @@ const songToAddToPlaylistReducer = (state = INITIAL_STATE, action) => {
     case STORING_SONG_TO_BE_ADDED_TO_PLAYLIST:
       return {
         song: action.payload,
-        isBeingAdded: true,
+        isBeingAdded: true
       };
     case REMOVING_SONG_TO_BE_ADDED_TO_PLAYLIST:
       return {
         song: {},
-        isBeingAdded: false,
+        isBeingAdded: false
       };
     case SONG_TO_BE_ADDED_TO_PLAYLIST_CLEARED:
       return {
         song: {},
-        isBeingAdded: false,
+        isBeingAdded: false
       };
     default:
       return state;

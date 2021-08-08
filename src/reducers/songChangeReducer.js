@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   url: '',
   imageUrl: '',
   length: '',
-  plays: 0,
+  plays: 0
 };
 
 const songChangeReducer = (state = INITIAL_STATE, action) => {
@@ -23,7 +23,7 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
         url: action.payload.url,
         imageUrl: action.payload.imageUrl,
         length: action.payload.length,
-        plays: action.payload.plays,
+        plays: action.payload.plays
       };
     case CURRENT_SONG_CLEARED:
       return {
@@ -33,7 +33,7 @@ const songChangeReducer = (state = INITIAL_STATE, action) => {
         url: '',
         imageUrl: '',
         length: '',
-        plays: 0,
+        plays: 0
       };
     default:
       return state;

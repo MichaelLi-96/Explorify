@@ -19,7 +19,7 @@ class AlbumPlaylist extends Component {
       songs: [],
       numberOfSongs: 0,
       idToSongMap: {},
-      isFavorited: false,
+      isFavorited: false
     };
   }
 
@@ -40,13 +40,13 @@ class AlbumPlaylist extends Component {
       songs: [],
       numberOfSongs: 0,
       idToSongMap: {},
-      isFavorited: false,
+      isFavorited: false
     });
 
     const newAuthState = {
       jwt: this.props.authDetails.jwt,
       userIsLoggedIn: this.props.authDetails.userIsLoggedIn,
-      user: this.props.authDetails.user,
+      user: this.props.authDetails.user
     };
 
     if (this.props.authDetails.jwt === '' || this.props.authDetails.jwt === null) {
@@ -57,7 +57,7 @@ class AlbumPlaylist extends Component {
     } else {
       axios
         .post(`${API_URL}/auth/decodeJwt`, {
-          token: this.props.authDetails.jwt,
+          token: this.props.authDetails.jwt
         })
         .then((response) => {
           if (!this.props.authDetails.userIsLoggedIn) {
@@ -229,7 +229,7 @@ class AlbumPlaylist extends Component {
       url: sortedSongs[0].url,
       imageUrl: sortedSongs[0].imageUrl,
       length: sortedSongs[0].length,
-      plays: sortedSongs[0].plays,
+      plays: sortedSongs[0].plays
     });
     this.props.playAlbumPlaylistPress();
     this.props.songPress();
@@ -351,7 +351,7 @@ class AlbumPlaylist extends Component {
 const mapStateToProps = (state) => ({
   currentSong: state.currentSong,
   songHistory: state.songHistory,
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, {
@@ -360,5 +360,5 @@ export default connect(mapStateToProps, {
   playlistAlbumPlayed,
   checkedJwtToken,
   userChangedData,
-  playAlbumPlaylistPress,
+  playAlbumPlaylistPress
 })(AlbumPlaylist);

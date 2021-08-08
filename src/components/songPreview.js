@@ -15,7 +15,7 @@ class SongPreview extends Component {
       loading: true,
       song: {},
       albumPlaylist: {},
-      artist: {},
+      artist: {}
     };
   }
 
@@ -70,7 +70,7 @@ class SongPreview extends Component {
       url: this.state.song.url,
       imageUrl: this.state.song.imageUrl,
       length: this.state.song.length,
-      plays: this.state.song.plays,
+      plays: this.state.song.plays
     });
     this.props.songPress();
     if (this.props.songHistory.currentSongId !== this.state.song._id) {
@@ -81,7 +81,7 @@ class SongPreview extends Component {
         artist: this.state.artist,
         url: this.state.song.url,
         imageUrl: this.state.song.imageUrl,
-        length: this.state.song.length,
+        length: this.state.song.length
       });
     }
 
@@ -93,7 +93,7 @@ class SongPreview extends Component {
         url: this.state.song.url,
         imageUrl: this.state.song.imageUrl,
         length: this.state.song.length,
-        plays: this.state.song.plays + 1,
+        plays: this.state.song.plays + 1
       })
       .then((response) => {
         //console.log(response);
@@ -115,8 +115,8 @@ class SongPreview extends Component {
           to={{
             pathname: `/albums/${this.state.artist.name}/${this.state.albumPlaylist.name}`,
             state: {
-              albumPlaylistId: this.state.albumPlaylist._id,
-            },
+              albumPlaylistId: this.state.albumPlaylist._id
+            }
           }}
         >
           {this.state.song.name}
@@ -127,8 +127,8 @@ class SongPreview extends Component {
           to={{
             pathname: `/artists/${this.state.artist.name}`,
             state: {
-              artistId: this.state.artist._id,
-            },
+              artistId: this.state.artist._id
+            }
           }}
         >
           {this.state.artist.name}
@@ -140,12 +140,12 @@ class SongPreview extends Component {
 
 const mapStateToProps = (state) => ({
   currentSong: state.currentSong,
-  songHistory: state.songHistory,
+  songHistory: state.songHistory
 });
 
 export default connect(mapStateToProps, {
   songChange,
   songPress,
   newSongAddedToHistory,
-  singleSongPlayed,
+  singleSongPlayed
 })(SongPreview);

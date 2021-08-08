@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       loading: true,
       artists: [],
-      songs: [],
+      songs: []
     };
   }
 
@@ -21,7 +21,7 @@ class Home extends Component {
     const newAuthState = {
       jwt: this.props.authDetails.jwt,
       userIsLoggedIn: this.props.authDetails.userIsLoggedIn,
-      user: this.props.authDetails.user,
+      user: this.props.authDetails.user
     };
 
     if (this.props.authDetails.jwt === '' || this.props.authDetails.jwt === null) {
@@ -32,7 +32,7 @@ class Home extends Component {
     } else {
       axios
         .post(`${API_URL}/auth/decodeJwt`, {
-          token: this.props.authDetails.jwt,
+          token: this.props.authDetails.jwt
         })
         .then((response) => {
           if (!this.props.authDetails.userIsLoggedIn) {
@@ -136,9 +136,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, {
-  checkedJwtToken,
+  checkedJwtToken
 })(Home);

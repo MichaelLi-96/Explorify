@@ -8,7 +8,7 @@ import {
   MdRepeat,
   MdShuffle,
   MdVolumeOff,
-  MdVolumeUp,
+  MdVolumeUp
 } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ import {
   nextSongPressed,
   shufflePressed,
   unshufflePressed,
-  playAlbumPlaylistPress,
+  playAlbumPlaylistPress
 } from '../actions';
 
 class Playbar extends Component {
@@ -34,7 +34,7 @@ class Playbar extends Component {
       ended: false,
       repeat: false,
       shuffle: false,
-      playbarSongProgressContainerMouseDown: false,
+      playbarSongProgressContainerMouseDown: false
     };
   }
 
@@ -108,7 +108,7 @@ class Playbar extends Component {
         url: this.props.songHistory.songHistoryPlaylist[prevIndex].url,
         imageUrl: this.props.songHistory.songHistoryPlaylist[prevIndex].imageUrl,
         length: this.props.songHistory.songHistoryPlaylist[prevIndex].length,
-        plays: this.props.songHistory.songHistoryPlaylist[prevIndex].plays,
+        plays: this.props.songHistory.songHistoryPlaylist[prevIndex].plays
       });
       this.props.songPress();
     }
@@ -126,7 +126,7 @@ class Playbar extends Component {
         url: this.props.songHistory.songHistoryPlaylist[nextIndex].url,
         imageUrl: this.props.songHistory.songHistoryPlaylist[nextIndex].imageUrl,
         length: this.props.songHistory.songHistoryPlaylist[nextIndex].length,
-        plays: this.props.songHistory.songHistoryPlaylist[nextIndex].plays,
+        plays: this.props.songHistory.songHistoryPlaylist[nextIndex].plays
       });
       this.props.songPress();
     }
@@ -338,8 +338,8 @@ class Playbar extends Component {
               to={{
                 pathname: `/albums/${this.props.currentSong.artist.name}/${this.props.currentSong.albumPlaylist.name}`,
                 state: {
-                  albumPlaylistId: this.props.currentSong.albumPlaylist._id,
-                },
+                  albumPlaylistId: this.props.currentSong.albumPlaylist._id
+                }
               }}
             >
               {this.props.currentSong.name}
@@ -350,8 +350,8 @@ class Playbar extends Component {
               to={{
                 pathname: `/artists/${this.props.currentSong.artist.name}`,
                 state: {
-                  artistId: this.props.currentSong.artist._id,
-                },
+                  artistId: this.props.currentSong.artist._id
+                }
               }}
             >
               {this.props.currentSong.artist.name}
@@ -412,7 +412,7 @@ const mapStateToProps = (state) => ({
   currentSong: state.currentSong,
   songPressed: state.songPressed,
   songHistory: state.songHistory,
-  playAlbumPlaylistPressed: state.playAlbumPlaylistPressed,
+  playAlbumPlaylistPressed: state.playAlbumPlaylistPressed
 });
 
 export default connect(mapStateToProps, {
@@ -422,5 +422,5 @@ export default connect(mapStateToProps, {
   nextSongPressed,
   shufflePressed,
   unshufflePressed,
-  playAlbumPlaylistPress,
+  playAlbumPlaylistPress
 })(Playbar);

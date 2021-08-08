@@ -13,7 +13,7 @@ class LogIn extends Component {
     this.state = {
       email: '',
       password: '',
-      demoButtonClicked: false,
+      demoButtonClicked: false
     };
   }
 
@@ -31,13 +31,13 @@ class LogIn extends Component {
         axios
           .post(`${API_URL}/auth/login`, {
             email: this.state.email,
-            password: this.state.password,
+            password: this.state.password
           })
           .then((response) => {
             const jwt = response.data.token;
             axios
               .post(`${API_URL}/auth/decodeJwt`, {
-                token: jwt,
+                token: jwt
               })
               .then((response) => {
                 const userId = response.data.userId;
@@ -48,7 +48,7 @@ class LogIn extends Component {
                     const userObject = response.data;
                     this.props.userLoggedIn({
                       token: jwt,
-                      user: userObject,
+                      user: userObject
                     });
                     this.props.history.push('/');
                   })
@@ -112,13 +112,13 @@ class LogIn extends Component {
         axios
           .post(`${API_URL}/auth/login`, {
             email: 'DemoUser@demo.com',
-            password: 'demoPassword',
+            password: 'demoPassword'
           })
           .then((response) => {
             const jwt = response.data.token;
             axios
               .post(`${API_URL}/auth/decodeJwt`, {
-                token: jwt,
+                token: jwt
               })
               .then((response) => {
                 const userId = response.data.userId;
@@ -129,7 +129,7 @@ class LogIn extends Component {
                     const userObject = response.data;
                     this.props.userLoggedIn({
                       token: jwt,
-                      user: userObject,
+                      user: userObject
                     });
                     this.props.history.push('/');
                   })
@@ -229,5 +229,5 @@ class LogIn extends Component {
 const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
-  userLoggedIn,
+  userLoggedIn
 })(LogIn);

@@ -13,7 +13,7 @@ class AlbumPlaylistPreview extends Component {
     this.state = {
       loading: true,
       albumPlaylist: {},
-      numberOfSongs: 0,
+      numberOfSongs: 0
     };
   }
 
@@ -78,8 +78,8 @@ class AlbumPlaylistPreview extends Component {
               to={{
                 pathname: `/albums/${this.state.albumPlaylist.artist}/${this.state.albumPlaylist.name}`,
                 state: {
-                  albumPlaylistId: this.state.albumPlaylist._id,
-                },
+                  albumPlaylistId: this.state.albumPlaylist._id
+                }
               }}
             >
               <img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} className="albumPlaylistPreviewImg"></img>
@@ -89,8 +89,8 @@ class AlbumPlaylistPreview extends Component {
               to={{
                 pathname: `/yourLibrary/${this.state.albumPlaylist.name}`,
                 state: {
-                  albumPlaylistId: this.state.albumPlaylist._id,
-                },
+                  albumPlaylistId: this.state.albumPlaylist._id
+                }
               }}
             >
               <img src={this.state.albumPlaylist.imageUrl} alt={this.state.albumPlaylist.name} className="albumPlaylistPreviewImg"></img>
@@ -109,9 +109,9 @@ class AlbumPlaylistPreview extends Component {
 
 const mapStateToProps = (state) => ({
   authDetails: state.authDetails,
-  songToAddToPlaylist: state.songToAddToPlaylist,
+  songToAddToPlaylist: state.songToAddToPlaylist
 });
 
 export default connect(mapStateToProps, {
-  removeSongToBeAddedToPlaylist,
+  removeSongToBeAddedToPlaylist
 })(AlbumPlaylistPreview);

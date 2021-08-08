@@ -9,7 +9,7 @@ class CreatePlaylistModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playlistName: '',
+      playlistName: ''
     };
   }
 
@@ -51,7 +51,7 @@ class CreatePlaylistModal extends Component {
         imageUrl: 'https://explorify.s3-us-west-1.amazonaws.com/defaultPlaylistImg.jpg',
         artist: this.props.authDetails.user.name,
         year: '',
-        songs: [],
+        songs: []
       })
       .then((response) => {
         const albumPlaylistId = response.data.albumPlaylist._id;
@@ -107,10 +107,10 @@ class CreatePlaylistModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default connect(mapStateToProps, {
   hideCreatePlaylistModal,
-  userChangedData,
+  userChangedData
 })(CreatePlaylistModal);

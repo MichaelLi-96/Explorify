@@ -16,7 +16,7 @@ class SongRow extends Component {
       song: {},
       albumPlaylist: {},
       artist: {},
-      currentUsersLikedSongsAlbumPlaylist: [],
+      currentUsersLikedSongsAlbumPlaylist: []
     };
   }
 
@@ -125,7 +125,7 @@ class SongRow extends Component {
       url: this.state.song.url,
       imageUrl: this.state.song.imageUrl,
       length: this.state.song.length,
-      plays: this.state.song.plays,
+      plays: this.state.song.plays
     });
     this.props.songPress();
     if (this.props.songHistory.currentSongId !== this.state.song._id) {
@@ -136,7 +136,7 @@ class SongRow extends Component {
         artist: this.state.artist,
         url: this.state.song.url,
         imageUrl: this.state.song.imageUrl,
-        length: this.state.song.length,
+        length: this.state.song.length
       });
     }
 
@@ -148,7 +148,7 @@ class SongRow extends Component {
         url: this.state.song.url,
         imageUrl: this.state.song.imageUrl,
         length: this.state.song.length,
-        plays: this.state.song.plays + 1,
+        plays: this.state.song.plays + 1
       })
       .then((response) => {
         //console.log(response);
@@ -270,8 +270,8 @@ class SongRow extends Component {
                 to={{
                   pathname: `/artists/${this.state.artist.name}`,
                   state: {
-                    artistId: this.state.artist._id,
-                  },
+                    artistId: this.state.artist._id
+                  }
                 }}
               >
                 {this.state.artist.name}
@@ -284,8 +284,8 @@ class SongRow extends Component {
                 to={{
                   pathname: `/albums/${this.state.artist.name}/${this.state.albumPlaylist.name}`,
                   state: {
-                    albumPlaylistId: this.state.albumPlaylist._id,
-                  },
+                    albumPlaylistId: this.state.albumPlaylist._id
+                  }
                 }}
               >
                 {this.state.albumPlaylist.name}
@@ -327,7 +327,7 @@ const mapStateToProps = (state) => ({
   currentSong: state.currentSong,
   songHistory: state.songHistory,
   authDetails: state.authDetails,
-  songToAddToPlaylist: state.songToAddToPlaylist,
+  songToAddToPlaylist: state.songToAddToPlaylist
 });
 
 export default connect(mapStateToProps, {
@@ -335,5 +335,5 @@ export default connect(mapStateToProps, {
   songPress,
   newSongAddedToHistory,
   singleSongPlayed,
-  storeSongToBeAddedToPlaylist,
+  storeSongToBeAddedToPlaylist
 })(SongRow);

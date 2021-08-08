@@ -59,7 +59,7 @@ class AccountButton extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authDetails: state.authDetails,
+  authDetails: state.authDetails
 });
 
 export default withRouter(
@@ -67,6 +67,6 @@ export default withRouter(
     userLoggedOut,
     songToBeAddedToPlaylistCleared,
     currentSongCleared,
-    songHistoryCleared,
+    songHistoryCleared
   })(AccountButton)
 );

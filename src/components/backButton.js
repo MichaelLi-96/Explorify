@@ -21,5 +21,5 @@ class BackButton extends Component {
 const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
-  removeSongToBeAddedToPlaylist,
+  removeSongToBeAddedToPlaylist
 })(BackButton);
